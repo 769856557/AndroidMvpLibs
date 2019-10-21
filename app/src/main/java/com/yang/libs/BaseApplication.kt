@@ -9,7 +9,7 @@ import com.yang.libs.api.QQApi
 import com.yang.libs.api.WeiXinApi
 import java.io.File
 
-/**分支调试
+/**
  * →_→
  * 2018/10/25 15:00
  * 769856557@qq.com
