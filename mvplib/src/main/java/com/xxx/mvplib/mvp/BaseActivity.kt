@@ -26,11 +26,11 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        if (!super.onSupportNavigateUp()) {
+        return if (!super.onSupportNavigateUp()) {
             onBackPressed()
-            return false
+            false
         } else {
-            return true
+            true
         }
     }
 

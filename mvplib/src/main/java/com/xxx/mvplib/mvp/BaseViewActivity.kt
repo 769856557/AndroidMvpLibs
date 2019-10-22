@@ -22,8 +22,8 @@ abstract class BaseViewActivity : BaseActivity(), BaseView {
      */
     fun setStatusBarTranslucent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            val localLayoutParams = window.attributes
-            localLayoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or localLayoutParams.flags
+            val layoutParams = window.attributes
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or layoutParams.flags
         }
     }
 
