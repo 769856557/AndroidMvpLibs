@@ -1,13 +1,11 @@
 package com.yang.libs
 
 import android.app.Application
-import android.os.Environment
 import com.blankj.utilcode.util.Utils
 import com.xxx.mvplib.net.provider.ApiConfigProvider
 import com.xxx.mvplib.net.retrofit.Retrofit2Manager
 import com.yang.libs.api.QQApi
 import com.yang.libs.api.WeiXinApi
-import java.io.File
 
 /**
  * →_→
@@ -16,13 +14,6 @@ import java.io.File
  * yangyong
  */
 class BaseApplication : Application() {
-    companion object {
-        /**
-         * sd卡下的app文件夹目录
-         */
-        val mDirPath = Environment.getExternalStorageDirectory().absolutePath + File
-            .separator + BuildConfig.APPLICATION_ID
-    }
 
     override fun onCreate() {
         super.onCreate()

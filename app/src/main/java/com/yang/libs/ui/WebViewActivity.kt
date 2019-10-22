@@ -16,8 +16,8 @@ import com.blankj.utilcode.util.FileUtils
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.entity.LocalMedia
 import com.xxx.mvplib.mvp.BaseViewActivity
+import com.xxx.mvplib.utils.PathUtils
 import com.xxx.mvplib.utils.WebViewUtils
-import com.yang.libs.BaseApplication
 import com.yang.libs.BuildConfig
 import com.yang.libs.R
 import kotlinx.android.synthetic.main.activity_webview.*
@@ -130,7 +130,7 @@ class WebViewActivity : BaseViewActivity() {
     override fun onRestart() {
         super.onRestart()
         //通知相册更新
-        var files: List<File>? = FileUtils.listFilesInDir(BaseApplication.mDirPath)
+        var files: List<File>? = FileUtils.listFilesInDir(PathUtils.DIR_APP)
         for (file in files ?: return) {
             val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
             intent.data = Uri.fromFile(file)
