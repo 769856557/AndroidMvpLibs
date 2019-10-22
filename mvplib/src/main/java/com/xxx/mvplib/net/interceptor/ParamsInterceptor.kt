@@ -38,8 +38,7 @@ class ParamsInterceptor : Interceptor {
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request()
-        val requestBuilder = request.newBuilder()
+        val requestBuilder = chain.request().newBuilder()
         requestBuilder.addHeader("token", TOKEN)
         requestBuilder.addHeader("device_name", DEVICE_NAME)//设备名称
         requestBuilder.addHeader("os_name", OS_NAME)//系统名称
