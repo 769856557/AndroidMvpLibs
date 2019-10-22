@@ -23,8 +23,8 @@ import java.math.RoundingMode
  */
 class MainPresenter : BasePresenter<MainView>() {
 
-    fun getAdvertisement() {
-        AppApi.api.getAdvertisement()
+    fun getAdvertisement(param: String) {
+        AppApi.api.getAdvertisement(param)
             .compose(RxHelper.ioAndMain())
             .compose(RxHelper.startAndFinish(getView()))
             .subscribe(object : XxBaseHttpObserver<BannerBean>() {

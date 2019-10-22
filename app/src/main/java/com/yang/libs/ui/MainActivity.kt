@@ -1,7 +1,6 @@
 package com.yang.libs.ui
 
 import com.xxx.mvplib.mvp.BasePresenterActivity
-import com.xxx.mvplib.utils.ClipboardUtils
 import com.yang.libs.R
 import com.yang.libs.mvpmodel.BannerBean
 import com.yang.libs.mvpmodel.UploadBean
@@ -19,7 +18,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
     override fun init() {
         title = "主页标题"
         btOne.setOnClickListener {
-            getPresenter().getAdvertisement()
+            getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
         }

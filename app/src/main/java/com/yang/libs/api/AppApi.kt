@@ -8,8 +8,8 @@ import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 /**
  * App的api
@@ -30,13 +30,12 @@ object AppApi {
          * 获取广告
          */
         @GET("/index.php/_BUSINESS/Api_version1/system/getHotAppInfo")
-        fun getAdvertisement(): Observable<BaseResponseBean<BannerBean>>
+        fun getAdvertisement(@Query("param") param: String): Observable<BaseResponseBean<BannerBean>>
 
         /**
          * 上传图片
          */
         @POST("/index.php/api/user/uploadimg")
-        @Headers("apisign:efd92e39889fd90321711e51242b11d1")
         fun uploadImg(@Body img: RequestBody): Observable<BaseResponseBean<UploadBean>>
     }
 

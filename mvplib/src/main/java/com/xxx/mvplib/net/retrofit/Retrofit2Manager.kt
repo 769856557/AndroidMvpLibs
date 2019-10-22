@@ -3,6 +3,7 @@ package com.xxx.mvplib.net.retrofit
 import com.blankj.utilcode.util.Utils
 import com.xxx.mvplib.net.converter.GsonConverterFactory
 import com.xxx.mvplib.net.interceptor.CacheInterceptor
+import com.xxx.mvplib.net.interceptor.ParamsInterceptor
 import com.xxx.mvplib.net.provider.ApiConfigProvider
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -46,6 +47,7 @@ object Retrofit2Manager {
         val cachePath = "${Utils.getApp().externalCacheDir.absolutePath}${File.separator}okhttp_cache"
         OkHttpClient.Builder()
             .cache(Cache(File(cachePath), 10L * 1024 * 1024))
+            .addInterceptor(ParamsInterceptor())
             .addInterceptor(CacheInterceptor.AppCacheInterceptor())
             .addNetworkInterceptor(CacheInterceptor.NetCacheInterceptor())
             .apply {
