@@ -1,5 +1,6 @@
 package com.yang.libs.ui
 
+import com.blankj.utilcode.util.BusUtils
 import com.xxx.mvplib.mvp.BasePresenterActivity
 import com.yang.libs.R
 import com.yang.libs.mvpmodel.BannerBean
@@ -17,10 +18,12 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
 
     override fun init() {
         title = "主页标题"
+        registerBlankjBus()
         btOne.setOnClickListener {
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
+            BusUtils.post("AA", "你好")
         }
     }
 
@@ -34,6 +37,11 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
 
     override fun uploadImg(bean: UploadBean) {
         tvContent.text = bean.url
+    }
+
+    @BusUtils.Bus(tag = "AA")
+    fun oneParamFun(param: String) {
+        tvContent.text = param
     }
 
 }

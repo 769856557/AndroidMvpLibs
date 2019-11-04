@@ -1,4 +1,4 @@
-package com.yang.libs.api
+package com.xxx.mvplib.api
 
 import android.app.Activity
 import android.text.TextUtils
@@ -22,6 +22,7 @@ object AliApi {
      *
      * @param activity  Activity实例
      * @param orderInfo 已签名的订单信息
+     * @param observer 支付成功回调
      */
     fun alipay(activity: Activity, orderInfo: String, observer: Observer<Any>) {
         Observable

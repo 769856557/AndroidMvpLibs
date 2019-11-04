@@ -1,4 +1,4 @@
-package com.yang.libs.api
+package com.xxx.mvplib.api
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -6,7 +6,6 @@ import com.tencent.mm.opensdk.modelmsg.*
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
-import com.yang.libs.BuildConfig
 
 /**
  * 微信相关API
@@ -27,24 +26,6 @@ object WeiXinApi {
 
 
     /**
-     *授权Token
-     */
-    const val EXTRA_WX_AUTH_TOKEN = "${BuildConfig.APPLICATION_ID}extra_wx_auth_token"
-    /**
-     * 微信授权成功
-     */
-    const val ACTION_WX_AUTH_SUCCES = "${BuildConfig.APPLICATION_ID}action_wx_auth_succes"
-    /**
-     * 微信分享成功
-     */
-    const val ACTION_WX_SHARE_SUCCES = "${BuildConfig.APPLICATION_ID}action_wx_share_succes"
-    /**
-     * 微信支付成功
-     */
-    const val ACTION_WX_PAY_SUCCES = "${BuildConfig.APPLICATION_ID}action_wx_pay_succes"
-
-
-    /**
      * IWXAPI实例
      */
     lateinit var mIWXAPI: IWXAPI
@@ -55,7 +36,10 @@ object WeiXinApi {
      * 初始化
      */
     fun init(context: Context) {
-        mIWXAPI = WXAPIFactory.createWXAPI(context, WX_APP_ID, true)
+        mIWXAPI = WXAPIFactory.createWXAPI(
+            context,
+            WX_APP_ID, true
+        )
         mIWXAPI.registerApp(WX_APP_ID)
     }
 

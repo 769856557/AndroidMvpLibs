@@ -13,7 +13,6 @@ import com.xxx.mvplib.R
  * yangyong
  */
 abstract class BaseViewFragment : BaseFragment(), BaseView {
-
     private var alertDialog: AlertDialog? = null
 
     /**
@@ -83,6 +82,11 @@ abstract class BaseViewFragment : BaseFragment(), BaseView {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        dismissLoadingDialog()
+        super.onDestroy()
     }
 
 }

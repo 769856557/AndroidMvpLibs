@@ -16,16 +16,7 @@ import com.xxx.mvplib.R
  * yangyong
  */
 abstract class BaseViewActivity : BaseActivity(), BaseView {
-
-    /**
-     * 设置沉浸式状态栏,API最低支持19
-     */
-    fun setStatusBarTranslucent() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            val layoutParams = window.attributes
-            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or layoutParams.flags
-        }
-    }
+    private var alertDialog: AlertDialog? = null
 
     /**
      * 设置标题
@@ -36,8 +27,15 @@ abstract class BaseViewActivity : BaseActivity(), BaseView {
         findViewById<TextView>(R.id.tvTitle)?.text = title
     }
 
-
-    private var alertDialog: AlertDialog? = null
+    /**
+     * 设置沉浸式状态栏,API最低支持19
+     */
+    fun setStatusBarTranslucent() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val layoutParams = window.attributes
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or layoutParams.flags
+        }
+    }
 
     /**
      * 显示加载框
@@ -94,7 +92,6 @@ abstract class BaseViewActivity : BaseActivity(), BaseView {
             }
         }
     }
-
 
     override fun onDestroy() {
         dismissLoadingDialog()

@@ -1,5 +1,7 @@
 package com.xxx.mvplib.mvp
 
+import com.blankj.utilcode.util.BusUtils
+
 /**
  * Fragment三级基类
  * →_→
@@ -34,7 +36,15 @@ abstract class BasePresenterFragment<V : BaseView, P : BasePresenter<V>> : BaseV
         return presenter as P
     }
 
+    /**
+     *注册com.blankj.bus,和EventBus类似的库
+     */
+    protected fun registerBlankjBus() {
+        BusUtils.register(this)
+    }
+
     override fun onDestroyView() {
+        BusUtils.unregister(this)
         getPresenter().detachView()
         super.onDestroyView()
     }

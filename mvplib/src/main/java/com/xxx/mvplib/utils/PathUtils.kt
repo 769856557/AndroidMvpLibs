@@ -41,4 +41,13 @@ object PathUtils {
         }
     }
 
+    /**
+     *okhttp缓存文件夹路径，/storage/emulated/0/Android/data/包名/cache/okhttp
+     */
+    val CACHE_OKHTTP by lazy {
+        "${Utils.getApp().externalCacheDir.absolutePath}${File.separator}okhttp".also {
+            FileUtils.createOrExistsDir(it)
+        }
+    }
+
 }

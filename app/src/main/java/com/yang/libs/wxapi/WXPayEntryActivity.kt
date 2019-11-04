@@ -9,7 +9,7 @@ import com.tencent.mm.opensdk.constants.ConstantsAPI
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
-import com.yang.libs.api.WeiXinApi
+import com.xxx.mvplib.api.WeiXinApi
 
 /**
  * 微信支付回调

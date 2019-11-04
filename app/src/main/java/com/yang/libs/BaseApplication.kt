@@ -2,10 +2,10 @@ package com.yang.libs
 
 import android.app.Application
 import com.blankj.utilcode.util.Utils
+import com.xxx.mvplib.api.QQApi
+import com.xxx.mvplib.api.WeiXinApi
 import com.xxx.mvplib.net.provider.ApiConfigProvider
 import com.xxx.mvplib.net.retrofit.Retrofit2Manager
-import com.yang.libs.api.QQApi
-import com.yang.libs.api.WeiXinApi
 
 /**
  * →_→

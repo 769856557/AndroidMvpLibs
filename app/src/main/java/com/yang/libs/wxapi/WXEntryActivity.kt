@@ -8,8 +8,8 @@ import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
+import com.xxx.mvplib.api.WeiXinApi
 import com.xxx.mvplib.mvp.BaseViewActivity
-import com.yang.libs.api.WeiXinApi
 
 /**
  * 微信授权、分享回调

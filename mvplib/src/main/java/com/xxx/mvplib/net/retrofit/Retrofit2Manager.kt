@@ -1,10 +1,10 @@
 package com.xxx.mvplib.net.retrofit
 
-import com.blankj.utilcode.util.Utils
 import com.xxx.mvplib.net.converter.GsonConverterFactory
 import com.xxx.mvplib.net.interceptor.CacheInterceptor
 import com.xxx.mvplib.net.interceptor.ParamsInterceptor
 import com.xxx.mvplib.net.provider.ApiConfigProvider
+import com.xxx.mvplib.utils.PathUtils
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -43,10 +43,8 @@ object Retrofit2Manager {
      * OkHttpClient初始化
      */
     private val okHttpClient: OkHttpClient by lazy {
-        //okhttp缓存文件夹路径，/storage/emulated/0/Android/data/包名/cache/okhttp_cache
-        val cachePath = "${Utils.getApp().externalCacheDir.absolutePath}${File.separator}okhttp_cache"
         OkHttpClient.Builder()
-            .cache(Cache(File(cachePath), 10L * 1024 * 1024))
+            .cache(Cache(File(PathUtils.CACHE_OKHTTP), 10L * 1024 * 1024))
             .addInterceptor(ParamsInterceptor())
             .addInterceptor(CacheInterceptor.AppCacheInterceptor())
             .addNetworkInterceptor(CacheInterceptor.NetCacheInterceptor())

@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.blankj.bus'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -40,8 +39,6 @@ dependencies {
         exclude group: 'com.android.support'
         exclude group: 'io.reactivex.rxjava2'
     }
-    //微信sdk
-    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
     //通用RecyclerView的adapter
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
 }
