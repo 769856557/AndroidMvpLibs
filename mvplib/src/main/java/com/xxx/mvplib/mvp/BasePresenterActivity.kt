@@ -44,6 +44,7 @@ abstract class BasePresenterActivity<V : BaseView, P : BasePresenter<V>> : BaseV
     }
 
     override fun onDestroy() {
+        BusUtils.unregister(this)
         getPresenter().detachView()
         super.onDestroy()
     }
