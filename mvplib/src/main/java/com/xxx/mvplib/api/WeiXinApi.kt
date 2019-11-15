@@ -15,32 +15,23 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  * yangyong
  */
 object WeiXinApi {
-    /**
-     * 微信appid
-     */
-    private val WX_APP_ID = "wx375fb1184c0e2ce0"
-    /**
-     * 微信secret
-     */
-    private val WX_APP_SECRET = "f1824704eb82f91baa653d12bf777277"
 
 
     /**
      * IWXAPI实例
      */
-    lateinit var mIWXAPI: IWXAPI
+    lateinit var iWxApi: IWXAPI
         private set
 
 
     /**
      * 初始化
+     * @param context application的context
+     * @param appId 微信的appId
      */
-    fun init(context: Context) {
-        mIWXAPI = WXAPIFactory.createWXAPI(
-            context,
-            WX_APP_ID, true
-        )
-        mIWXAPI.registerApp(WX_APP_ID)
+    fun init(context: Context, appId: String) {
+        iWxApi = WXAPIFactory.createWXAPI(context, appId, true)
+        iWxApi.registerApp(appId)
     }
 
 
@@ -66,7 +57,7 @@ object WeiXinApi {
         val req = SendMessageToWX.Req()
         req.message = msg
         req.scene = scene
-        mIWXAPI.sendReq(req)
+        iWxApi.sendReq(req)
     }
 
     /**
@@ -82,7 +73,7 @@ object WeiXinApi {
         val req = SendMessageToWX.Req()
         req.message = msg
         req.scene = scene
-        mIWXAPI.sendReq(req)
+        iWxApi.sendReq(req)
     }
 
 
@@ -96,7 +87,7 @@ object WeiXinApi {
         val req = SendAuth.Req()
         req.scope = scope
         req.state = state
-        mIWXAPI.sendReq(req)
+        iWxApi.sendReq(req)
     }
 
     /**
@@ -128,7 +119,7 @@ object WeiXinApi {
             req.timeStamp = timestamp
             req.packageValue = packageValue
             req.sign = sign
-            mIWXAPI.sendReq(req)
+            iWxApi.sendReq(req)
         } catch (e: Exception) {
             e.printStackTrace()
         }

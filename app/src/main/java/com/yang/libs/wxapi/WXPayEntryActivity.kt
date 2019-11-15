@@ -23,13 +23,13 @@ class WXPayEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WeiXinApi.mIWXAPI.handleIntent(intent, this)
+        WeiXinApi.iWxApi.handleIntent(intent, this)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        WeiXinApi.mIWXAPI.handleIntent(intent, this)
+        WeiXinApi.iWxApi.handleIntent(intent, this)
     }
 
     override fun onReq(req: BaseReq) {}

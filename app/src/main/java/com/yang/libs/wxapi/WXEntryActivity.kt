@@ -23,13 +23,13 @@ class WXEntryActivity : BaseViewActivity(), IWXAPIEventHandler {
     override fun getLayoutResId(): Int = 0
 
     override fun init() {
-        WeiXinApi.mIWXAPI.handleIntent(intent, this)
+        WeiXinApi.iWxApi.handleIntent(intent, this)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        WeiXinApi.mIWXAPI.handleIntent(intent, this)
+        WeiXinApi.iWxApi.handleIntent(intent, this)
     }
 
     override fun onReq(req: BaseReq) {}

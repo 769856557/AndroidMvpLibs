@@ -3,7 +3,6 @@ package com.xxx.mvplib.api
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-
 import com.blankj.utilcode.util.Utils
 import com.tencent.connect.UserInfo
 import com.tencent.connect.share.QQShare
@@ -19,22 +18,19 @@ import com.tencent.tauth.Tencent
  */
 object QQApi {
     /**
-     * QQappid
-     */
-    private const val QQ_APP_ID = "1107925990"
-
-    /**
      * 获取Tencent实例
      *
      * @return
      */
-    private lateinit var mTencent: Tencent
+    private lateinit var tencent: Tencent
 
     /**
      * 初始化
+     * @param context application的context
+     * @param appId qq的appID
      */
-    fun init(context: Context) {
-        mTencent = Tencent.createInstance(QQ_APP_ID, context)
+    fun init(context: Context, appId: String) {
+        tencent = Tencent.createInstance(appId, context)
     }
 
     /**
@@ -62,7 +58,7 @@ object QQApi {
         params.putString(QQShare.SHARE_TO_QQ_TITLE, title)
         params.putString(QQShare.SHARE_TO_QQ_SUMMARY, summary)
         params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, img)
-        mTencent.shareToQQ(activity, params, iUiListener)
+        tencent.shareToQQ(activity, params, iUiListener)
     }
 
     /**
@@ -78,7 +74,7 @@ object QQApi {
         params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, way)
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE)
         params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, path)
-        mTencent.shareToQQ(activity, params, iUiListener)
+        tencent.shareToQQ(activity, params, iUiListener)
     }
 
     /**
@@ -89,7 +85,7 @@ object QQApi {
      * @param iUiListener
      */
     fun qqAuth(activity: Activity, scope: String, iUiListener: IUiListener) {
-        mTencent.login(activity, scope, iUiListener)
+        tencent.login(activity, scope, iUiListener)
     }
 
     /**
@@ -101,9 +97,9 @@ object QQApi {
      * @param iUiListener
      */
     fun getUserInfo(openid: String, access_token: String, expires_in: String, iUiListener: IUiListener) {
-        mTencent.openId = openid
-        mTencent.setAccessToken(access_token, expires_in)
-        val mInfo = UserInfo(Utils.getApp(), mTencent.qqToken)
+        tencent.openId = openid
+        tencent.setAccessToken(access_token, expires_in)
+        val mInfo = UserInfo(Utils.getApp(), tencent.qqToken)
         mInfo.getUserInfo(iUiListener)
     }
 }

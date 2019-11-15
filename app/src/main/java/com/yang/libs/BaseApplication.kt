@@ -4,8 +4,7 @@ import android.app.Application
 import com.blankj.utilcode.util.Utils
 import com.xxx.mvplib.api.QQApi
 import com.xxx.mvplib.api.WeiXinApi
-import com.xxx.mvplib.net.provider.ApiConfigProvider
-import com.xxx.mvplib.net.retrofit.Retrofit2Manager
+import com.xxx.mvplib.net.helper.AppConfigHelper
 
 /**
  * →_→
@@ -17,18 +16,14 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppConfigHelper.init(
+            BuildConfig.DEBUG,
+            BuildConfig.BUILD_TYPE,
+            AppConfig.RELEASE_HOST,
+            AppConfig.DEBUG_HOST
+        )
         Utils.init(this)
-        WeiXinApi.init(this)
-        QQApi.init(this)
-        //api接口初始化
-        Retrofit2Manager.apiConfigProvider = object : ApiConfigProvider {
-
-            override var isDebug: Boolean = BuildConfig.DEBUG
-
-            override var debugHost: String = "http://xian.51ehw.com"
-
-            override var releaseHost: String = "http://www.13141314.ren"
-
-        }
+        WeiXinApi.init(this, AppConfig.WX_APP_ID)
+        QQApi.init(this, AppConfig.QQ_APP_ID)
     }
 }

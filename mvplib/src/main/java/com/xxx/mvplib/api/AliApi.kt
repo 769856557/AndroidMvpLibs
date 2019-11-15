@@ -31,6 +31,8 @@ object AliApi {
                 val payResult = PayResult(result)
                 if ("9000" == payResult.resultStatus) {
                     it.onComplete()
+                } else {
+                    it.onError(Throwable(payResult.result));
                 }
 
             }

@@ -1,7 +1,7 @@
 package com.yang.libs.api
 
 import com.xxx.mvplib.net.bean.BaseResponseBean
-import com.xxx.mvplib.net.retrofit.Retrofit2Manager
+import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
 import com.yang.libs.mvpmodel.BannerBean
 import com.yang.libs.mvpmodel.UploadBean
 import io.reactivex.Observable
@@ -21,7 +21,7 @@ import retrofit2.http.Query
 object AppApi {
 
     val api: Api by lazy {
-        Retrofit2Manager.retrofit.create(AppApi.Api::class.java)
+        RetrofitOkHttpHelper.retrofit.create(AppApi.Api::class.java)
     }
 
 
