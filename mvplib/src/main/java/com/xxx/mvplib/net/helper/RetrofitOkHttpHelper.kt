@@ -22,16 +22,29 @@ import java.io.File
 object RetrofitOkHttpHelper {
 
     /**
-     * Retrofit初始化
+     * Retrofit初始化，用于自己的服务器相关请求
      */
-    val retrofit: Retrofit by lazy {
+    val retrofitApp: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(AppConfigHelper.apiHost)
+            .baseUrl(AppHelper.apiHost)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
+
+    /**
+     * Retrofit初始化，用于微信服务器相关请求
+     */
+    val retrofitWx: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(AppHelper.wxHost)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+    }
+
 
     /**
      * OkHttpClient初始化
@@ -43,7 +56,7 @@ object RetrofitOkHttpHelper {
             .addInterceptor(CacheInterceptor.AppCacheInterceptor())
             .addNetworkInterceptor(CacheInterceptor.NetCacheInterceptor())
             .apply {
-                if (AppConfigHelper.isDebuggable) {
+                if (AppHelper.isDebuggable) {
                     addInterceptor(HttpLoggingInterceptor()
                         .apply {
                             level = HttpLoggingInterceptor.Level.BODY

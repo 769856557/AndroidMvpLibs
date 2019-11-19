@@ -1,6 +1,7 @@
 package com.yang.libs.ui
 
 import com.blankj.utilcode.util.BusUtils
+import com.xxx.mvplib.api.WeiXinApi
 import com.xxx.mvplib.mvp.BasePresenterActivity
 import com.yang.libs.R
 import com.yang.libs.mvpmodel.BannerBean
@@ -23,7 +24,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            BusUtils.post("AA", "你好")
+            WeiXinApi.wxAuth("", "")
         }
     }
 

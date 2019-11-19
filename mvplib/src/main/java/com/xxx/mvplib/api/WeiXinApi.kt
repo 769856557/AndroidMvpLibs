@@ -6,6 +6,11 @@ import com.tencent.mm.opensdk.modelmsg.*
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import com.xxx.mvplib.net.bean.BaseResponseBean
+import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
+import io.reactivex.Observable
+import retrofit2.http.GET
+import retrofit2.http.Query
 
 /**
  * 微信相关API
@@ -15,7 +20,17 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory
  * yangyong
  */
 object WeiXinApi {
+    /**
+     * 微信appid
+     */
+    lateinit var appId: String
+        private set
 
+    /**
+     * 微信secret
+     */
+    lateinit var secret: String
+        private set
 
     /**
      * IWXAPI实例
@@ -28,8 +43,11 @@ object WeiXinApi {
      * 初始化
      * @param context application的context
      * @param appId 微信的appId
+     * @param secret 微信的secret
      */
-    fun init(context: Context, appId: String) {
+    fun init(context: Context, appId: String, secret: String) {
+        this.appId = appId;
+        this.secret = secret;
         iWxApi = WXAPIFactory.createWXAPI(context, appId, true)
         iWxApi.registerApp(appId)
     }
@@ -124,6 +142,23 @@ object WeiXinApi {
             e.printStackTrace()
         }
 
+    }
+
+    val api: WeiXinApi.Api by lazy {
+        RetrofitOkHttpHelper.retrofitWx.create(WeiXinApi.Api::class.java)
+    }
+
+    interface Api {
+        /**
+         * 通过 code 获取 access_token
+         */
+        @GET("/sns/oauth2/access_token")
+        fun getAccessToken(
+            @Query("appid") appid: String,
+            @Query("secret") secret: String,
+            @Query("code") code: String,
+            @Query("grant_type") grantType: String
+        ): Observable<BaseResponseBean<String>>
     }
 
 }

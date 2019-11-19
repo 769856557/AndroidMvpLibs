@@ -4,7 +4,7 @@ import android.app.Application
 import com.blankj.utilcode.util.Utils
 import com.xxx.mvplib.api.QQApi
 import com.xxx.mvplib.api.WeiXinApi
-import com.xxx.mvplib.net.helper.AppConfigHelper
+import com.xxx.mvplib.net.helper.AppHelper
 
 /**
  * →_→
@@ -16,14 +16,19 @@ class BaseApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppConfigHelper.init(
+        Utils.init(this)
+        AppHelper.init(
             BuildConfig.DEBUG,
             BuildConfig.BUILD_TYPE,
             AppConfig.RELEASE_HOST,
-            AppConfig.DEBUG_HOST
+            AppConfig.DEBUG_HOST,
+            AppConfig.WX_HOST
         )
-        Utils.init(this)
-        WeiXinApi.init(this, AppConfig.WX_APP_ID)
+        WeiXinApi.init(
+            this,
+            AppConfig.WX_APP_ID,
+            AppConfig.WX_APP_SECRET
+        )
         QQApi.init(this, AppConfig.QQ_APP_ID)
     }
 }

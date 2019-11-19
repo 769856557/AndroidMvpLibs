@@ -21,7 +21,7 @@ import retrofit2.http.Query
 object AppApi {
 
     val api: Api by lazy {
-        RetrofitOkHttpHelper.retrofit.create(AppApi.Api::class.java)
+        RetrofitOkHttpHelper.retrofitApp.create(AppApi.Api::class.java)
     }
 
 

@@ -1,13 +1,13 @@
 package com.yang.libs
 
 /**
- * app模块配置
+ * app相关配置
  * →_→
  * 2019/11/15 15:31
  * 769856557@qq.com
  * yangyong
  */
-object AppConfig {
+internal object AppConfig {
     /**
      * 正式版的域名
      */
@@ -16,6 +16,10 @@ object AppConfig {
      * 正式版的域名
      */
     val DEBUG_HOST = "http://xian.51ehw.com";
+    /**
+     * 微信的域名
+     */
+    val WX_HOST = "https://api.weixin.qq.com";
     /**
      * 微信appid
      */
