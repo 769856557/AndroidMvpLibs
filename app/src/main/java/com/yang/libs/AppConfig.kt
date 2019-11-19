@@ -23,11 +23,11 @@ internal object AppConfig {
     /**
      * 微信appid
      */
-    val WX_APP_ID = "wx375fb1184c0e2ce0"
+    val WX_APP_ID = "wxfb78531f58612718"
     /**
      * 微信secret
      */
-    val WX_APP_SECRET = "f1824704eb82f91baa653d12bf777277"
+    val WX_APP_SECRET = "bbd178306c59567fcd590d363dc13b51"
     /**
      * QQappid
      */

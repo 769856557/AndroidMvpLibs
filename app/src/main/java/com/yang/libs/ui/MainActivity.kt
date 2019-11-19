@@ -24,7 +24,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            WeiXinApi.wxAuth("", "")
+            WeiXinApi.wxAuth("snsapi_userinfo", "Auth")
         }
     }
 
