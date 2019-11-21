@@ -1,5 +1,6 @@
 package com.xxx.mvplib.net.helper
 
+import com.xxx.mvplib.AppConfig
 import com.xxx.mvplib.net.converter.GsonConverterFactory
 import com.xxx.mvplib.net.interceptor.CacheInterceptor
 import com.xxx.mvplib.net.interceptor.ParamsInterceptor
@@ -26,7 +27,7 @@ object RetrofitOkHttpHelper {
      */
     val retrofitApp: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(AppHelper.apiHost)
+            .baseUrl(AppConfig.apiHost)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -38,7 +39,7 @@ object RetrofitOkHttpHelper {
      */
     val retrofitWx: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(AppHelper.wxHost)
+            .baseUrl(AppConfig.WX_HOST)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -56,7 +57,7 @@ object RetrofitOkHttpHelper {
             .addInterceptor(CacheInterceptor.AppCacheInterceptor())
             .addNetworkInterceptor(CacheInterceptor.NetCacheInterceptor())
             .apply {
-                if (AppHelper.isDebuggable) {
+                if (AppConfig.isDebuggable) {
                     addInterceptor(HttpLoggingInterceptor()
                         .apply {
                             level = HttpLoggingInterceptor.Level.BODY

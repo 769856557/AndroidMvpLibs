@@ -1,11 +1,12 @@
 package com.xxx.mvplib.api
 
-import android.content.Context
 import android.graphics.Bitmap
+import com.blankj.utilcode.util.Utils
 import com.tencent.mm.opensdk.modelmsg.*
 import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
+import com.xxx.mvplib.AppConfig
 import com.xxx.mvplib.net.bean.BaseResponseBean
 import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
 import io.reactivex.Observable
@@ -21,37 +22,13 @@ import retrofit2.http.Query
  */
 object WeiXinApi {
     /**
-     * 微信appid
-     */
-    lateinit var appId: String
-        private set
-
-    /**
-     * 微信secret
-     */
-    lateinit var secret: String
-        private set
-
-    /**
      * IWXAPI实例
      */
-    lateinit var iWxApi: IWXAPI
-        private set
-
-
-    /**
-     * 初始化
-     * @param context application的context
-     * @param appId 微信的appId
-     * @param secret 微信的secret
-     */
-    fun init(context: Context, appId: String, secret: String) {
-        this.appId = appId;
-        this.secret = secret;
-        iWxApi = WXAPIFactory.createWXAPI(context, appId, true)
-        iWxApi.registerApp(appId)
+    val iWxApi: IWXAPI by lazy {
+        WXAPIFactory.createWXAPI(Utils.getApp(), AppConfig.WX_APP_ID, true).apply {
+            registerApp(AppConfig.WX_APP_ID)
+        }
     }
-
 
     /**
      * 微信分享(网页分享)
@@ -61,9 +38,16 @@ object WeiXinApi {
      * @param title       网页标题
      * @param description 网页描述
      * @param bitmap      图片，不超过32k
+     * @param transaction 标识
      */
-    fun wxWebShare(scene: Int, webpageUrl: String, title: String, description: String, bitmap: Bitmap) {
-
+    fun shareWeb(
+        scene: Int,
+        webpageUrl: String,
+        title: String,
+        description: String,
+        bitmap: Bitmap,
+        transaction: String
+    ) {
         val webpage = WXWebpageObject()
         webpage.webpageUrl = webpageUrl
 
@@ -75,15 +59,19 @@ object WeiXinApi {
         val req = SendMessageToWX.Req()
         req.message = msg
         req.scene = scene
-        iWxApi.sendReq(req)
+        req.transaction = transaction
+        if (req.checkArgs()) {
+            iWxApi.sendReq(req)
+        }
     }
 
     /**
      * 微信分享(图片分享)
      * @param scene       分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
      * @param path       图片本地路径，不超过10M
+     * @param transaction 标识
      */
-    fun wxImgShare(scene: Int, path: String) {
+    fun shareImg(scene: Int, path: String, transaction: String) {
         val imgObj = WXImageObject()
         imgObj.imagePath = path
         val msg = WXMediaMessage(imgObj)
@@ -91,7 +79,10 @@ object WeiXinApi {
         val req = SendMessageToWX.Req()
         req.message = msg
         req.scene = scene
-        iWxApi.sendReq(req)
+        req.transaction = transaction
+        if (req.checkArgs()) {
+            iWxApi.sendReq(req)
+        }
     }
 
 
@@ -99,13 +90,15 @@ object WeiXinApi {
      * 微信授权
      *
      * @param scope //"snsapi_login,snsapi_userinfo"
-     * @param state //BuildConfig.APPLICATION_ID
+     * @param transaction 标识
      */
-    fun wxAuth(scope: String, state: String) {
+    fun auth(scope: String, transaction: String) {
         val req = SendAuth.Req()
         req.scope = scope
-        req.state = state
-        iWxApi.sendReq(req)
+        req.transaction = transaction
+        if (req.checkArgs()) {
+            iWxApi.sendReq(req)
+        }
     }
 
     /**
@@ -118,30 +111,30 @@ object WeiXinApi {
      * @param timestamp    时间戳
      * @param packageValue
      * @param sign         签名
+     * @param transaction 标识
      */
-    fun wxPay(
+    fun pay(
         appId: String,
         partnerid: String,
         prepayId: String,
         nonceStr: String,
         timestamp: String,
         packageValue: String,
-        sign: String
+        sign: String,
+        transaction: String
     ) {
-        try {
-            val req = PayReq()
-            req.appId = appId
-            req.partnerId = partnerid
-            req.prepayId = prepayId
-            req.nonceStr = nonceStr
-            req.timeStamp = timestamp
-            req.packageValue = packageValue
-            req.sign = sign
+        val req = PayReq()
+        req.appId = appId
+        req.partnerId = partnerid
+        req.prepayId = prepayId
+        req.nonceStr = nonceStr
+        req.timeStamp = timestamp
+        req.packageValue = packageValue
+        req.sign = sign
+        req.transaction = transaction
+        if (req.checkArgs()) {
             iWxApi.sendReq(req)
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
-
     }
 
     val api: WeiXinApi.Api by lazy {

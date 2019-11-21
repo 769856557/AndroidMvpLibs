@@ -20,13 +20,6 @@ android {
             keyAlias = 'android'
             keyPassword 'android'
         }
-
-        debug {
-            storeFile file('E:\\WorkSpace\\AndroidMvpLibs\\android.jks')
-            storePassword 'android'
-            keyAlias = 'android'
-            keyPassword 'android'
-        }
     }
 
     buildTypes {
@@ -36,9 +29,8 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.debug
+            minifyEnabled = false
+            signingConfig signingConfigs.release
         }
     }
 

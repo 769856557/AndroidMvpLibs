@@ -1,0 +1,9 @@
+{
+  "BusUtilsClass": "com.blankj.utilcode.util.BusUtils",
+  "rightBus": {
+    "666666": [
+      "{ desc: com.yang.libs.ui.MainActivity#shareToWxResult(com.tencent.mm.opensdk.modelbase.BaseResp req) }"
+    ]
+  },
+  "wrongBus": {}
+}

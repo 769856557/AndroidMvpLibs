@@ -2,9 +2,7 @@ package com.yang.libs
 
 import android.app.Application
 import com.blankj.utilcode.util.Utils
-import com.xxx.mvplib.api.QQApi
-import com.xxx.mvplib.api.WeiXinApi
-import com.xxx.mvplib.net.helper.AppHelper
+import com.xxx.mvplib.AppConfig
 
 /**
  * →_→
@@ -17,18 +15,6 @@ class BaseApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         Utils.init(this)
-        AppHelper.init(
-            BuildConfig.DEBUG,
-            BuildConfig.BUILD_TYPE,
-            AppConfig.RELEASE_HOST,
-            AppConfig.DEBUG_HOST,
-            AppConfig.WX_HOST
-        )
-        WeiXinApi.init(
-            this,
-            AppConfig.WX_APP_ID,
-            AppConfig.WX_APP_SECRET
-        )
-        QQApi.init(this, AppConfig.QQ_APP_ID)
+        AppConfig.init(BuildConfig.DEBUG, BuildConfig.BUILD_TYPE)
     }
 }

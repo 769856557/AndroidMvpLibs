@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.blankj.utilcode.util.BusUtils
 import com.xxx.mvplib.BaseActivity
 import com.xxx.mvplib.R
 
@@ -93,7 +94,15 @@ abstract class BaseViewActivity : BaseActivity(), BaseView {
         }
     }
 
+    /**
+     *注册com.blankj.bus,和EventBus类似的库
+     */
+    protected fun registerBlankjBus() {
+        BusUtils.register(this)
+    }
+
     override fun onDestroy() {
+        BusUtils.unregister(this)
         dismissLoadingDialog()
         super.onDestroy()
     }

@@ -2,11 +2,9 @@ package com.yang.libs.wxapi
 
 
 import android.content.Intent
-import com.blankj.utilcode.util.ToastUtils
-import com.tencent.mm.opensdk.constants.ConstantsAPI
+import com.blankj.utilcode.util.BusUtils
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
-import com.tencent.mm.opensdk.modelmsg.SendAuth
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.xxx.mvplib.api.WeiXinApi
 import com.xxx.mvplib.mvp.BaseViewActivity
@@ -35,22 +33,23 @@ class WXEntryActivity : BaseViewActivity(), IWXAPIEventHandler {
     override fun onReq(req: BaseReq) {}
 
     override fun onResp(resp: BaseResp) {
-        when (resp.type) {
-            ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX -> {
-                if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
-                    //分享成功
-                    ToastUtils.showShort("分享成功")
-                }
-            }
-            ConstantsAPI.COMMAND_SENDAUTH -> {
-                if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
-                    //授权成功
-                    ToastUtils.showShort("授权成功")
-                    val code = (resp as SendAuth.Resp).code
-                }
-            }
-        }
+        BusUtils.post(resp.transaction, resp)
         finish()
+//        when (resp.type) {
+//            ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX -> {
+//                if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
+//                    //分享成功
+//                    ToastUtils.showShort("分享成功")
+//                }
+//            }
+//            ConstantsAPI.COMMAND_SENDAUTH -> {
+//                if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
+//                    //授权成功
+//                    ToastUtils.showShort("授权成功")
+//                    val code = (resp as SendAuth.Resp).code
+//                }
+//            }
+//        }
     }
 
 }

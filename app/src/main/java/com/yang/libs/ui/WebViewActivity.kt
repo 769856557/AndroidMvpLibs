@@ -36,16 +36,15 @@ class WebViewActivity : BaseViewActivity() {
         /**
          * 网页标题
          */
-        const val EXTRA_WEB_TITLE = "title"
+        const val EXTRA_WEB_TITLE = "extra_web_title_WebViewActivity"
         /**
          * 网页地址
          */
-        const val EXTRA_WEB_URL = "url"
+        const val EXTRA_WEB_URL = "extra_web_url_WebViewActivity"
         /**
          * 网页文本
          */
-        const val EXTRA_WEB_TEXT = "text"
-
+        const val EXTRA_WEB_TEXT = "extra_web_text_WebViewActivity"
     }
 
 

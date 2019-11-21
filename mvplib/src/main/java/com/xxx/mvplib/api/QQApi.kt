@@ -1,13 +1,13 @@
 package com.xxx.mvplib.api
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import com.blankj.utilcode.util.Utils
 import com.tencent.connect.UserInfo
 import com.tencent.connect.share.QQShare
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
+import com.xxx.mvplib.AppConfig
 
 /**
  * QQAPI
@@ -22,15 +22,8 @@ object QQApi {
      *
      * @return
      */
-    private lateinit var tencent: Tencent
-
-    /**
-     * 初始化
-     * @param context application的context
-     * @param appId qq的appID
-     */
-    fun init(context: Context, appId: String) {
-        tencent = Tencent.createInstance(appId, context)
+    private val tencent: Tencent by lazy {
+        Tencent.createInstance(AppConfig.QQ_APP_ID, Utils.getApp())
     }
 
     /**
@@ -41,7 +34,7 @@ object QQApi {
      * @param webUrl      网页地址
      * @param title       网页标题
      * @param summary     网页描述
-     * @param iUiListener 分享回调
+     * @param iUiListener 回调
      */
     fun qqWebShare(
         activity: Activity,
@@ -67,7 +60,7 @@ object QQApi {
      * @param activity    Activity实例
      * @param way         分享方式 ,0好友分享,1空间分享
      * @param path         图片本地路径
-     * @param iUiListener 分享回调
+     * @param iUiListener 回调
      */
     fun qqImgShare(activity: Activity, way: Int, path: String, iUiListener: IUiListener) {
         val params = Bundle()
@@ -80,9 +73,9 @@ object QQApi {
     /**
      * QQ授权
      *
-     * @param activity
-     * @param scope
-     * @param iUiListener
+     * @param activity Activity实例
+     * @param scope 授权类型
+     * @param iUiListener 回调
      */
     fun qqAuth(activity: Activity, scope: String, iUiListener: IUiListener) {
         tencent.login(activity, scope, iUiListener)
@@ -91,15 +84,14 @@ object QQApi {
     /**
      * 获取用户资料
      *
-     * @param openid
-     * @param access_token
-     * @param expires_in
-     * @param iUiListener
+     * @param openid QQ授权成功后返回
+     * @param accessToken QQ授权成功后返回
+     * @param expiresIn QQ授权成功后返回
+     * @param iUiListener 回调
      */
-    fun getUserInfo(openid: String, access_token: String, expires_in: String, iUiListener: IUiListener) {
+    fun getUserInfo(openid: String, accessToken: String, expiresIn: String, iUiListener: IUiListener) {
         tencent.openId = openid
-        tencent.setAccessToken(access_token, expires_in)
-        val mInfo = UserInfo(Utils.getApp(), tencent.qqToken)
-        mInfo.getUserInfo(iUiListener)
+        tencent.setAccessToken(accessToken, expiresIn)
+        UserInfo(Utils.getApp(), tencent.qqToken).getUserInfo(iUiListener)
     }
 }
