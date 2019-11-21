@@ -15,6 +15,7 @@ import com.xxx.mvplib.R
  */
 abstract class BaseViewFragment : BaseFragment(), BaseView {
     private var alertDialog: AlertDialog? = null
+    private var isRegisterBlankjBus: Boolean = false
 
     /**
      * 显示加载框
@@ -89,11 +90,14 @@ abstract class BaseViewFragment : BaseFragment(), BaseView {
      *注册com.blankj.bus,和EventBus类似的库
      */
     protected fun registerBlankjBus() {
+        isRegisterBlankjBus = true
         BusUtils.register(this)
     }
 
     override fun onDestroy() {
-        BusUtils.unregister(this)
+        if (isRegisterBlankjBus) {
+            BusUtils.unregister(this)
+        }
         dismissLoadingDialog()
         super.onDestroy()
     }

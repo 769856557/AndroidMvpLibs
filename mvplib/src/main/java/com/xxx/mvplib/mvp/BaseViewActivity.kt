@@ -18,6 +18,7 @@ import com.xxx.mvplib.R
  */
 abstract class BaseViewActivity : BaseActivity(), BaseView {
     private var alertDialog: AlertDialog? = null
+    private var isRegisterBlankjBus: Boolean = false
 
     /**
      * 设置标题
@@ -98,11 +99,14 @@ abstract class BaseViewActivity : BaseActivity(), BaseView {
      *注册com.blankj.bus,和EventBus类似的库
      */
     protected fun registerBlankjBus() {
+        isRegisterBlankjBus = true
         BusUtils.register(this)
     }
 
     override fun onDestroy() {
-        BusUtils.unregister(this)
+        if (isRegisterBlankjBus) {
+            BusUtils.unregister(this)
+        }
         dismissLoadingDialog()
         super.onDestroy()
     }
