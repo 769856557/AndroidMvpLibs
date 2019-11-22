@@ -14,6 +14,7 @@ import java.io.File
  * yangyong
  */
 object PathUtils {
+    /* -------------------------------- /storage/emulated/0/包名 相关路径---------------------------------*/
     /**
      * app根文件夹路径，/storage/emulated/0/包名
      */
@@ -40,6 +41,8 @@ object PathUtils {
             FileUtils.createOrExistsDir(it)
         }
     }
+
+    /* -------------------------------- /storage/emulated/0/Android/data/包名 相关路径---------------------------------*/
 
     /**
      *okhttp缓存文件夹路径，/storage/emulated/0/Android/data/包名/cache/okhttp
