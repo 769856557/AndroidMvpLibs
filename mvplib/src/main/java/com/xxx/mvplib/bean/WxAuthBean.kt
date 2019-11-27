@@ -7,6 +7,6 @@ package com.xxx.mvplib.bean
  * yangyong
  */
 data class WxAuthBean(
-    var errcode: Int, // 0
-    var errmsg: String // ok
+    var errcode: Int = 0, // 0
+    var errmsg: String = "" // ok
 )

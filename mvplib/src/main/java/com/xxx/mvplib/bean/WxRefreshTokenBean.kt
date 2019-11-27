@@ -7,11 +7,11 @@ package com.xxx.mvplib.bean
  * yangyong
  */
 data class WxRefreshTokenBean(
-    var errcode: Int, // 0
-    var errmsg: String, // ok
-    var access_token: String, // ACCESS_TOKEN
+    var errcode: Int = 0, // 0
+    var errmsg: String = "", // ok
+    var access_token: String = "", // ACCESS_TOKEN
     var expires_in: Int, // 7200
-    var openid: String, // OPENID
-    var refresh_token: String, // REFRESH_TOKEN
-    var scope: String // SCOPE
+    var openid: String = "", // OPENID
+    var refresh_token: String = "", // REFRESH_TOKEN
+    var scope: String = "" // SCOPE
 )
