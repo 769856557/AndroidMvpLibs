@@ -7,11 +7,15 @@ import com.tencent.mm.opensdk.modelpay.PayReq
 import com.tencent.mm.opensdk.openapi.IWXAPI
 import com.tencent.mm.opensdk.openapi.WXAPIFactory
 import com.xxx.mvplib.AppConfig
-import com.xxx.mvplib.net.bean.BaseResponseBean
+import com.xxx.mvplib.bean.WxAccessTokenBean
+import com.xxx.mvplib.bean.WxAuthBean
+import com.xxx.mvplib.bean.WxRefreshTokenBean
+import com.xxx.mvplib.bean.WxUserinfoBean
 import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.POST
 
 /**
  * 微信相关API
@@ -137,21 +141,60 @@ object WeiXinApi {
         }
     }
 
-    val api: WeiXinApi.Api by lazy {
+    val api: Api by lazy {
         RetrofitOkHttpHelper.retrofitWx.create(WeiXinApi.Api::class.java)
     }
 
     interface Api {
         /**
          * 通过 code 获取 access_token
+         * @param grantType 传 snsapi_userinfo
          */
-        @GET("/sns/oauth2/access_token")
-        fun getAccessToken(
-            @Query("appid") appid: String,
-            @Query("secret") secret: String,
-            @Query("code") code: String,
-            @Query("grant_type") grantType: String
-        ): Observable<BaseResponseBean<String>>
+        @FormUrlEncoded
+        @POST("/sns/oauth2/access_token")
+        fun accessToken(
+            @Field("appid") appid: String,
+            @Field("secret") secret: String,
+            @Field("code") code: String,
+            @Field("grant_type") grantType: String
+        ): Observable<WxAccessTokenBean>
+
+
+        /**
+         * 检验授权凭证（access_token）是否有效
+         * @param 国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为 zh-CN
+         */
+        @FormUrlEncoded
+        @POST("/sns/userinfo")
+        fun userinfo(
+            @Field("openid") openid: String,
+            @Field("access_token") accessToken: String,
+            @Field("lang") lang: String
+        ): Observable<WxUserinfoBean>
+
+        /**
+         * 检验授权凭证（access_token）是否有效
+         */
+        @FormUrlEncoded
+        @POST("/sns/auth")
+        fun auth(
+            @Field("openid") openid: String,
+            @Field("access_token") accessToken: String
+        ): Observable<WxAuthBean>
+
+        /**
+         * 刷新或续期 access_token 使用
+         * @param grantType 传 refresh_token
+         */
+        @FormUrlEncoded
+        @POST("/sns/oauth2/refresh_token")
+        fun refreshToken(
+            @Field("appid") appid: String,
+            @Field("refresh_token") refreshToken: String,
+            @Field("grant_type") grantType: String
+        ): Observable<WxRefreshTokenBean>
+
     }
+
 
 }

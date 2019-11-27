@@ -1,13 +1,11 @@
 package com.xxx.mvplib.net.observer
 
-
-import android.Manifest.permission.ACCESS_NETWORK_STATE
+import android.Manifest
 import androidx.annotation.RequiresPermission
 import com.blankj.utilcode.util.NetworkUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.JsonSyntaxException
 import com.google.gson.stream.MalformedJsonException
-import com.xxx.mvplib.bean.BaseResponseBean
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import retrofit2.HttpException
@@ -17,13 +15,13 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 /**
- * RxJava的Observer封装
+ * RxJava的Observer封装，用于微信相关请求
  * →_→
- * 2017/1/9 20:08
+ * 2019/11/26 18:17
  * 769856557@qq.com
  * yangyong
  */
-abstract class XxBaseHttpObserver<T> : Observer<BaseResponseBean<T>> {
+abstract class XxWeiXinHttpObserver<T> : Observer<T> {
 
     /**
      * 请求成功
@@ -42,21 +40,14 @@ abstract class XxBaseHttpObserver<T> : Observer<BaseResponseBean<T>> {
     override fun onSubscribe(d: Disposable) {
     }
 
-    override fun onNext(responseBean: BaseResponseBean<T>) {
-        var errorMessage: String = responseBean.responseMessage.errorMessage
-        if (responseBean.responseMessage.messageType == "success") {
-            if (errorMessage.isBlank()) errorMessage = "请求成功"
-            onSuccess(errorMessage, responseBean.data)
-        } else {
-            if (errorMessage.isBlank()) errorMessage = "请求失败"
-            onFail(errorMessage, responseBean.responseMessage.errorType)
-        }
+    override fun onNext(bean: T) {
+        onSuccess("请求成功", bean)
     }
 
     override fun onComplete() {
     }
 
-    @RequiresPermission(ACCESS_NETWORK_STATE)
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun onError(throwable: Throwable) {
         throwable.printStackTrace()
         when {

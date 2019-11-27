@@ -3,8 +3,7 @@ package com.xxx.mvplib.widget
 import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.Button
-import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.AppCompatTextView
 import java.lang.ref.WeakReference
 import java.util.*
 
@@ -15,7 +14,7 @@ import java.util.*
  * 769856557@qq.com
  * yangyong
  */
-class CountDownButton(context: Context, attrs: AttributeSet) : AppCompatButton(context, attrs) {
+class CountDownButton(context: Context, attrs: AttributeSet) : AppCompatTextView(context, attrs) {
 
     init {
         if (CountDownUtils.second > 0) {
@@ -36,9 +35,10 @@ class CountDownButton(context: Context, attrs: AttributeSet) : AppCompatButton(c
      * 倒计时工具类
      */
     private object CountDownUtils {
-        var button: WeakReference<Button>? = null//button弱引用
+        var button: WeakReference<AppCompatTextView>? = null//button弱引用
         var hint: String = ""// 初始文本
         var second: Int = 0// 倒计秒数
+        var timer: Timer? = null
 
 
         /**
@@ -46,26 +46,26 @@ class CountDownButton(context: Context, attrs: AttributeSet) : AppCompatButton(c
          * @param tv 控件
          * @param s 倒计时（秒）
          */
-        fun setCountDown(bt: AppCompatButton, s: Int) {
+        fun setCountDown(bt: AppCompatTextView, s: Int) {
             button = WeakReference(bt);
             hint = button?.get()?.text.toString()
             second = s
 
             button?.get()?.isEnabled = false
-            button?.get()?.alpha = 0.4f
-            button?.get()?.text = "$second S"
+            button?.get()?.text = "重新发送(${second}s)"
 
-            Timer().schedule(object : TimerTask() {
+            timer?.cancel()
+            timer = Timer()
+            timer?.schedule(object : TimerTask() {
                 override fun run() {
                     (button?.get()?.context as Activity).runOnUiThread {
                         second--
                         if (second < 1) {
                             button?.get()?.isEnabled = true
-                            button?.get()?.alpha = 1.0f
                             button?.get()?.text = hint
-                            cancel()
+                            timer?.cancel()
                         } else {
-                            button?.get()?.text = "$second S"
+                            button?.get()?.text = "重新发送(${second}s)"
                         }
                     }
                 }

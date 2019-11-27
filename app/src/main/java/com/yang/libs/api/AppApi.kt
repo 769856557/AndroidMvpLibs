@@ -1,6 +1,6 @@
 package com.yang.libs.api
 
-import com.xxx.mvplib.net.bean.BaseResponseBean
+import com.xxx.mvplib.bean.BaseResponseBean
 import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
 import com.yang.libs.mvpmodel.BannerBean
 import com.yang.libs.mvpmodel.UploadBean

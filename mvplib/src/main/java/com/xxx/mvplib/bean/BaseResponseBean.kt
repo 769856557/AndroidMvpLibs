@@ -1,4 +1,4 @@
-package com.xxx.mvplib.net.bean
+package com.xxx.mvplib.bean
 
 /**
  * 公共响应体
