@@ -42,7 +42,7 @@ object AppConfig {
     val RELEASE_HOST = "http://www.13141314.ren";
 
     /**
-     * 正式版的域名
+     * 测试版的域名
      */
     val DEBUG_HOST = "http://xian.51ehw.com";
 
