@@ -39,11 +39,11 @@ class ParamsInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
-        requestBuilder.addHeader("token", TOKEN)//登陆成功后返回的token
-        requestBuilder.addHeader("device_name", DEVICE_NAME)//设备名称
-        requestBuilder.addHeader("os_name", OS_NAME)//系统名称
-        requestBuilder.addHeader("os_version", OS_VERSION)//系统版本
-        requestBuilder.addHeader("app_version", APP_VERSION)//应用版本
+        requestBuilder.addHeader("Token", TOKEN)//登陆成功后返回的token
+        requestBuilder.addHeader("Device-Name", DEVICE_NAME)//设备名称
+        requestBuilder.addHeader("Os-Name", OS_NAME)//系统名称
+        requestBuilder.addHeader("Os-Version", OS_VERSION)//系统版本
+        requestBuilder.addHeader("App-Version", APP_VERSION)//应用版本
         return chain.proceed(requestBuilder.build())
     }
 
