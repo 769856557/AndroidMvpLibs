@@ -24,7 +24,7 @@ class ItemDecorationList(context: Context, res: Int) : RecyclerView.ItemDecorati
     /**
      * 是否绘制第一个item顶部线
      */
-    var isOneDrawTop: Boolean = false
+    var isOneDrawTop: Boolean = true
     /**
      * 是否绘制第一个item底部线
      */
@@ -39,7 +39,12 @@ class ItemDecorationList(context: Context, res: Int) : RecyclerView.ItemDecorati
     var isVertical: Boolean = true
 
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         val itemCount = parent.adapter?.itemCount ?: return//总数
         val position = parent.getChildAdapterPosition(view)//当前序号
 
@@ -81,10 +86,37 @@ class ItemDecorationList(context: Context, res: Int) : RecyclerView.ItemDecorati
         val itemCount = parent.adapter?.itemCount ?: return//总数
         for (index in 0 until itemCount) {
             val child = parent.getChildAt(index) ?: continue
-            var left = 0
-            var top = 0
-            var right = 0
-            var bottom = 0
+            var left: Int
+            var top: Int
+            var right: Int
+            var bottom: Int
+
+            if (index == 0 && isOneDrawTop) {
+                //绘制第一个item顶部线
+                if (isVertical) {
+                    left = child.left
+                    top = child.top - (divider?.intrinsicHeight ?: 0)
+                    right = child.right
+                    bottom = child.top
+                } else {
+                    left = child.left - (divider?.intrinsicHeight ?: 0)
+                    top = child.bottom
+                    right = child.left
+                    bottom = child.bottom
+                }
+                divider?.setBounds(left, top, right, bottom)
+                divider?.draw(c)
+            }
+
+            if (index == 0 && !isOneDrawButtom) {
+                //不绘制第一个item底部线
+                continue
+            }
+
+            if (index == itemCount - 1 && !isLastDrawButtom) {
+                //不绘制最后一个item底部线
+                continue
+            }
 
             //绘制item的线
             if (isVertical) {
@@ -92,7 +124,6 @@ class ItemDecorationList(context: Context, res: Int) : RecyclerView.ItemDecorati
                 top = child.bottom
                 right = child.right
                 bottom = child.bottom + (divider?.intrinsicHeight ?: 0)
-
             } else {
                 left = child.right
                 top = child.bottom

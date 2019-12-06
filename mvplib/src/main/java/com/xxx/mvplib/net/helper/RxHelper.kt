@@ -25,15 +25,18 @@ object RxHelper {
         }
     }
 
-
     /**
      * 加载Dialog处理
      */
-    fun <T> startAndFinish(mainView: BaseView?): ObservableTransformer<T, T> {
+    fun <T> startFinishDialog(
+        mainView: BaseView?,
+        isShowLoadingDialog: Boolean = true
+    ): ObservableTransformer<T, T> {
         return ObservableTransformer { observable ->
             observable
-                .doOnSubscribe { mainView?.showLoadingDialog() }
-                .doFinally { mainView?.dismissLoadingDialog() }
+                .doOnSubscribe { if (isShowLoadingDialog) mainView?.showLoadingDialog() }
+                .doOnNext { if (isShowLoadingDialog) mainView?.dismissLoadingDialog() }
+                .doOnError { if (isShowLoadingDialog) mainView?.dismissLoadingDialog() }
         }
     }
 }

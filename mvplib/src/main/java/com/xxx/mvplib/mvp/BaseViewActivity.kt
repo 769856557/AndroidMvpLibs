@@ -80,10 +80,10 @@ abstract class BaseViewActivity : BaseActivity(), BaseView {
     }
 
     /**
-     * 显示加载框提示
-     * @param hint 提示语，可不传
+     * 设置加载框提示
+     * @param hint 提示语
      */
-    override fun showLoadingDialogHint(hint: String) {
+    override fun setLoadingDialogHint(hint: String) {
         if (!isFinishing && alertDialog?.isShowing == true) {
             runOnUiThread {
                 try {

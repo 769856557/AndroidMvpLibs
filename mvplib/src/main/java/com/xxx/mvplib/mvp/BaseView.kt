@@ -23,6 +23,6 @@ interface BaseView {
     /**
      * 显示加载框提示
      */
-    fun showLoadingDialogHint(hint: String = "")
+    fun setLoadingDialogHint(hint: String = "")
 
 }

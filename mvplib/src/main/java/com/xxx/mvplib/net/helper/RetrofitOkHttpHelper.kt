@@ -1,10 +1,10 @@
 package com.xxx.mvplib.net.helper
 
 import com.xxx.mvplib.AppConfig
+import com.xxx.mvplib.PathConfig
 import com.xxx.mvplib.net.converter.GsonConverterFactory
 import com.xxx.mvplib.net.interceptor.CacheInterceptor
 import com.xxx.mvplib.net.interceptor.ParamsInterceptor
-import com.xxx.mvplib.utils.PathUtils
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -52,7 +52,7 @@ object RetrofitOkHttpHelper {
      */
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
-            .cache(Cache(File(PathUtils.CACHE_OKHTTP), 10L * 1024 * 1024))
+            .cache(Cache(File(PathConfig.CACHE_OKHTTP), 10L * 1024 * 1024))
             .addInterceptor(ParamsInterceptor())
             .addInterceptor(CacheInterceptor.AppCacheInterceptor())
             .addNetworkInterceptor(CacheInterceptor.NetCacheInterceptor())

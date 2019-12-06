@@ -3,7 +3,6 @@ package com.xxx.mvplib.net.observer
 import android.Manifest
 import androidx.annotation.RequiresPermission
 import com.blankj.utilcode.util.NetworkUtils
-import com.blankj.utilcode.util.ToastUtils
 import com.google.gson.JsonSyntaxException
 import com.google.gson.stream.MalformedJsonException
 import io.reactivex.Observer
@@ -50,17 +49,19 @@ abstract class XxWeiXinHttpObserver<T> : Observer<T> {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     override fun onError(throwable: Throwable) {
         throwable.printStackTrace()
+        var errorMessage: String
         when {
-            !NetworkUtils.isConnected() -> ToastUtils.showShort("网络异常")
-            throwable is HttpException -> ToastUtils.showShort("HTTP异常:${throwable.code()}")
-            throwable is UnknownHostException -> ToastUtils.showShort("服务器异常")
-            throwable is ConnectException -> ToastUtils.showShort("连接异常")
-            throwable is SocketTimeoutException -> ToastUtils.showShort("连接超时")
-            throwable is InterruptedIOException -> ToastUtils.showShort("连接超时")
-            throwable is MalformedJsonException -> ToastUtils.showShort("数据异常")
-            throwable is JsonSyntaxException -> ToastUtils.showShort("数据异常")
-            else -> ToastUtils.showShort("请求异常")
+            !NetworkUtils.isConnected() -> errorMessage = "网络异常"
+            throwable is HttpException -> errorMessage = "HTTP异常:${throwable.code()}"
+            throwable is UnknownHostException -> errorMessage = "服务器异常"
+            throwable is ConnectException -> errorMessage = "连接异常"
+            throwable is SocketTimeoutException -> errorMessage = "连接超时"
+            throwable is InterruptedIOException -> errorMessage = "连接超时"
+            throwable is MalformedJsonException -> errorMessage = "数据异常"
+            throwable is JsonSyntaxException -> errorMessage = "数据异常"
+            else -> errorMessage = "请求异常"
         }
+        onFail(errorMessage, "")
     }
 
 }

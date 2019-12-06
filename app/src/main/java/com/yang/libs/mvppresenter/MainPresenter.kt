@@ -1,7 +1,6 @@
 package com.yang.libs.mvppresenter
 
 import com.blankj.utilcode.util.ToastUtils
-import com.xxx.mvplib.api.WeiXinApi
 import com.xxx.mvplib.mvp.BasePresenter
 import com.xxx.mvplib.net.body.UploadBody
 import com.xxx.mvplib.net.helper.RxHelper
@@ -27,7 +26,7 @@ class MainPresenter : BasePresenter<MainView>() {
     fun getAdvertisement(param: String) {
         AppApi.api.getAdvertisement(param)
             .compose(RxHelper.ioAndMain())
-            .compose(RxHelper.startAndFinish(getView()))
+            .compose(RxHelper.startFinishDialog(getView()))
             .subscribe(object : XxBaseHttpObserver<BannerBean>() {
 
                 override fun onSuccess(msg: String?, bean: BannerBean?) {
@@ -57,35 +56,17 @@ class MainPresenter : BasePresenter<MainView>() {
                     val totalDecimal = BigDecimal(total.toString())
                     val currentDecimal = BigDecimal((current * 100).toString())
                     val percentage = currentDecimal.divide(totalDecimal, RoundingMode.DOWN)
-                    getView()?.showLoadingDialogHint("正在上传：${percentage}%")
+                    getView()?.setLoadingDialogHint("正在上传：${percentage}%")
                 }
             });
 
         AppApi.api.uploadImg(uploadBody)
             .compose(RxHelper.ioAndMain())
-            .compose(RxHelper.startAndFinish(getView()))
+            .compose(RxHelper.startFinishDialog(getView()))
             .subscribe(object : XxBaseHttpObserver<UploadBean>() {
 
                 override fun onSuccess(msg: String?, bean: UploadBean?) {
                     getView()?.uploadImg(bean ?: return)
-                }
-
-                override fun onFail(msg: String?, code: String?) {
-                    ToastUtils.showShort(msg)
-                }
-            })
-    }
-
-    /**
-     * 获取微信AccessToken
-     */
-    fun getAccessToken(appid: String, secret: String, code: String, grantType: String) {
-        WeiXinApi.api.getAccessToken(appid, secret, code, grantType)
-            .compose(RxHelper.ioAndMain())
-            .compose(RxHelper.startAndFinish(getView()))
-            .subscribe(object : XxBaseHttpObserver<String>() {
-
-                override fun onSuccess(msg: String?, bean: String?) {
                 }
 
                 override fun onFail(msg: String?, code: String?) {

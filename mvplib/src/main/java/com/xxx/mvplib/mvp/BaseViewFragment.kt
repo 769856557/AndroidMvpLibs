@@ -67,12 +67,12 @@ abstract class BaseViewFragment : BaseFragment(), BaseView {
     }
 
     /**
-     * 显示加载框提示
-     * @param hint 提示语，可不传
+     * 设置加载框提示
+     * @param hint 提示语
      */
-    override fun showLoadingDialogHint(hint: String) {
+    override fun setLoadingDialogHint(hint: String) {
         if (activity is BaseViewActivity) {
-            (activity as? BaseViewActivity)?.showLoadingDialogHint(hint)
+            (activity as? BaseViewActivity)?.setLoadingDialogHint(hint)
             return
         }
         if (activity?.isFinishing == false && alertDialog?.isShowing == true) {
