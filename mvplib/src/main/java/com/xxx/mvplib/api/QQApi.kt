@@ -17,13 +17,12 @@ import com.xxx.mvplib.AppConfig
  * yangyong
  */
 object QQApi {
+
     /**
      * 获取Tencent实例
-     *
-     * @return
      */
     private val tencent: Tencent by lazy {
-        Tencent.createInstance(AppConfig.QQ_APP_ID, Utils.getApp())
+        Tencent.createInstance(AppConfig.qqAppId, Utils.getApp())
     }
 
     /**
@@ -89,7 +88,12 @@ object QQApi {
      * @param expiresIn QQ授权成功后返回
      * @param iUiListener 回调
      */
-    fun getUserInfo(openid: String, accessToken: String, expiresIn: String, iUiListener: IUiListener) {
+    fun getUserInfo(
+        openid: String,
+        accessToken: String,
+        expiresIn: String,
+        iUiListener: IUiListener
+    ) {
         tencent.openId = openid
         tencent.setAccessToken(accessToken, expiresIn)
         UserInfo(Utils.getApp(), tencent.qqToken).getUserInfo(iUiListener)

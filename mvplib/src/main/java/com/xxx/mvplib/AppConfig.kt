@@ -1,5 +1,16 @@
 package com.xxx.mvplib
 
+import com.xxx.mvplib.DefaultConfig.DEBUG_API_HOST
+import com.xxx.mvplib.DefaultConfig.DEBUG_QQ_APP_ID
+import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_ID
+import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_SECRET
+import com.xxx.mvplib.DefaultConfig.DEBUG_WX_HOST
+import com.xxx.mvplib.DefaultConfig.RELEASE_API_HOST
+import com.xxx.mvplib.DefaultConfig.RELEASE_QQ_APP_ID
+import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_ID
+import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_SECRET
+import com.xxx.mvplib.DefaultConfig.RELEASE_WX_HOST
+
 /**
  * app相关配置
  * →_→
@@ -8,6 +19,7 @@ package com.xxx.mvplib
  * yangyong
  */
 object AppConfig {
+
     /**
      * 是否调试模式，对应app模块中的BuildConfig.DEBUG，对应bulid文件的debuggable属性
      */
@@ -21,6 +33,37 @@ object AppConfig {
         private set
 
     /**
+     * Api域名
+     */
+    val apiHost: String
+        get() = if (isRelease) RELEASE_API_HOST else DEBUG_API_HOST
+
+    /**
+     * 微信域名
+     */
+    val wxHost: String
+        get() = if (isRelease) RELEASE_WX_HOST else DEBUG_WX_HOST
+
+    /**
+     * 微信appid
+     */
+    val wxAppId: String
+        get() = if (isRelease) RELEASE_WX_APP_ID else DEBUG_WX_APP_ID
+
+    /**
+     * 微信secret
+     */
+    val wxAppSecret: String
+        get() = if (isRelease) RELEASE_WX_APP_SECRET else DEBUG_WX_APP_SECRET
+
+    /**
+     * QQappid
+     */
+    val qqAppId: String
+        get() = if (isRelease) RELEASE_QQ_APP_ID else DEBUG_QQ_APP_ID
+
+
+    /**
      * 初始化调试模式和构建类型
      * @param isDebuggable 是否调试模式，对应app模块的BuildConfig.DEBUG
      * @param buildType  构建类型，对应app模块的BuildConfig.BUILD_TYPE
@@ -30,40 +73,5 @@ object AppConfig {
         this.isRelease = buildType == "release"
     }
 
-    /**
-     * Api主域名,正式版会返回正式域名，测试版会返回测试域名
-     */
-    val apiHost: String
-        get() = if (isRelease) RELEASE_HOST else DEBUG_HOST
-
-    /**
-     * 正式版的域名
-     */
-    val RELEASE_HOST = "http://www.13141314.ren";
-
-    /**
-     * 测试版的域名
-     */
-    val DEBUG_HOST = "http://xian.51ehw.com";
-
-    /**
-     * 微信的域名
-     */
-    val WX_HOST = "https://api.weixin.qq.com";
-
-    /**
-     * 微信appid
-     */
-    val WX_APP_ID = "wxfb78531f58612718"
-
-    /**
-     * 微信secret
-     */
-    val WX_APP_SECRET = "bbd178306c59567fcd590d363dc13b51"
-
-    /**
-     * QQappid
-     */
-    val QQ_APP_ID = "1107925990"
 
 }

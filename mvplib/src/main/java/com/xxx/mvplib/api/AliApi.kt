@@ -45,7 +45,7 @@ object AliApi {
     /**
      * 支付结果实体类
      */
-    class PayResult(rawResult: Map<String, String>) {
+    private class PayResult(rawResult: Map<String, String>) {
 
         var resultStatus: String = ""
             private set

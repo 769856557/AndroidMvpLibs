@@ -25,12 +25,13 @@ import retrofit2.http.POST
  * yangyong
  */
 object WeiXinApi {
+
     /**
      * IWXAPI实例
      */
     val iWxApi: IWXAPI by lazy {
-        WXAPIFactory.createWXAPI(Utils.getApp(), AppConfig.WX_APP_ID, true).apply {
-            registerApp(AppConfig.WX_APP_ID)
+        WXAPIFactory.createWXAPI(Utils.getApp(), AppConfig.wxAppId, true).apply {
+            registerApp(AppConfig.wxAppId)
         }
     }
 

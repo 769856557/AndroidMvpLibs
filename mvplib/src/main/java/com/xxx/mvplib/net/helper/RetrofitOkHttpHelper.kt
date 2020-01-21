@@ -39,7 +39,7 @@ object RetrofitOkHttpHelper {
      */
     val retrofitWx: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl(AppConfig.WX_HOST)
+            .baseUrl(AppConfig.wxHost)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
