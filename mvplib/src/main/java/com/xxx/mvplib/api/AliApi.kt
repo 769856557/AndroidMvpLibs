@@ -3,10 +3,7 @@ package com.xxx.mvplib.api
 import android.app.Activity
 import android.text.TextUtils
 import com.alipay.sdk.app.PayTask
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.blankj.utilcode.util.BusUtils
 
 /**
  * 支付宝api
@@ -19,26 +16,16 @@ object AliApi {
 
     /**
      * 支付宝支付
-     *
      * @param activity  Activity实例
      * @param orderInfo 已签名的订单信息
-     * @param observer 支付成功回调
+     * @param tag 支付标识:用于区分支付类型，比如：购买商品、充值话费
      */
-    fun alipay(activity: Activity, orderInfo: String, observer: Observer<Any>) {
-        Observable
-            .create<Any> {
-                val result = PayTask(activity).payV2(orderInfo, true)
-                val payResult = PayResult(result)
-                if ("9000" == payResult.resultStatus) {
-                    it.onComplete()
-                } else {
-                    it.onError(Throwable(payResult.result));
-                }
-
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(observer)
+    fun pay(activity: Activity, orderInfo: String, tag: String) {
+        Thread(Runnable {
+            val result = PayTask(activity).payV2(orderInfo, true)
+            val payResult = PayResult(result)
+            BusUtils.post(tag, payResult)//发送结果事件
+        }).start()
     }
 
 
@@ -46,6 +33,7 @@ object AliApi {
      * 支付结果实体类
      */
     private class PayResult(rawResult: Map<String, String>) {
+        val PAY_SUCCESS = "9000"//当resultStatus=9000代表支付成功
 
         var resultStatus: String = ""
             private set
@@ -53,7 +41,6 @@ object AliApi {
             private set
         var memo: String = ""
             private set
-
 
         init {
             for (key in rawResult.keys) {

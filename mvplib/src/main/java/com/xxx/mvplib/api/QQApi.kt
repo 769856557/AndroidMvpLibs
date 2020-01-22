@@ -2,6 +2,7 @@ package com.xxx.mvplib.api
 
 import android.app.Activity
 import android.os.Bundle
+import com.blankj.utilcode.util.ToastUtils
 import com.blankj.utilcode.util.Utils
 import com.tencent.connect.UserInfo
 import com.tencent.connect.share.QQShare
@@ -19,7 +20,7 @@ import com.xxx.mvplib.AppConfig
 object QQApi {
 
     /**
-     * 获取Tencent实例
+     * Tencent实例
      */
     private val tencent: Tencent by lazy {
         Tencent.createInstance(AppConfig.qqAppId, Utils.getApp())
@@ -27,29 +28,34 @@ object QQApi {
 
     /**
      * QQ分享(网页)
-     *
-     * @param activity    Activity实例
-     * @param way         分享方式 ,0好友分享,1空间分享
-     * @param webUrl      网页地址
-     * @param title       网页标题
-     * @param summary     网页描述
-     * @param iUiListener 回调
+     * @param activity Activity实例
+     * @param way 分享方式 ,0：好友分享,1：空间分享
+     * @param title 网页标题
+     * @param des 网页描述
+     * @param img  图片地址
+     * @param url 网页地址
+     * @param iUiListener 分享回调
      */
-    fun qqWebShare(
+    fun shareWeb(
         activity: Activity,
         way: Int,
-        webUrl: String,
         title: String,
-        summary: String,
+        des: String,
         img: String,
+        url: String,
         iUiListener: IUiListener
     ) {
-        val params = Bundle()
-        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, way)
-        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, webUrl)
-        params.putString(QQShare.SHARE_TO_QQ_TITLE, title)
-        params.putString(QQShare.SHARE_TO_QQ_SUMMARY, summary)
-        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, img)
+        if (!tencent.isQQInstalled(activity)) {
+            ToastUtils.showLong("请先安装QQ")
+            return
+        }
+        val params = Bundle().apply {
+            putInt(QQShare.SHARE_TO_QQ_EXT_INT, way)
+            putString(QQShare.SHARE_TO_QQ_TITLE, title)
+            putString(QQShare.SHARE_TO_QQ_SUMMARY, des)
+            putString(QQShare.SHARE_TO_QQ_IMAGE_URL, img)
+            putString(QQShare.SHARE_TO_QQ_TARGET_URL, url)
+        }
         tencent.shareToQQ(activity, params, iUiListener)
     }
 
@@ -59,34 +65,41 @@ object QQApi {
      * @param activity    Activity实例
      * @param way         分享方式 ,0好友分享,1空间分享
      * @param path         图片本地路径
-     * @param iUiListener 回调
+     * @param iUiListener 分享回调
      */
-    fun qqImgShare(activity: Activity, way: Int, path: String, iUiListener: IUiListener) {
-        val params = Bundle()
-        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, way)
-        params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE)
-        params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, path)
+    fun shareImg(activity: Activity, way: Int, path: String, iUiListener: IUiListener) {
+        if (!tencent.isQQInstalled(activity)) {
+            ToastUtils.showLong("请先安装QQ")
+            return
+        }
+        val params = Bundle().apply {
+            putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE)
+            putInt(QQShare.SHARE_TO_QQ_EXT_INT, way)
+            putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, path)
+        }
         tencent.shareToQQ(activity, params, iUiListener)
     }
 
     /**
      * QQ授权
-     *
      * @param activity Activity实例
-     * @param scope 授权类型
-     * @param iUiListener 回调
+     * @param scope 授权类型，get_simple_userinfo:获取用户资料
+     * @param iUiListener 授权回调
      */
-    fun qqAuth(activity: Activity, scope: String, iUiListener: IUiListener) {
+    fun auth(activity: Activity, scope: String, iUiListener: IUiListener) {
+        if (!tencent.isQQInstalled(activity)) {
+            ToastUtils.showLong("请先安装QQ")
+            return
+        }
         tencent.login(activity, scope, iUiListener)
     }
 
     /**
      * 获取用户资料
-     *
      * @param openid QQ授权成功后返回
      * @param accessToken QQ授权成功后返回
      * @param expiresIn QQ授权成功后返回
-     * @param iUiListener 回调
+     * @param iUiListener 获取用户资料回调
      */
     fun getUserInfo(
         openid: String,

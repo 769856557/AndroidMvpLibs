@@ -33,23 +33,8 @@ class WXEntryActivity : BaseViewActivity(), IWXAPIEventHandler {
     override fun onReq(req: BaseReq) {}
 
     override fun onResp(resp: BaseResp) {
-        BusUtils.post(resp.transaction, resp)
+        BusUtils.post(resp.transaction, resp)//发送结果事件
         finish()
-//        when (resp.type) {
-//            ConstantsAPI.COMMAND_SENDMESSAGE_TO_WX -> {
-//                if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
-//                    //分享成功
-//                    ToastUtils.showShort("分享成功")
-//                }
-//            }
-//            ConstantsAPI.COMMAND_SENDAUTH -> {
-//                if (resp.errCode == BaseResp.ErrCode.ERR_OK) {
-//                    //授权成功
-//                    ToastUtils.showShort("授权成功")
-//                    val code = (resp as SendAuth.Resp).code
-//                }
-//            }
-//        }
     }
 
 }

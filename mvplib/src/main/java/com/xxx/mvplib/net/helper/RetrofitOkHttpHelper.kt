@@ -23,9 +23,9 @@ import java.io.File
 object RetrofitOkHttpHelper {
 
     /**
-     * Retrofit初始化，用于自己的服务器相关请求
+     * Retrofit初始化
      */
-    val retrofitApp: Retrofit by lazy {
+    val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(AppConfig.apiHost)
             .client(okHttpClient)
@@ -33,19 +33,6 @@ object RetrofitOkHttpHelper {
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
     }
-
-    /**
-     * Retrofit初始化，用于微信服务器相关请求
-     */
-    val retrofitWx: Retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(AppConfig.wxHost)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .build()
-    }
-
 
     /**
      * OkHttpClient初始化

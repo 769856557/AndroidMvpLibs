@@ -1,6 +1,7 @@
 package com.xxx.mvplib.api
 
 import android.graphics.Bitmap
+import com.blankj.utilcode.util.ToastUtils
 import com.blankj.utilcode.util.Utils
 import com.tencent.mm.opensdk.modelmsg.*
 import com.tencent.mm.opensdk.modelpay.PayReq
@@ -13,6 +14,8 @@ import com.xxx.mvplib.bean.WxRefreshTokenBean
 import com.xxx.mvplib.bean.WxUserinfoBean
 import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
 import io.reactivex.Observable
+import okhttp3.ResponseBody
+import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
@@ -38,33 +41,38 @@ object WeiXinApi {
     /**
      * 微信分享(网页分享)
      *
-     * @param scene       分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
-     * @param webpageUrl  网页url
-     * @param title       网页标题
-     * @param description 网页描述
-     * @param bitmap      图片，不超过32k
-     * @param transaction 标识
+     * @param scene 分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
+     * @param title 网页标题
+     * @param des 网页描述
+     * @param bitmap 图片，不超过32k
+     *  @param url 网页url
+     * @param tag 标识,用于区分回调
      */
     fun shareWeb(
         scene: Int,
-        webpageUrl: String,
         title: String,
-        description: String,
+        des: String,
         bitmap: Bitmap,
-        transaction: String
+        url: String,
+        tag: String
     ) {
+        if (!iWxApi.isWXAppInstalled) {
+            ToastUtils.showLong("请先安装微信")
+            return
+        }
+
         val webpage = WXWebpageObject()
-        webpage.webpageUrl = webpageUrl
+        webpage.webpageUrl = url
 
         val msg = WXMediaMessage(webpage)
         msg.title = title
-        msg.description = description
+        msg.description = des
         msg.setThumbImage(bitmap)
 
         val req = SendMessageToWX.Req()
         req.message = msg
         req.scene = scene
-        req.transaction = transaction
+        req.transaction = tag
         if (req.checkArgs()) {
             iWxApi.sendReq(req)
         }
@@ -74,9 +82,14 @@ object WeiXinApi {
      * 微信分享(图片分享)
      * @param scene       分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
      * @param path       图片本地路径，不超过10M
-     * @param transaction 标识
+     * @param transaction 标识,用于区分回调
      */
     fun shareImg(scene: Int, path: String, transaction: String) {
+        if (!iWxApi.isWXAppInstalled) {
+            ToastUtils.showLong("请先安装微信")
+            return
+        }
+
         val imgObj = WXImageObject()
         imgObj.imagePath = path
         val msg = WXMediaMessage(imgObj)
@@ -95,9 +108,14 @@ object WeiXinApi {
      * 微信授权
      *
      * @param scope //"snsapi_login,snsapi_userinfo"
-     * @param transaction 标识
+     * @param transaction 标识,用于区分回调
      */
     fun auth(scope: String, transaction: String) {
+        if (!iWxApi.isWXAppInstalled) {
+            ToastUtils.showLong("请先安装微信")
+            return
+        }
+
         val req = SendAuth.Req()
         req.scope = scope
         req.transaction = transaction
@@ -106,9 +124,9 @@ object WeiXinApi {
         }
     }
 
+
     /**
      * 微信支付
-     *
      * @param appId        appid
      * @param partnerid    商户id
      * @param prepayId     预支付交易会话标识
@@ -128,6 +146,11 @@ object WeiXinApi {
         sign: String,
         transaction: String
     ) {
+        if (!iWxApi.isWXAppInstalled) {
+            ToastUtils.showLong("请先安装微信")
+            return
+        }
+
         val req = PayReq()
         req.appId = appId
         req.partnerId = partnerid
@@ -136,15 +159,17 @@ object WeiXinApi {
         req.timeStamp = timestamp
         req.packageValue = packageValue
         req.sign = sign
-        req.transaction = transaction
+        req.extData = transaction
         if (req.checkArgs()) {
             iWxApi.sendReq(req)
         }
     }
 
+
     val api: Api by lazy {
-        RetrofitOkHttpHelper.retrofitWx.create(WeiXinApi.Api::class.java)
+        RetrofitOkHttpHelper.retrofit.create(Api::class.java)
     }
+
 
     interface Api {
         /**
@@ -152,7 +177,7 @@ object WeiXinApi {
          * @param grantType 传 snsapi_userinfo
          */
         @FormUrlEncoded
-        @POST("/sns/oauth2/access_token")
+        @POST("https://api.weixin.qq.com/sns/oauth2/access_token")
         fun accessToken(
             @Field("appid") appid: String,
             @Field("secret") secret: String,
@@ -163,10 +188,10 @@ object WeiXinApi {
 
         /**
          * 检验授权凭证（access_token）是否有效
-         * @param 国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为 zh-CN
+         * @param lang 国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为 zh-CN
          */
         @FormUrlEncoded
-        @POST("/sns/userinfo")
+        @POST("https://api.weixin.qq.com/sns/userinfo")
         fun userinfo(
             @Field("openid") openid: String,
             @Field("access_token") accessToken: String,
@@ -177,7 +202,7 @@ object WeiXinApi {
          * 检验授权凭证（access_token）是否有效
          */
         @FormUrlEncoded
-        @POST("/sns/auth")
+        @POST("https://api.weixin.qq.com/sns/auth")
         fun auth(
             @Field("openid") openid: String,
             @Field("access_token") accessToken: String
@@ -188,12 +213,19 @@ object WeiXinApi {
          * @param grantType 传 refresh_token
          */
         @FormUrlEncoded
-        @POST("/sns/oauth2/refresh_token")
+        @POST("https://api.weixin.qq.com/sns/oauth2/refresh_token")
         fun refreshToken(
             @Field("appid") appid: String,
             @Field("refresh_token") refreshToken: String,
             @Field("grant_type") grantType: String
         ): Observable<WxRefreshTokenBean>
+
+
+        /**
+         * 生成预支付交易单
+         */
+        @POST("https://api.mch.weixin.qq.com/pay/unifiedorder")
+        fun unifiedorder(@Body parseXml: String): Observable<ResponseBody>
 
     }
 

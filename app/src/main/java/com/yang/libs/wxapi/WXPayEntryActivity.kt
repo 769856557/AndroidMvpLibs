@@ -4,10 +4,10 @@ package com.yang.libs.wxapi
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.blankj.utilcode.util.ToastUtils
-import com.tencent.mm.opensdk.constants.ConstantsAPI
+import com.blankj.utilcode.util.BusUtils
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
+import com.tencent.mm.opensdk.modelpay.PayResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.xxx.mvplib.api.WeiXinApi
 
@@ -35,9 +35,7 @@ class WXPayEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
     override fun onReq(req: BaseReq) {}
 
     override fun onResp(resp: BaseResp) {
-        if (resp.type == ConstantsAPI.COMMAND_PAY_BY_WX && resp.errCode == BaseResp.ErrCode.ERR_OK) {
-            ToastUtils.showShort("支付成功")
-        }
+        BusUtils.post((resp as PayResp).extData, resp)//发送结果事件
         finish()
     }
 

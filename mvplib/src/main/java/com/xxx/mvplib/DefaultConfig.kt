@@ -26,6 +26,21 @@ object DefaultConfig {
     val RELEASE_WX_APP_ID = "wxfb78531f58612718"
 
     /**
+     * 微信商户号
+     */
+    val RELEASE_WX_MCH_ID = ""
+
+    /**
+     * 微信密钥
+     */
+    val RELEASE_WX_APP_KEY = ""
+
+    /**
+     * 微信回调地址
+     */
+    val RELEASE_WX_NOTIFY_URL = ""
+
+    /**
      * 微信secret
      */
     val RELEASE_WX_APP_SECRET = "bbd178306c59567fcd590d363dc13b51"
@@ -50,6 +65,21 @@ object DefaultConfig {
      * 微信appid
      */
     val DEBUG_WX_APP_ID = "wxfb78531f58612718"
+
+    /**
+     * 微信商户号
+     */
+    val DEBUG_WX_MCH_ID = ""
+
+    /**
+     * 微信密钥
+     */
+    val DEBUG_WX_APP_KEY = ""
+
+    /**
+     * 微信回调地址
+     */
+    val DEBUG_WX_NOTIFY_URL = ""
 
     /**
      * 微信secret

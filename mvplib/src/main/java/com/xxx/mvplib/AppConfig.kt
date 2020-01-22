@@ -3,13 +3,19 @@ package com.xxx.mvplib
 import com.xxx.mvplib.DefaultConfig.DEBUG_API_HOST
 import com.xxx.mvplib.DefaultConfig.DEBUG_QQ_APP_ID
 import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_ID
+import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_KEY
 import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_SECRET
 import com.xxx.mvplib.DefaultConfig.DEBUG_WX_HOST
+import com.xxx.mvplib.DefaultConfig.DEBUG_WX_MCH_ID
+import com.xxx.mvplib.DefaultConfig.DEBUG_WX_NOTIFY_URL
 import com.xxx.mvplib.DefaultConfig.RELEASE_API_HOST
 import com.xxx.mvplib.DefaultConfig.RELEASE_QQ_APP_ID
 import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_ID
+import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_KEY
 import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_SECRET
 import com.xxx.mvplib.DefaultConfig.RELEASE_WX_HOST
+import com.xxx.mvplib.DefaultConfig.RELEASE_WX_MCH_ID
+import com.xxx.mvplib.DefaultConfig.RELEASE_WX_NOTIFY_URL
 
 /**
  * app相关配置
@@ -49,6 +55,25 @@ object AppConfig {
      */
     val wxAppId: String
         get() = if (isRelease) RELEASE_WX_APP_ID else DEBUG_WX_APP_ID
+
+    /**
+     * 微信商户号
+     */
+    val wxMchId: String
+        get() = if (isRelease) RELEASE_WX_MCH_ID else DEBUG_WX_MCH_ID
+
+    /**
+     * 微信密钥
+     */
+    val wxAppKey: String
+        get() = if (isRelease) RELEASE_WX_APP_KEY else DEBUG_WX_APP_KEY
+
+
+    /**
+     * 微信回调地址
+     */
+    val wxNotifyUrl: String
+        get() = if (isRelease) RELEASE_WX_NOTIFY_URL else DEBUG_WX_NOTIFY_URL
 
     /**
      * 微信secret

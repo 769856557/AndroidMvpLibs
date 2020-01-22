@@ -3,8 +3,8 @@ package com.yang.libs.ui
 import com.blankj.utilcode.util.BusUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.tencent.mm.opensdk.modelbase.BaseResp
+import com.xxx.mvplib.api.AliApi
 import com.xxx.mvplib.mvp.BasePresenterActivity
-import com.xxx.mvplib.utils.SysAppUtils
 import com.yang.libs.R
 import com.yang.libs.mvpmodel.BannerBean
 import com.yang.libs.mvpmodel.UploadBean
@@ -26,7 +26,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            SysAppUtils.openWebView(this, "http://wap.baidu.com")
+            //            SysAppUtils.openWebView(this, "http://wap.baidu.com")
 //            WeiXinApi.shareWeb(
 //                SendMessageToWX.Req.WXSceneSession,
 //                "http://wap.baidu.com",
@@ -35,6 +35,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
 //                BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher),
 //                "666666"
 //            )
+            AliApi.pay(this, "aaaaaaaaaaaaaa", "aaa")
         }
     }
 
