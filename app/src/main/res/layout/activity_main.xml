@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/windowBackground_gray"
-              android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/windowBackground_gray"
+        android:orientation="vertical">
 
-    <include layout="@layout/layout_tool_bar"/>
+    <include layout="@layout/layout_tool_bar" />
 
     <TextView
             android:id="@+id/tvContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground"
-            android:text="Hello World!"/>
+            android:text="Hello World!" />
+
+    <ImageView
+            android:id="@+id/ivImg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop" />
 
     <Button
             android:id="@+id/btOne"
             style="@style/ButtonStylePrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="按钮一"/>
+            android:text="按钮一" />
 
     <Button
             android:id="@+id/btTwo"
@@ -28,7 +34,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/selector_secondary"
             android:foreground="?attr/selectableItemBackground"
-            android:text="按钮二"/>
+            android:text="按钮二" />
 
 
 </LinearLayout>

@@ -24,12 +24,13 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
         debug {
-            minifyEnabled = false
             signingConfig signingConfigs.release
         }
     }
@@ -38,18 +39,14 @@ android {
         sourceCompatibility rootProject.ext.sourceCompatibility
         targetCompatibility rootProject.ext.targetCompatibility
     }
+
+    repositories {
+        flatDir {
+            dirs project(':mvplib').file('libs')
+        }
+    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
-
     implementation project(':mvplib')
-    //图片选择
-    implementation('com.github.LuckSiege.PictureSelector:picture_library:v2.2.3') {
-        exclude group: 'com.android.support'
-        exclude group: 'io.reactivex.rxjava2'
-    }
-    //通用RecyclerView的adapter
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
 }

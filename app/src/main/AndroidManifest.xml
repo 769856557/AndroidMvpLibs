@@ -27,16 +27,15 @@
 
 
         <activity android:name=".ui.MainActivity"/>
-
-
         <activity android:name=".ui.WebViewActivity"/>
+
+
         <!--支付宝集成-->
         <activity
                 android:name="com.alipay.sdk.app.H5PayActivity"
-                android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+                android:configChanges="orientation|keyboardHidden|navigation"
                 android:exported="false"
-                android:screenOrientation="behind"
-                android:windowSoftInputMode="adjustResize|stateHidden"/>
+                android:screenOrientation="behind" />
         <!--微信sdk集成-->
         <activity
                 android:name=".wxapi.WXEntryActivity"
