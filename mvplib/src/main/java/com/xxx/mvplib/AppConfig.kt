@@ -1,21 +1,21 @@
 package com.xxx.mvplib
 
-import com.xxx.mvplib.DefaultConfig.DEBUG_API_HOST
-import com.xxx.mvplib.DefaultConfig.DEBUG_QQ_APP_ID
-import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_ID
-import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_KEY
-import com.xxx.mvplib.DefaultConfig.DEBUG_WX_APP_SECRET
-import com.xxx.mvplib.DefaultConfig.DEBUG_WX_HOST
-import com.xxx.mvplib.DefaultConfig.DEBUG_WX_MCH_ID
-import com.xxx.mvplib.DefaultConfig.DEBUG_WX_NOTIFY_URL
-import com.xxx.mvplib.DefaultConfig.RELEASE_API_HOST
-import com.xxx.mvplib.DefaultConfig.RELEASE_QQ_APP_ID
-import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_ID
-import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_KEY
-import com.xxx.mvplib.DefaultConfig.RELEASE_WX_APP_SECRET
-import com.xxx.mvplib.DefaultConfig.RELEASE_WX_HOST
-import com.xxx.mvplib.DefaultConfig.RELEASE_WX_MCH_ID
-import com.xxx.mvplib.DefaultConfig.RELEASE_WX_NOTIFY_URL
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_API_HOST
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_QQ_APP_ID
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_APP_ID
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_APP_KEY
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_APP_SECRET
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_HOST
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_MCH_ID
+import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_NOTIFY_URL
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_API_HOST
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_QQ_APP_ID
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_APP_ID
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_APP_KEY
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_APP_SECRET
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_HOST
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_MCH_ID
+import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_NOTIFY_URL
 
 /**
  * app相关配置

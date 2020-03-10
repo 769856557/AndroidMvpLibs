@@ -7,7 +7,7 @@ package com.xxx.mvplib
  * 769856557@qq.com
  * yangyong
  */
-object DefaultConfig {
+internal object AppDefaultConfig {
 
     /** ------------------------------正式相关配置----------------------**/
 
