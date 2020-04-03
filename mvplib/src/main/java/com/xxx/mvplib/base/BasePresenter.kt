@@ -1,4 +1,4 @@
-package com.xxx.mvplib.mvp
+package com.xxx.mvplib.base
 
 import java.lang.ref.WeakReference
 
@@ -10,20 +10,27 @@ import java.lang.ref.WeakReference
  * yangyong
  */
 abstract class BasePresenter<V : BaseView> {
+
     private var weakReference: WeakReference<V>? = null
 
+    /**
+     * Presenter逻辑处理器绑定View
+     */
     fun attachView(view: V) {
         weakReference = WeakReference(view)
     }
 
 
+    /**
+     * Presenter逻辑处理器解绑View
+     */
     fun detachView() {
         weakReference?.clear()
         weakReference = null
     }
 
     /**
-     * 获取V实例
+     * 获取View实例
      */
     protected fun getView(): V? {
         return weakReference?.get()

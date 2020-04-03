@@ -2,7 +2,7 @@ package com.yang.libs.ui
 
 import android.content.Intent
 import android.os.Handler
-import com.xxx.mvplib.mvp.BaseViewActivity
+import com.xxx.mvplib.base.BaseViewActivity
 import com.yang.libs.R
 
 /**
@@ -21,5 +21,6 @@ class LuanchActivity : BaseViewActivity() {
             startActivity(Intent(this@LuanchActivity, MainActivity::class.java))
             finish()
         }, 2000)
+
     }
 }

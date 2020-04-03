@@ -1,7 +1,7 @@
 package com.yang.libs.mvppresenter
 
 import com.blankj.utilcode.util.ToastUtils
-import com.xxx.mvplib.mvp.BasePresenter
+import com.xxx.mvplib.base.BasePresenter
 import com.xxx.mvplib.net.body.UploadBody
 import com.xxx.mvplib.net.helper.RxHelper
 import com.xxx.mvplib.net.observer.XxBaseHttpObserver

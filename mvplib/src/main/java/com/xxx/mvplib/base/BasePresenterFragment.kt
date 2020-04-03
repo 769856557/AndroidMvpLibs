@@ -1,27 +1,26 @@
-package com.xxx.mvplib.mvp
+package com.xxx.mvplib.base
 
 /**
- * Activity三级基类
+ * Fragment二级级基类
  * →_→
- * 2017/10/30 15:31
+ * 2017/10/30 2017/11/1 9:53
  * 769856557@qq.com
  * yangyong
  */
-abstract class BasePresenterActivity<V : BaseView, P : BasePresenter<V>> : BaseViewActivity() {
+abstract class BasePresenterFragment<V : BaseView, P : BasePresenter<V>> : BaseViewFragment() {
 
+    /**
+     * Presenter逻辑处理器
+     */
     private var presenter: P? = null
 
     /**
-     * 创建P层
-     *
-     * @return P层对象
+     * 创建Presenter逻辑处理器
      */
     protected abstract fun createPresenter(): P
 
     /**
-     * 获取P层实例
-     *
-     * @return P层实例
+     * 获取Presenter逻辑处理器
      */
     protected fun getPresenter(): P {
         if (presenter == null) {
@@ -34,8 +33,8 @@ abstract class BasePresenterActivity<V : BaseView, P : BasePresenter<V>> : BaseV
         return presenter as P
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
         getPresenter().detachView()
-        super.onDestroy()
+        super.onDestroyView()
     }
 }

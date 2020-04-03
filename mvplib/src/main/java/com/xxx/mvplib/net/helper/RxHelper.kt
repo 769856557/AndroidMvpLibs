@@ -1,6 +1,6 @@
 package com.xxx.mvplib.net.helper
 
-import com.xxx.mvplib.mvp.BaseView
+import com.xxx.mvplib.base.BaseView
 import io.reactivex.ObservableTransformer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

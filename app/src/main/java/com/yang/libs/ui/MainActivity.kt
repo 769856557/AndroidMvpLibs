@@ -2,7 +2,7 @@ package com.yang.libs.ui
 
 import com.xxx.mvplib.GlideApp
 import com.xxx.mvplib.api.AliApi
-import com.xxx.mvplib.mvp.BasePresenterActivity
+import com.xxx.mvplib.base.BasePresenterActivity
 import com.yang.libs.R
 import com.yang.libs.mvpmodel.BannerBean
 import com.yang.libs.mvpmodel.UploadBean

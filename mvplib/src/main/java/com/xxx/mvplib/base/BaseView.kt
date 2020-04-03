@@ -1,4 +1,4 @@
-package com.xxx.mvplib.mvp
+package com.xxx.mvplib.base
 
 
 /**
@@ -12,6 +12,7 @@ interface BaseView {
 
     /**
      *  显示加载框
+     *  @param hint 提示语
      */
     fun showLoadingDialog(hint: String = "")
 
@@ -21,7 +22,8 @@ interface BaseView {
     fun dismissLoadingDialog()
 
     /**
-     * 显示加载框提示
+     * 设置加载框提示，加载框显示后才生效
+     * @param hint 提示语
      */
     fun setLoadingDialogHint(hint: String = "")
 

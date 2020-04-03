@@ -1,21 +1,50 @@
-package com.xxx.mvplib.mvp
+package com.xxx.mvplib.base
 
 import android.graphics.drawable.ColorDrawable
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.BusUtils
 import com.xxx.mvplib.R
 
 /**
- * Fragment二级基类
+ * Fragment一级基类
  * →_→
  * 2017/11/2 18:22
  * 769856557@qq.com
  * yangyong
  */
-abstract class BaseViewFragment : BaseFragment(), BaseView {
+abstract class BaseViewFragment : Fragment(), BaseView {
     private var alertDialog: AlertDialog? = null
     private var isRegisterBlankjBus: Boolean = false
+
+    /**
+     * 获取布局资源id
+     */
+    protected abstract fun getLayoutResId(): Int
+
+    /**
+     * 初始化
+     */
+    protected abstract fun init(view: View?)
+
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(getLayoutResId(), container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        init(view)
+    }
+
 
     /**
      * 显示加载框
@@ -67,7 +96,7 @@ abstract class BaseViewFragment : BaseFragment(), BaseView {
     }
 
     /**
-     * 设置加载框提示
+     * 设置加载框提示，加载框显示后才生效
      * @param hint 提示语
      */
     override fun setLoadingDialogHint(hint: String) {

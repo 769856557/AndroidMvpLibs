@@ -16,7 +16,7 @@ import com.blankj.utilcode.util.FileUtils
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.entity.LocalMedia
 import com.xxx.mvplib.PathConfig
-import com.xxx.mvplib.mvp.BaseViewActivity
+import com.xxx.mvplib.base.BaseViewActivity
 import com.xxx.mvplib.utils.WebViewUtils
 import com.yang.libs.BuildConfig
 import com.yang.libs.R
