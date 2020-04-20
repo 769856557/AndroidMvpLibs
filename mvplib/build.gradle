@@ -40,6 +40,7 @@ android {
 }
 
 dependencies {
+    implementation project(':mvpres')
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.3.1'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.1'
