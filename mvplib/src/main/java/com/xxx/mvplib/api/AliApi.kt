@@ -1,9 +1,10 @@
 package com.xxx.mvplib.api
 
 import android.app.Activity
-import android.text.TextUtils
 import com.alipay.sdk.app.PayTask
 import com.blankj.utilcode.util.BusUtils
+import com.blankj.utilcode.util.GsonUtils
+import com.xxx.mvplib.bean.AliPayResultBean
 
 /**
  * 支付宝api
@@ -22,43 +23,9 @@ object AliApi {
      */
     fun pay(activity: Activity, orderInfo: String, tag: String) {
         Thread(Runnable {
-            val result = PayTask(activity).payV2(orderInfo, true)
-            val payResult = PayResult(result)
-            BusUtils.post(tag, payResult)//发送结果事件
+            val result = PayTask(activity).pay(orderInfo, true)
+            val bean = GsonUtils.fromJson<AliPayResultBean>(result, AliPayResultBean::class.java)
+            BusUtils.post(tag, bean)//发送结果事件
         }).start()
     }
-
-
-    /**
-     * 支付结果实体类
-     */
-    private class PayResult(rawResult: Map<String, String>) {
-        val PAY_SUCCESS = "9000"//当resultStatus=9000代表支付成功
-
-        var resultStatus: String = ""
-            private set
-        var result: String = ""
-            private set
-        var memo: String = ""
-            private set
-
-        init {
-            for (key in rawResult.keys) {
-                if (TextUtils.equals(key, "resultStatus")) {
-                    resultStatus = rawResult[key]!!
-                } else if (TextUtils.equals(key, "result")) {
-                    result = rawResult[key]!!
-                } else if (TextUtils.equals(key, "memo")) {
-                    memo = rawResult[key]!!
-                }
-            }
-        }
-
-        override fun toString(): String {
-            return ("resultStatus={" + resultStatus + "};memo={" + memo
-                    + "};result={" + result + "}")
-        }
-    }
-
-
 }
