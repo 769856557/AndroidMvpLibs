@@ -12,4 +12,10 @@ object Action {
      * 刷新：首页，HomeFragment
      */
     const val ACTION_REFRESH_HOME_FRAGMENT = "action_refresh_home_fragment"
+
+
+    /**
+     * 购买商品
+     */
+    const val ACTION_BUY_GOODS = "action_buy_goods"
 }

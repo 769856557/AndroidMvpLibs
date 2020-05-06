@@ -12,6 +12,7 @@ import com.xxx.mvplib.bean.WxAccessTokenBean
 import com.xxx.mvplib.bean.WxAuthBean
 import com.xxx.mvplib.bean.WxRefreshTokenBean
 import com.xxx.mvplib.bean.WxUserinfoBean
+import com.xxx.mvplib.constant.Action
 import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
 import io.reactivex.Observable
 import okhttp3.ResponseBody
@@ -46,7 +47,7 @@ object WeiXinApi {
      * @param des 网页描述
      * @param bitmap 图片，不超过32k
      *  @param url 网页url
-     * @param tag 标识,用于区分回调
+     * @param transaction 在[Action]类声明,用于区分回调
      */
     fun shareWeb(
         scene: Int,
@@ -54,7 +55,7 @@ object WeiXinApi {
         des: String,
         bitmap: Bitmap,
         url: String,
-        tag: String
+        transaction: String
     ) {
         if (!iWxApi.isWXAppInstalled) {
             ToastUtils.showLong("请先安装微信")
@@ -72,7 +73,7 @@ object WeiXinApi {
         val req = SendMessageToWX.Req()
         req.message = msg
         req.scene = scene
-        req.transaction = tag
+        req.transaction = transaction
         if (req.checkArgs()) {
             iWxApi.sendReq(req)
         }
@@ -82,7 +83,7 @@ object WeiXinApi {
      * 微信分享(图片分享)
      * @param scene       分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
      * @param path       图片本地路径，不超过10M
-     * @param transaction 标识,用于区分回调
+     * @param transaction 在[Action]类声明,用于区分回调
      */
     fun shareImg(scene: Int, path: String, transaction: String) {
         if (!iWxApi.isWXAppInstalled) {
@@ -108,7 +109,7 @@ object WeiXinApi {
      * 微信授权
      *
      * @param scope //"snsapi_login,snsapi_userinfo"
-     * @param transaction 标识,用于区分回调
+     * @param transaction 在[Action]类声明,用于区分回调
      */
     fun auth(scope: String, transaction: String) {
         if (!iWxApi.isWXAppInstalled) {
@@ -134,7 +135,7 @@ object WeiXinApi {
      * @param timestamp    时间戳
      * @param packageValue
      * @param sign         签名
-     * @param transaction 标识
+     * @param transaction 在[Action]类声明,用于区分回调
      */
     fun pay(
         appId: String,
