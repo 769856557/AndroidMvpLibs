@@ -18,7 +18,7 @@ import com.xxx.mvplib.base.BaseViewActivity
  */
 class WXEntryActivity : BaseViewActivity(), IWXAPIEventHandler {
 
-    override fun getLayoutResId(): Int = 0
+    override fun createLayoutRes(): Int = 0
 
     override fun init() {
         WeiXinApi.iWxApi.handleIntent(intent, this)

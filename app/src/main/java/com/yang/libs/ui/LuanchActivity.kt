@@ -13,7 +13,7 @@ import com.yang.libs.R
  */
 class LuanchActivity : BaseViewActivity() {
 
-    override fun getLayoutResId(): Int = R.layout.activity_luanch
+    override fun createLayoutRes(): Int = R.layout.activity_luanch
 
     override fun init() {
         setStatusBarTranslucent()

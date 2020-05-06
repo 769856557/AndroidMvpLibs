@@ -3,6 +3,7 @@ package com.yang.libs.ui
 import com.xxx.mvplib.GlideApp
 import com.xxx.mvplib.api.AliApi
 import com.xxx.mvplib.base.BasePresenterActivity
+import com.xxx.mvplib.constant.Tag
 import com.yang.libs.R
 import com.yang.libs.mvpmodel.BannerBean
 import com.yang.libs.mvpmodel.UploadBean
@@ -15,7 +16,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
 
     override fun createPresenter(): MainPresenter = MainPresenter()
 
-    override fun getLayoutResId(): Int = R.layout.activity_main
+    override fun createLayoutRes(): Int = R.layout.activity_main
 
     override fun init() {
         title = "主页标题"
@@ -27,7 +28,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            AliApi.pay(this, "aaaaaaaaaaaaaa", "aaa")
+            AliApi.pay(this, "aaaaaaaaaaaaaa", Tag.TAG_BUY_GOODS)
         }
     }
 

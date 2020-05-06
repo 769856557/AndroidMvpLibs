@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.BusUtils
@@ -21,16 +22,26 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
     /**
      * 通用加载框
      */
-    private var alertDialog: AlertDialog? = null
+    private val alertDialog: AlertDialog by lazy {
+        AlertDialog
+            .Builder(this)
+            .setView(R.layout.dialog_loading)
+            .create().apply {
+                setCanceledOnTouchOutside(false)
+                window?.setBackgroundDrawable(ColorDrawable())
+            }
+    }
+
     /**
      * 是否注册com.blankj.bus,和EventBus类似的库
      */
     private var isRegisterBlankjBus: Boolean = false
 
     /**
-     * 获取布局资源id
+     * 创建布局资源
      */
-    abstract fun getLayoutResId(): Int
+    @LayoutRes
+    abstract fun createLayoutRes(): Int
 
     /**
      * 初始化
@@ -40,7 +51,7 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val layoutId = getLayoutResId()
+        val layoutId = createLayoutRes()
         if (layoutId > 0) {
             setContentView(layoutId)
             setSupportActionBar(findViewById(R.id.toolBar))//绑定标题栏
@@ -86,19 +97,11 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
      * @param hint 提示语，可不传
      */
     override fun showLoadingDialog(hint: String) {
-        if (alertDialog == null) {
-            alertDialog = AlertDialog
-                .Builder(this)
-                .setView(R.layout.dialog_loading)
-                .create()
-            alertDialog?.setCanceledOnTouchOutside(false)
-            alertDialog?.window?.setBackgroundDrawable(ColorDrawable())
-        }
-        if (!isFinishing && alertDialog?.isShowing == false) {
+        if (!isFinishing && !alertDialog.isShowing) {
             runOnUiThread {
                 try {
-                    alertDialog?.show()
-                    alertDialog?.findViewById<TextView>(R.id.tvHint)?.text = hint
+                    alertDialog.show()
+                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -113,7 +116,7 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
         if (!isFinishing) {
             runOnUiThread {
                 try {
-                    alertDialog?.dismiss()
+                    alertDialog.dismiss()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -126,10 +129,10 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
      * @param hint 提示语
      */
     override fun setLoadingDialogHint(hint: String) {
-        if (!isFinishing && alertDialog?.isShowing == true) {
+        if (!isFinishing && alertDialog.isShowing) {
             runOnUiThread {
                 try {
-                    alertDialog?.findViewById<TextView>(R.id.tvHint)?.text = hint
+                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

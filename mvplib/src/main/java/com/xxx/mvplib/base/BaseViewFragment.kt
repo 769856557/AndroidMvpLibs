@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.BusUtils
@@ -19,13 +20,29 @@ import com.xxx.mvplib.R
  * yangyong
  */
 abstract class BaseViewFragment : Fragment(), BaseView {
-    private var alertDialog: AlertDialog? = null
+    /**
+     * 通用加载框
+     */
+    private val alertDialog: AlertDialog by lazy {
+        AlertDialog
+            .Builder(context!!)
+            .setView(R.layout.dialog_loading)
+            .create().apply {
+                setCanceledOnTouchOutside(false)
+                window?.setBackgroundDrawable(ColorDrawable())
+            }
+    }
+
+    /**
+     * 是否注册com.blankj.bus,和EventBus类似的库
+     */
     private var isRegisterBlankjBus: Boolean = false
 
     /**
-     * 获取布局资源id
+     * 创建布局资源
      */
-    protected abstract fun getLayoutResId(): Int
+    @LayoutRes
+    protected abstract fun createLayoutRes(): Int
 
     /**
      * 初始化
@@ -38,7 +55,7 @@ abstract class BaseViewFragment : Fragment(), BaseView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(getLayoutResId(), container, false)
+        return inflater.inflate(createLayoutRes(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,19 +72,11 @@ abstract class BaseViewFragment : Fragment(), BaseView {
             (activity as? BaseViewActivity)?.showLoadingDialog(hint)
             return
         }
-        if (alertDialog == null) {
-            alertDialog = AlertDialog
-                .Builder(context ?: return)
-                .setView(R.layout.dialog_loading)
-                .create()
-            alertDialog?.setCanceledOnTouchOutside(false)
-            alertDialog?.window?.setBackgroundDrawable(ColorDrawable())
-        }
-        if (activity?.isFinishing == false && alertDialog?.isShowing == false) {
+        if (activity?.isFinishing == false && !alertDialog.isShowing) {
             activity?.runOnUiThread {
                 try {
-                    alertDialog?.show()
-                    alertDialog?.findViewById<TextView>(R.id.tvHint)?.text = hint
+                    alertDialog.show()
+                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -87,7 +96,7 @@ abstract class BaseViewFragment : Fragment(), BaseView {
         if (activity?.isFinishing == false) {
             activity?.runOnUiThread {
                 try {
-                    alertDialog?.dismiss()
+                    alertDialog.dismiss()
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -104,10 +113,10 @@ abstract class BaseViewFragment : Fragment(), BaseView {
             (activity as? BaseViewActivity)?.setLoadingDialogHint(hint)
             return
         }
-        if (activity?.isFinishing == false && alertDialog?.isShowing == true) {
+        if (activity?.isFinishing == false && alertDialog.isShowing) {
             activity?.runOnUiThread {
                 try {
-                    alertDialog?.findViewById<TextView>(R.id.tvHint)?.text = hint
+                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

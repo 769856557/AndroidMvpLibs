@@ -5,6 +5,7 @@ import com.alipay.sdk.app.PayTask
 import com.blankj.utilcode.util.BusUtils
 import com.blankj.utilcode.util.GsonUtils
 import com.xxx.mvplib.bean.AliPayResultBean
+import com.xxx.mvplib.constant.Tag
 
 /**
  * 支付宝api
@@ -19,7 +20,7 @@ object AliApi {
      * 支付宝支付
      * @param activity  Activity实例
      * @param orderInfo 已签名的订单信息
-     * @param tag 支付标识:用于区分支付类型，比如：购买商品、充值话费
+     * @param tag 支付标识,在 [Tag] 类声明，用于区分支付类型，例：购买商品、充值话费
      */
     fun pay(activity: Activity, orderInfo: String, tag: String) {
         Thread(Runnable {
