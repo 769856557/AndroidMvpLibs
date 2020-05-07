@@ -27,6 +27,8 @@ object RxHelper {
 
     /**
      * 加载Dialog处理
+     * @param mainView BaseView实例
+     * @param isShowLoadingDialog 是否展示加载Dialog处理
      */
     fun <T> startFinishDialog(
         mainView: BaseView?,

@@ -28,7 +28,7 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            AliApi.pay(this, "aaaaaaaaaaaaaa", Action.ACTION_BUY_GOODS)
+            AliApi.pay(this, "aaaaaaaaaaaaaa", Action.ACTION_PAY_BUY_GOODS)
         }
     }
 

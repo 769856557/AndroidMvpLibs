@@ -15,7 +15,7 @@ object Action {
 
 
     /**
-     * 购买商品
+     * 支付：购买商品
      */
-    const val ACTION_BUY_GOODS = "action_buy_goods"
+    const val ACTION_PAY_BUY_GOODS = "action_pay_buy_goods"
 }

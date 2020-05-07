@@ -7,7 +7,7 @@ package com.xxx.mvplib.constant
  * 769856557@qq.com
  * yangyong
  */
-object SettingKey {
+object KeySetting {
     /**
      * 保存的文件名
      */

@@ -12,7 +12,10 @@ import android.text.TextUtils
 data class PayResult(var rawResult: Map<String, String>) {
 
     companion object {
-        const val PAY_SUCCESS = "9000"//当resultStatus=9000代表支付成功
+        /**
+         * 支付成功标识，当resultStatus=9000代表支付成功
+         */
+        const val PAY_SUCCESS = "9000"
     }
 
 

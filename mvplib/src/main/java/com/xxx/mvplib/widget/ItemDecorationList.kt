@@ -46,6 +46,9 @@ class ItemDecorationList(context: Context, res: Int) : RecyclerView.ItemDecorati
         state: RecyclerView.State
     ) {
         val itemCount = parent.adapter?.itemCount ?: return//总数
+        if (itemCount <= 1) {
+            return
+        }
         val position = parent.getChildAdapterPosition(view)//当前序号
 
         //item预留线的绘制空间
@@ -84,6 +87,9 @@ class ItemDecorationList(context: Context, res: Int) : RecyclerView.ItemDecorati
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         val itemCount = parent.adapter?.itemCount ?: return//总数
+        if (itemCount <= 1) {
+            return
+        }
         for (index in 0 until itemCount) {
             val child = parent.getChildAt(index) ?: continue
             var left: Int

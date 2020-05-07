@@ -39,7 +39,7 @@ object RetrofitOkHttpHelper {
      */
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
-            .cache(Cache(File(PathConfig.CACHE_OKHTTP), 10L * 1024 * 1024))
+            .cache(Cache(File(PathConfig.DIR_CACHE_OKHTTP), 10L * 1024 * 1024))
             .addInterceptor(ParamsInterceptor())
             .addInterceptor(CacheInterceptor.AppCacheInterceptor())
             .addNetworkInterceptor(CacheInterceptor.NetCacheInterceptor())

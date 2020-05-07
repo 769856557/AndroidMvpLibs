@@ -47,7 +47,7 @@ object WeiXinApi {
      * @param des 网页描述
      * @param bitmap 图片，不超过32k
      *  @param url 网页url
-     * @param transaction 在[Action]类声明,用于区分回调
+     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的分享功能
      */
     fun shareWeb(
         scene: Int,
@@ -83,7 +83,7 @@ object WeiXinApi {
      * 微信分享(图片分享)
      * @param scene       分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
      * @param path       图片本地路径，不超过10M
-     * @param transaction 在[Action]类声明,用于区分回调
+     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的分享功能
      */
     fun shareImg(scene: Int, path: String, transaction: String) {
         if (!iWxApi.isWXAppInstalled) {
@@ -109,7 +109,7 @@ object WeiXinApi {
      * 微信授权
      *
      * @param scope //"snsapi_login,snsapi_userinfo"
-     * @param transaction 在[Action]类声明,用于区分回调
+     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的授权功能
      */
     fun auth(scope: String, transaction: String) {
         if (!iWxApi.isWXAppInstalled) {
@@ -135,7 +135,7 @@ object WeiXinApi {
      * @param timestamp    时间戳
      * @param packageValue
      * @param sign         签名
-     * @param transaction 在[Action]类声明,用于区分回调
+     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的支付
      */
     fun pay(
         appId: String,

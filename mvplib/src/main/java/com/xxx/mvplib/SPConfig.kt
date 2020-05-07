@@ -1,5 +1,8 @@
 package com.xxx.mvplib
 
+import com.blankj.utilcode.util.SPUtils
+import com.xxx.mvplib.constant.KeyAccount
+
 /**
  * SharedPreferences相关配置
  * →_→
@@ -21,6 +24,7 @@ object SPConfig {
      * 退出登录，退出登录需要调用该方法
      */
     fun logout() {
+        SPUtils.getInstance(KeyAccount.FILE_NAME).clear()
     }
 
 }

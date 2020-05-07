@@ -24,7 +24,7 @@ class GlideConfig : AppGlideModule() {
             .setDiskCache(
                 ExternalPreferredCacheDiskCacheFactory(
                     context,
-                    PathConfig.CACHE_GLIDE,
+                    PathConfig.DIR_CACHE_GLIDE,
                     DiskCache.Factory.DEFAULT_DISK_CACHE_SIZE.toLong()
                 )
             )
