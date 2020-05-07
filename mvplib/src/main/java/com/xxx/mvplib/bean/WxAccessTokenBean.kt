@@ -6,7 +6,7 @@ package com.xxx.mvplib.bean
  * 769856557@qq.com
  * yangyong
  */
-class WxAccessTokenBean(
+data class WxAccessTokenBean(
     var errcode: Int = 0, // 0
     var errmsg: String = "", // ok
     var access_token: String = "", // 27_nm6soA6cylGPh3zYHqDgHcc2X6JjJATWXF8JOPYgr_k9UqoRovqWtguEmr3bnty6JUUU-jGMttjBNb-NlHTcwBo5yXiu_AUSHRz-RXcWiig
