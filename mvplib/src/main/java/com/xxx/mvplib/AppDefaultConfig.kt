@@ -55,7 +55,7 @@ internal object AppDefaultConfig {
     /**
      *  api域名
      */
-    val DEBUG_API_HOST = "http://xian.51ehw.cn"
+    val DEBUG_API_HOST = "http://www.51ehw.cn"
     /**
      * 微信的域名
      */
