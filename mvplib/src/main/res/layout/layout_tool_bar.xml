@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools" xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/toolBar"
-        app:buttonGravity="bottom"
-        app:navigationIcon="@mipmap/ic_back"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@android:color/white">
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@android:color/white"
+        app:buttonGravity="center_vertical"
+        app:navigationIcon="@mipmap/ic_back">
 
     <TextView
             android:id="@+id/tvTitle"
@@ -18,6 +18,6 @@
             android:lines="1"
             android:textColor="@android:color/black"
             android:textSize="20sp"
-            tools:text="标题"/>
+            tools:text="标题" />
 
 </androidx.appcompat.widget.Toolbar>
