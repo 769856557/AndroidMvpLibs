@@ -1,21 +1,19 @@
 package com.xxx.mvplib
 
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_API_HOST
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_QQ_APP_ID
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_APP_ID
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_APP_KEY
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_APP_SECRET
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_HOST
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_MCH_ID
-import com.xxx.mvplib.AppDefaultConfig.DEBUG_WX_NOTIFY_URL
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_API_HOST
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_QQ_APP_ID
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_APP_ID
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_APP_KEY
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_APP_SECRET
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_HOST
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_MCH_ID
-import com.xxx.mvplib.AppDefaultConfig.RELEASE_WX_NOTIFY_URL
+import com.xxx.mvplib.AppConfigDefault.DEBUG_API_HOST
+import com.xxx.mvplib.AppConfigDefault.DEBUG_QQ_APP_ID
+import com.xxx.mvplib.AppConfigDefault.DEBUG_WX_APP_ID
+import com.xxx.mvplib.AppConfigDefault.DEBUG_WX_APP_KEY
+import com.xxx.mvplib.AppConfigDefault.DEBUG_WX_APP_SECRET
+import com.xxx.mvplib.AppConfigDefault.DEBUG_WX_MCH_ID
+import com.xxx.mvplib.AppConfigDefault.DEBUG_WX_NOTIFY_URL
+import com.xxx.mvplib.AppConfigDefault.RELEASE_API_HOST
+import com.xxx.mvplib.AppConfigDefault.RELEASE_QQ_APP_ID
+import com.xxx.mvplib.AppConfigDefault.RELEASE_WX_APP_ID
+import com.xxx.mvplib.AppConfigDefault.RELEASE_WX_APP_KEY
+import com.xxx.mvplib.AppConfigDefault.RELEASE_WX_APP_SECRET
+import com.xxx.mvplib.AppConfigDefault.RELEASE_WX_MCH_ID
+import com.xxx.mvplib.AppConfigDefault.RELEASE_WX_NOTIFY_URL
 
 /**
  * app相关配置
@@ -43,12 +41,6 @@ object AppConfig {
      */
     val apiHost: String
         get() = if (isRelease) RELEASE_API_HOST else DEBUG_API_HOST
-
-    /**
-     * 微信域名
-     */
-    val wxHost: String
-        get() = if (isRelease) RELEASE_WX_HOST else DEBUG_WX_HOST
 
     /**
      * 微信appid

@@ -7,89 +7,71 @@ package com.xxx.mvplib
  * 769856557@qq.com
  * yangyong
  */
-internal object AppDefaultConfig {
-
-    /** ------------------------------正式相关配置----------------------**/
+internal object AppConfigDefault {
 
     /**
-     * api域名
+     * 正式api域名
      */
-    val RELEASE_API_HOST = "http://www.13141314.ren";
+    val RELEASE_API_HOST = "http://www.51ehw.cn";
     /**
-     * 微信的域名
+     * 测试api域名
      */
-    val RELEASE_WX_HOST = "https://api.weixin.qq.com";
+    val DEBUG_API_HOST = "http://www.51ehw.cn"
+
 
     /**
-     * 微信appid
+     * 正式微信appid
      */
     val RELEASE_WX_APP_ID = "wxfb78531f58612718"
-
     /**
-     * 微信商户号
+     * 正式微信商户号
      */
     val RELEASE_WX_MCH_ID = ""
-
     /**
-     * 微信密钥
+     * 正式微信密钥
      */
     val RELEASE_WX_APP_KEY = ""
-
     /**
-     * 微信回调地址
+     * 正式微信回调地址
      */
     val RELEASE_WX_NOTIFY_URL = ""
-
     /**
-     * 微信secret
+     * 正式微信secret
      */
     val RELEASE_WX_APP_SECRET = "bbd178306c59567fcd590d363dc13b51"
 
-    /**
-     * QQappid
-     */
-    val RELEASE_QQ_APP_ID = "1107925990"
-
-    /** ------------------------------测试相关配置----------------------**/
 
     /**
-     *  api域名
-     */
-    val DEBUG_API_HOST = "http://www.51ehw.cn"
-    /**
-     * 微信的域名
-     */
-    val DEBUG_WX_HOST = "https://api.weixin.qq.com";
-
-    /**
-     * 微信appid
+     * 测试微信appid
      */
     val DEBUG_WX_APP_ID = "wxfb78531f58612718"
-
     /**
-     * 微信商户号
+     * 测试微信商户号
      */
     val DEBUG_WX_MCH_ID = ""
-
     /**
-     * 微信密钥
+     * 测试微信密钥
      */
     val DEBUG_WX_APP_KEY = ""
-
     /**
-     * 微信回调地址
+     * 测试微信回调地址
      */
     val DEBUG_WX_NOTIFY_URL = ""
-
     /**
-     * 微信secret
+     * 测试微信secret
      */
     val DEBUG_WX_APP_SECRET = "bbd178306c59567fcd590d363dc13b51"
 
+
     /**
-     * QQappid
+     * 正式QQappid
+     */
+    val RELEASE_QQ_APP_ID = "1107925990"
+    /**
+     * 测试QQappid
      */
     val DEBUG_QQ_APP_ID = "1107925990"
+
 
 }
 
