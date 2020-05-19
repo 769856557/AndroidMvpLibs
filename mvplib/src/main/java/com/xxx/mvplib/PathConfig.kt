@@ -14,9 +14,9 @@ import java.io.File
  * yangyong
  */
 object PathConfig {
-    /* -------------------------------- /storage/emulated/0/包名 相关路径---------------------------------*/
+    /* -------------------------------- 根目录/包名 相关路径---------------------------------*/
     /**
-     * app根文件夹路径，/storage/emulated/0/包名
+     * app根文件夹路径，根目录/包名
      */
     val DIR_APP by lazy {
         (Environment.getExternalStorageDirectory().absolutePath + File.separator + AppUtils.getAppPackageName()).also {
@@ -25,7 +25,7 @@ object PathConfig {
     }
 
     /**
-     * 照片保存文件夹路径,只能用于PictureSelector，/storage/emulated/0/包名/photo
+     * 照片保存文件夹路径,只能用于PictureSelector，根目录/包名/photo
      */
     val DIR_PHOTO_PICTURESELECTOR by lazy {
         "/${AppUtils.getAppPackageName()}${File.separator}photo".also {
@@ -34,7 +34,7 @@ object PathConfig {
     }
 
     /**
-     * 照片保存文件夹路径,只能用于PictureSelector，/storage/emulated/0/包名/photo
+     * 照片保存文件夹路径,只能用于PictureSelector，根目录/包名/photo
      */
     val DIR_IMAGE_PICTURESELECTOR by lazy {
         "/${AppUtils.getAppPackageName()}${File.separator}image".also {
@@ -43,7 +43,7 @@ object PathConfig {
     }
 
     /**
-     * 图片保存文件夹路径，/storage/emulated/0/包名/image
+     * 图片保存文件夹路径，根目录/包名/image
      */
     val DIR_IMAGE by lazy {
         "$DIR_APP${File.separator}image".also {
@@ -51,10 +51,10 @@ object PathConfig {
         }
     }
 
-    /* -------------------------------- /storage/emulated/0/Android/data/包名 相关路径---------------------------------*/
+    /* -------------------------------- 根目录/Android/data/包名 相关路径---------------------------------*/
 
     /**
-     *okhttp缓存文件夹路径，/storage/emulated/0/Android/data/包名/cache/okhttp
+     *okhttp缓存文件夹路径，根目录/Android/data/包名/cache/okhttp
      */
     val DIR_CACHE_OKHTTP by lazy {
         "${Utils.getApp().externalCacheDir.absolutePath}${File.separator}okhttp".also {
@@ -63,7 +63,7 @@ object PathConfig {
     }
 
     /**
-     *glide缓存文件夹路径，/storage/emulated/0/Android/data/包名/cache/glide
+     *glide缓存文件夹路径，根目录/Android/data/包名/cache/glide
      */
     val DIR_CACHE_GLIDE by lazy {
         "glide".also {

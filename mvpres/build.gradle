@@ -10,3 +10,7 @@ android {
         versionName rootProject.ext.versionName
     }
 }
+
+dependencies {
+    compileOnly "androidx.appcompat:appcompat:$rootProject.ext.appcompat"
+}

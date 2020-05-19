@@ -6,4 +6,4 @@ package com.yang.libs.mvpmodel
  * 769856557@qq.com
  * yangyong
  */
-class UploadBean(var url: String = "")
+data class UploadBean(var url: String = "")
