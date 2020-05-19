@@ -135,7 +135,7 @@ object WeiXinApi {
      * @param timestamp    时间戳
      * @param packageValue
      * @param sign         签名
-     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的支付
+     * @param transaction 回调标识，请在[Action]类中声明，用于区分支付类型，例如：购买商品、充值话费
      */
     fun pay(
         appId: String,
