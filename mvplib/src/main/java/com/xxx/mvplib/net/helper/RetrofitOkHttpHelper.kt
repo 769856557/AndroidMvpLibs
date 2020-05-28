@@ -11,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.io.File
+import java.net.Proxy
 
 
 /**
@@ -43,6 +44,7 @@ object RetrofitOkHttpHelper {
             .addInterceptor(ParamsInterceptor())
             .addInterceptor(CacheInterceptor.AppCacheInterceptor())
             .addNetworkInterceptor(CacheInterceptor.NetCacheInterceptor())
+            .proxy(Proxy.NO_PROXY)
             .apply {
                 if (AppConfig.isDebuggable) {
                     addInterceptor(HttpLoggingInterceptor()
