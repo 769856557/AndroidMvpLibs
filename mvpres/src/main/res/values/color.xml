@@ -13,6 +13,7 @@
     <color name="text_tertiary">@color/app_tertiary</color>
     <color name="text_white">@android:color/white</color>
     <color name="text_black">#333333</color>
+    <color name="text_black_gray">#666666</color>
     <color name="text_gray">#999999</color>
     <color name="text_red">#FF0000</color>
     <!--线条颜色-->

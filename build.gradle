@@ -1,11 +1,9 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 ext {
     compileSdkVersion = 28
     minSdkVersion = 19
     targetSdkVersion = 28
-    versionCode = 1
-    versionName = "1.0"
+    versionCode = 100
+    versionName = "1.0.0"
     appcompat = "1.1.0"
     recyclerview = "1.1.0"
     sourceCompatibility = JavaVersion.VERSION_1_8

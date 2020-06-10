@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="24dp"
-    android:background="@drawable/shape_dialog_hint"
+    android:background="@drawable/shape_white_8"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -48,7 +48,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_dialog_hint_button_left"
+            android:background="@drawable/dialog_hint_button_left"
             android:gravity="center"
             android:text="---"
             android:textSize="16sp" />
@@ -63,7 +63,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:background="@drawable/selector_dialog_hint_button_right"
+            android:background="@drawable/dialog_hint_button_right"
             android:gravity="center"
             android:text="---"
             android:textSize="16sp" />
@@ -73,7 +73,7 @@
         android:id="@+id/btCenter"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/selector_dialog_hint_button_center"
+        android:background="@drawable/dialog_hint_button_center"
         android:gravity="center"
         android:text="---" />
 </LinearLayout>
