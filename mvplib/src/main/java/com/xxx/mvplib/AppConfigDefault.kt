@@ -12,17 +12,17 @@ internal object AppConfigDefault {
     /**
      * 正式api域名
      */
-    val RELEASE_API_HOST = "http://www.51ehw.cn";
+    val RELEASE_API_HOST = "http://www.51ehw.com";
     /**
      * 测试api域名
      */
-    val DEBUG_API_HOST = "http://www.51ehw.cn"
+    val DEBUG_API_HOST = "http://www.51ehw.com"
 
 
     /**
      * 正式微信appid
      */
-    val RELEASE_WX_APP_ID = "wxfb78531f58612718"
+    val RELEASE_WX_APP_ID = ""
     /**
      * 正式微信商户号
      */
@@ -38,13 +38,13 @@ internal object AppConfigDefault {
     /**
      * 正式微信secret
      */
-    val RELEASE_WX_APP_SECRET = "bbd178306c59567fcd590d363dc13b51"
+    val RELEASE_WX_APP_SECRET = ""
 
 
     /**
      * 测试微信appid
      */
-    val DEBUG_WX_APP_ID = "wxfb78531f58612718"
+    val DEBUG_WX_APP_ID = ""
     /**
      * 测试微信商户号
      */
@@ -60,17 +60,17 @@ internal object AppConfigDefault {
     /**
      * 测试微信secret
      */
-    val DEBUG_WX_APP_SECRET = "bbd178306c59567fcd590d363dc13b51"
+    val DEBUG_WX_APP_SECRET = ""
 
 
     /**
      * 正式QQappid
      */
-    val RELEASE_QQ_APP_ID = "1107925990"
+    val RELEASE_QQ_APP_ID = ""
     /**
      * 测试QQappid
      */
-    val DEBUG_QQ_APP_ID = "1107925990"
+    val DEBUG_QQ_APP_ID = ""
 
 
 }
