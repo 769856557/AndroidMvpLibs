@@ -25,8 +25,8 @@ class MainPresenter : BasePresenter<MainView>() {
 
     fun getAdvertisement(param: String) {
         AppApi.api.getAdvertisement(param)
-            .compose(RxHelper.ioAndMain())
             .compose(RxHelper.startFinishDialog(getView()))
+            .compose(RxHelper.ioAndMain())
             .subscribe(object : XxBaseHttpObserver<BannerBean>() {
 
                 override fun onSuccess(msg: String?, bean: BannerBean?) {
@@ -42,7 +42,11 @@ class MainPresenter : BasePresenter<MainView>() {
 
     fun uploadImg(file: File) {
         val part =
-            MultipartBody.Part.createFormData("img", file.name, file.asRequestBody(MultipartBody.FORM))
+            MultipartBody.Part.createFormData(
+                "img",
+                file.name,
+                file.asRequestBody(MultipartBody.FORM)
+            )
 
         val multipartBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
@@ -61,8 +65,8 @@ class MainPresenter : BasePresenter<MainView>() {
             });
 
         AppApi.api.uploadImg(uploadBody)
-            .compose(RxHelper.ioAndMain())
             .compose(RxHelper.startFinishDialog(getView()))
+            .compose(RxHelper.ioAndMain())
             .subscribe(object : XxBaseHttpObserver<UploadBean>() {
 
                 override fun onSuccess(msg: String?, bean: UploadBean?) {
