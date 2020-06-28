@@ -26,7 +26,6 @@ class MainPresenter : BasePresenter<MainView>() {
     fun getAdvertisement(param: String) {
         AppApi.api.getAdvertisement(param)
             .compose(RxHelper.startFinishDialog(getView()))
-            .compose(RxHelper.ioAndMain())
             .subscribe(object : XxBaseHttpObserver<BannerBean>() {
 
                 override fun onSuccess(msg: String?, bean: BannerBean?) {
@@ -66,7 +65,6 @@ class MainPresenter : BasePresenter<MainView>() {
 
         AppApi.api.uploadImg(uploadBody)
             .compose(RxHelper.startFinishDialog(getView()))
-            .compose(RxHelper.ioAndMain())
             .subscribe(object : XxBaseHttpObserver<UploadBean>() {
 
                 override fun onSuccess(msg: String?, bean: UploadBean?) {

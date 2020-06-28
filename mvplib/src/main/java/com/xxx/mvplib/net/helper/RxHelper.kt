@@ -15,7 +15,7 @@ import io.reactivex.schedulers.Schedulers
 object RxHelper {
 
     /**
-     * 线程调度切换
+     * 线程调度，如果已调用[RxHelper.startFinishDialog],则不需要使用该方法
      */
     fun <T> ioAndMain(): ObservableTransformer<T, T> {
         return ObservableTransformer { observable ->
@@ -26,7 +26,7 @@ object RxHelper {
     }
 
     /**
-     * 加载Dialog处理
+     * 加载框展示,默认会设置[RxHelper.ioAndMain]线程调度
      * @param mainView BaseView实例
      * @param isShowLoadingDialog 是否展示加载Dialog处理
      */
@@ -36,6 +36,7 @@ object RxHelper {
     ): ObservableTransformer<T, T> {
         return ObservableTransformer { observable ->
             observable
+                .compose(ioAndMain())
                 .doOnSubscribe { if (isShowLoadingDialog) mainView?.showLoadingDialog() }
                 .doOnNext { if (isShowLoadingDialog) mainView?.dismissLoadingDialog() }
                 .doOnError { if (isShowLoadingDialog) mainView?.dismissLoadingDialog() }
