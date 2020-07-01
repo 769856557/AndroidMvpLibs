@@ -1,5 +1,7 @@
 package com.yang.libs.ui
 
+import android.os.Bundle
+import android.util.Log
 import com.xxx.mvplib.GlideApp
 import com.xxx.mvplib.base.BasePresenterActivity
 import com.yang.libs.R
@@ -27,6 +29,16 @@ class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView 
         }
         btTwo.setOnClickListener {
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.e("yang", System.currentTimeMillis().toString())
+        super.onCreate(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("yang", System.currentTimeMillis().toString())
     }
 
 
