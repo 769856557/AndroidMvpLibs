@@ -1,11 +1,10 @@
 package com.yang.libs.mvpmodel
 
 import com.xxx.mvplib.base.BaseModel
+import com.xxx.mvplib.net.helper.RxThreadHelper
 import com.xxx.mvplib.net.observer.XxBaseHttpObserver
 import com.yang.libs.api.AppApi
 import com.yang.libs.bean.BannerBean
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 /**
  * →_→
@@ -17,8 +16,7 @@ class MainModel : BaseModel {
 
     fun getAdvertisement(param: String, baseHttpObserver: XxBaseHttpObserver<BannerBean>) {
         AppApi.api.getAdvertisement(param)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .compose(RxThreadHelper.ioAndMain())
             .doOnSubscribe { baseHttpObserver.onShowLoadingDialog() }
             .doOnNext { baseHttpObserver.onDismissLoadingDialog() }
             .doOnError { baseHttpObserver.onDismissLoadingDialog() }
