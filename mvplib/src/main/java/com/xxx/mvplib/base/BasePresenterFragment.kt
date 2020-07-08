@@ -7,27 +7,27 @@ package com.xxx.mvplib.base
  * 769856557@qq.com
  * yangyong
  */
-abstract class BasePresenterFragment<V : BaseView, P : BasePresenter<V>> : BaseViewFragment() {
+abstract class BasePresenterFragment<M : BaseModel, V : BaseView, P : BasePresenter<M, V>> :
+    BaseViewFragment() {
 
     /**
-     * Presenter逻辑处理器
+     * P层
      */
     private var presenter: P? = null
 
     /**
-     * 创建Presenter逻辑处理器
+     * 创建P层
      */
     protected abstract fun createPresenter(): P
 
     /**
-     * 获取Presenter逻辑处理器
+     * 获取P层
      */
     protected fun getPresenter(): P {
         if (presenter == null) {
             presenter = createPresenter()
         }
         if (this is BaseView) {
-            //依附V
             presenter?.attachView(this as V)
         }
         return presenter as P

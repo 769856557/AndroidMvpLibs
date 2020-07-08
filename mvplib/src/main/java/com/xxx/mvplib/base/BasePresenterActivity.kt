@@ -7,27 +7,27 @@ package com.xxx.mvplib.base
  * 769856557@qq.com
  * yangyong
  */
-abstract class BasePresenterActivity<V : BaseView, P : BasePresenter<V>> : BaseViewActivity() {
+abstract class BasePresenterActivity<M : BaseModel, V : BaseView, P : BasePresenter<M, V>> :
+    BaseViewActivity() {
 
     /**
-     * Presenter逻辑处理器
+     * P层
      */
     private var presenter: P? = null
 
     /**
-     * 创建Presenter逻辑处理器
+     * 创建P层
      */
     abstract fun createPresenter(): P
 
     /**
-     * 获取Presenter逻辑处理器
+     * 获取P层
      */
     fun getPresenter(): P {
         if (presenter == null) {
             presenter = createPresenter()
         }
         if (this is BaseView) {
-            //依附V
             presenter?.attachView(this as V)
         }
         return presenter as P

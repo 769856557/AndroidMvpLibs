@@ -5,12 +5,13 @@ import com.xxx.mvplib.base.BasePresenterActivity
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.bean.UploadBean
+import com.yang.libs.mvpmodel.MainModel
 import com.yang.libs.mvppresenter.MainPresenter
 import com.yang.libs.mvpview.MainView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : BasePresenterActivity<MainView, MainPresenter>(), MainView {
+class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>(), MainView {
 
     override fun createPresenter(): MainPresenter = MainPresenter()
 

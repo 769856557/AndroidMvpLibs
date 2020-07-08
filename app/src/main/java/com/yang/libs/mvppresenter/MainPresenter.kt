@@ -8,6 +8,7 @@ import com.xxx.mvplib.net.observer.XxBaseHttpObserver
 import com.yang.libs.api.AppApi
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.bean.UploadBean
+import com.yang.libs.mvpmodel.MainModel
 import com.yang.libs.mvpview.MainView
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -21,7 +22,9 @@ import java.math.RoundingMode
  * 769856557@qq.com
  * yangyong
  */
-class MainPresenter : BasePresenter<MainView>() {
+class MainPresenter : BasePresenter<MainModel, MainView>() {
+
+    override fun createModel(): MainModel = MainModel();
 
     fun getAdvertisement(param: String) {
         AppApi.api.getAdvertisement(param)

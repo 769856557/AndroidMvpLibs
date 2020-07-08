@@ -9,9 +9,23 @@ import java.lang.ref.WeakReference
  * 769856557@qq.com
  * yangyong
  */
-abstract class BasePresenter<V : BaseView> {
+abstract class BasePresenter<M : BaseModel, V : BaseView> {
 
+    private var model: M? = null
     private var weakReference: WeakReference<V>? = null
+
+
+    /**
+     * 创建M层
+     */
+    protected abstract fun createModel(): M
+
+    /**
+     * 获取M层
+     */
+    protected fun getModel(): M {
+        return model ?: createModel()
+    }
 
     /**
      * P层绑定V层
@@ -22,7 +36,7 @@ abstract class BasePresenter<V : BaseView> {
 
 
     /**
-     * P层解绑VV层
+     * P层解绑V层
      */
     fun detachView() {
         weakReference?.clear()
@@ -30,10 +44,11 @@ abstract class BasePresenter<V : BaseView> {
     }
 
     /**
-     * 获取View实例
+     * 获取V层
      */
     protected fun getView(): V? {
         return weakReference?.get()
     }
+
 
 }
