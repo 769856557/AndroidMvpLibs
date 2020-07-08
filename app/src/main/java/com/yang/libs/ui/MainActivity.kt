@@ -4,7 +4,6 @@ import com.xxx.mvplib.GlideApp
 import com.xxx.mvplib.base.BasePresenterActivity
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
-import com.yang.libs.bean.UploadBean
 import com.yang.libs.mvpmodel.MainModel
 import com.yang.libs.mvppresenter.MainPresenter
 import com.yang.libs.mvpview.MainView
@@ -36,9 +35,5 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
     }
 
     override fun getAdvertisementFail() {
-    }
-
-    override fun uploadImg(bean: UploadBean) {
-        tvContent.text = bean.url
     }
 }
