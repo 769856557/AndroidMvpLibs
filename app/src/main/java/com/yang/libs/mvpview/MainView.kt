@@ -1,8 +1,8 @@
 package com.yang.libs.mvpview
 
 import com.xxx.mvplib.base.BaseView
-import com.yang.libs.mvpmodel.BannerBean
-import com.yang.libs.mvpmodel.UploadBean
+import com.yang.libs.bean.BannerBean
+import com.yang.libs.bean.UploadBean
 
 /**
  *

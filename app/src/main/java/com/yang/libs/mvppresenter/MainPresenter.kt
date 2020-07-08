@@ -6,8 +6,8 @@ import com.xxx.mvplib.net.body.UploadBody
 import com.xxx.mvplib.net.helper.RxHelper
 import com.xxx.mvplib.net.observer.XxBaseHttpObserver
 import com.yang.libs.api.AppApi
-import com.yang.libs.mvpmodel.BannerBean
-import com.yang.libs.mvpmodel.UploadBean
+import com.yang.libs.bean.BannerBean
+import com.yang.libs.bean.UploadBean
 import com.yang.libs.mvpview.MainView
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody

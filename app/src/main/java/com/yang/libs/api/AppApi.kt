@@ -2,8 +2,8 @@ package com.yang.libs.api
 
 import com.xxx.mvplib.bean.BaseResponseBean
 import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
-import com.yang.libs.mvpmodel.BannerBean
-import com.yang.libs.mvpmodel.UploadBean
+import com.yang.libs.bean.BannerBean
+import com.yang.libs.bean.UploadBean
 import io.reactivex.Observable
 import okhttp3.RequestBody
 import retrofit2.http.Body

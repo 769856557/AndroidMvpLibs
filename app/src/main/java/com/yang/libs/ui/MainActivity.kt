@@ -3,8 +3,8 @@ package com.yang.libs.ui
 import com.xxx.mvplib.GlideApp
 import com.xxx.mvplib.base.BasePresenterActivity
 import com.yang.libs.R
-import com.yang.libs.mvpmodel.BannerBean
-import com.yang.libs.mvpmodel.UploadBean
+import com.yang.libs.bean.BannerBean
+import com.yang.libs.bean.UploadBean
 import com.yang.libs.mvppresenter.MainPresenter
 import com.yang.libs.mvpview.MainView
 import kotlinx.android.synthetic.main.activity_main.*

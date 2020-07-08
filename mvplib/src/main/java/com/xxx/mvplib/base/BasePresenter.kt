@@ -14,15 +14,15 @@ abstract class BasePresenter<V : BaseView> {
     private var weakReference: WeakReference<V>? = null
 
     /**
-     * Presenter逻辑处理器绑定View
+     * P层绑定V层
      */
-    fun attachView(view: V) {
-        weakReference = WeakReference(view)
+    fun attachView(v: V) {
+        weakReference = WeakReference(v)
     }
 
 
     /**
-     * Presenter逻辑处理器解绑View
+     * P层解绑VV层
      */
     fun detachView() {
         weakReference?.clear()

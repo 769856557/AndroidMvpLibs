@@ -1,4 +1,4 @@
-package com.yang.libs.mvpmodel
+package com.yang.libs.bean
 
 /**
  * →_→
