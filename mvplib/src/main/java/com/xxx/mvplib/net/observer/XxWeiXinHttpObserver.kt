@@ -36,6 +36,16 @@ abstract class XxWeiXinHttpObserver<T> : Observer<T> {
      */
     abstract fun onFail(msg: String?, code: String?)
 
+    /**
+     * 显示加载Dialog
+     */
+    abstract fun onShowLoadingDialog();
+
+    /**
+     * 关闭加载Dialog
+     */
+    abstract fun onDismissLoadingDialog();
+
     override fun onSubscribe(d: Disposable) {
     }
 
