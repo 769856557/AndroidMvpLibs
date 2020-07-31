@@ -2,7 +2,8 @@ package com.yang.libs.ui
 
 import android.content.Intent
 import android.os.Handler
-import com.xxx.mvplib.base.BaseViewActivity
+import android.view.View
+import com.xxx.mvplib.base.ui.BaseActivity
 import com.yang.libs.R
 
 /**
@@ -11,11 +12,11 @@ import com.yang.libs.R
  * 769856557@qq.com
  * yangyong
  */
-class LuanchActivity : BaseViewActivity() {
+class LuanchActivity : BaseActivity() {
 
     override fun initContentView(): Int = R.layout.activity_luanch
 
-    override fun init() {
+    override fun init(view: View?) {
         setStatusBarTranslucent()
         Handler().postDelayed({
             startActivity(Intent(this@LuanchActivity, MainActivity::class.java))

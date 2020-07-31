@@ -2,12 +2,13 @@ package com.yang.libs.wxapi
 
 
 import android.content.Intent
+import android.view.View
 import com.blankj.utilcode.util.BusUtils
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.xxx.mvplib.api.WeiXinApi
-import com.xxx.mvplib.base.BaseViewActivity
+import com.xxx.mvplib.base.ui.BaseActivity
 
 /**
  * 微信授权、分享回调
@@ -16,11 +17,11 @@ import com.xxx.mvplib.base.BaseViewActivity
  * 769856557@qq.com
  * yangyong
  */
-class WXEntryActivity : BaseViewActivity(), IWXAPIEventHandler {
+class WXEntryActivity : BaseActivity(), IWXAPIEventHandler {
 
     override fun initContentView(): Int = 0
 
-    override fun init() {
+    override fun init(view: View?) {
         WeiXinApi.iWxApi.handleIntent(intent, this)
     }
 

@@ -1,4 +1,8 @@
-package com.xxx.mvplib.base
+package com.xxx.mvplib.base.ui
+
+import com.xxx.mvplib.base.mvp.BaseModel
+import com.xxx.mvplib.base.mvp.BasePresenter
+import com.xxx.mvplib.base.mvp.BaseView
 
 /**
  * Fragment二级级基类
@@ -8,7 +12,7 @@ package com.xxx.mvplib.base
  * yangyong
  */
 abstract class BasePresenterFragment<M : BaseModel, V : BaseView, P : BasePresenter<M, V>> :
-    BaseViewFragment() {
+    BaseFragment() {
 
     /**
      * P层

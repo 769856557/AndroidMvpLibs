@@ -1,7 +1,8 @@
 package com.yang.libs.ui
 
+import android.view.View
 import com.xxx.mvplib.GlideApp
-import com.xxx.mvplib.base.BasePresenterActivity
+import com.xxx.mvplib.base.ui.BasePresenterActivity
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.mvpmodel.MainModel
@@ -16,7 +17,7 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
 
     override fun initContentView(): Int = R.layout.activity_main
 
-    override fun init() {
+    override fun init(view: View?) {
         title = "主页标题"
         GlideApp
             .with(this)

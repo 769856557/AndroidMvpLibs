@@ -1,15 +1,15 @@
-package com.xxx.mvplib.base
+package com.xxx.mvplib.base.ui
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.BusUtils
 import com.xxx.mvplib.R
+import com.xxx.mvplib.base.mvp.BaseView
 
 /**
  * Activity一级基类
@@ -18,7 +18,8 @@ import com.xxx.mvplib.R
  * 769856557@qq.com
  * yangyong
  */
-abstract class BaseViewActivity : AppCompatActivity(), BaseView {
+abstract class BaseActivity : AppCompatActivity(), IActivityFragment, BaseView {
+
     /**
      * 通用加载框
      */
@@ -37,18 +38,6 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
      */
     private var isRegisterBlankjBus: Boolean = false
 
-    /**
-     * 初始化布局
-     */
-    @LayoutRes
-    abstract fun initContentView(): Int
-
-    /**
-     * 初始化
-     */
-    abstract fun init()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val layoutId = initContentView()
@@ -58,7 +47,7 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
             supportActionBar?.setDisplayShowTitleEnabled(false)//不展示原生标题
             supportActionBar?.setDisplayHomeAsUpEnabled(true)//展示左侧按钮
         }
-        init()
+        init(null)
     }
 
 
@@ -84,7 +73,7 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
     /**
      * 设置沉浸式状态栏,API最低支持19
      */
-    fun setStatusBarTranslucent() {
+    protected fun setStatusBarTranslucent() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             val layoutParams = window.attributes
             layoutParams.flags =
@@ -141,18 +130,25 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
     }
 
     /**
-     *注册com.blankj.bus,和EventBus类似的库
+     * 注册com.blankj.bus,和EventBus类似的库
      */
-    fun registerBlankjBus() {
+    protected fun registerBlankjBus() {
         isRegisterBlankjBus = true
         BusUtils.register(this)
     }
 
-
-    override fun onDestroy() {
+    /**
+     * 注销com.blankj.bus,和EventBus类似的库
+     */
+    protected fun unRegisterBlankjBus() {
         if (isRegisterBlankjBus) {
             BusUtils.unregister(this)
+            isRegisterBlankjBus = false
         }
+    }
+
+    override fun onDestroy() {
+        unRegisterBlankjBus();
         dismissLoadingDialog()
         super.onDestroy()
     }

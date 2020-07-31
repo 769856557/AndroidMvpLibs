@@ -16,7 +16,7 @@ import com.blankj.utilcode.util.FileUtils
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.entity.LocalMedia
 import com.xxx.mvplib.PathConfig
-import com.xxx.mvplib.base.BaseViewActivity
+import com.xxx.mvplib.base.ui.BaseActivity
 import com.xxx.mvplib.utils.WebViewUtils
 import com.yang.libs.BuildConfig
 import com.yang.libs.R
@@ -30,13 +30,14 @@ import java.io.File
  * 769856557@qq.com
  * yangyong
  */
-class WebViewActivity : BaseViewActivity() {
+class WebViewActivity : BaseActivity() {
 
     companion object {
         /**
          * 网页标题
          */
         const val EXTRA_WEB_TITLE = "extra_web_title_WebViewActivity"
+
         /**
          * 网页地址
          */
@@ -51,7 +52,7 @@ class WebViewActivity : BaseViewActivity() {
     override fun initContentView(): Int = R.layout.activity_webview
 
     @SuppressLint("JavascriptInterface")
-    override fun init() {
+    override fun init(view: View?) {
         title = intent.getStringExtra(EXTRA_WEB_TITLE) ?: ""
         webView.addJavascriptInterface(ImageOnClickListner(this), "imageOnClickListner");
         webView.webViewClient = mWebViewClient

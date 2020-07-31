@@ -1,4 +1,4 @@
-package com.xxx.mvplib.base
+package com.xxx.mvplib.base.mvp
 
 /**
  * →_→

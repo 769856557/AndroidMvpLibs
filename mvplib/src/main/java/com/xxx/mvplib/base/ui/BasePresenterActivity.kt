@@ -1,4 +1,8 @@
-package com.xxx.mvplib.base
+package com.xxx.mvplib.base.ui
+
+import com.xxx.mvplib.base.mvp.BaseModel
+import com.xxx.mvplib.base.mvp.BasePresenter
+import com.xxx.mvplib.base.mvp.BaseView
 
 /**
  * Activity二级基类
@@ -8,7 +12,7 @@ package com.xxx.mvplib.base
  * yangyong
  */
 abstract class BasePresenterActivity<M : BaseModel, V : BaseView, P : BasePresenter<M, V>> :
-    BaseViewActivity() {
+    BaseActivity() {
 
     /**
      * P层

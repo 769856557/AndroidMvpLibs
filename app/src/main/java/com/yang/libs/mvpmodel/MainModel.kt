@@ -1,6 +1,6 @@
 package com.yang.libs.mvpmodel
 
-import com.xxx.mvplib.base.BaseModel
+import com.xxx.mvplib.base.mvp.BaseModel
 import com.xxx.mvplib.net.helper.RxThreadHelper
 import com.xxx.mvplib.net.observer.XxBaseHttpObserver
 import com.yang.libs.api.AppApi

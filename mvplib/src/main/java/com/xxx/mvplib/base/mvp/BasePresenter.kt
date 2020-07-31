@@ -1,4 +1,4 @@
-package com.xxx.mvplib.base
+package com.xxx.mvplib.base.mvp
 
 import java.lang.ref.WeakReference
 

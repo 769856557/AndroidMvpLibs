@@ -1,4 +1,4 @@
-package com.xxx.mvplib.base
+package com.xxx.mvplib.base.ui
 
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.blankj.utilcode.util.BusUtils
 import com.xxx.mvplib.R
+import com.xxx.mvplib.base.mvp.BaseView
 
 /**
  * Fragment一级基类
@@ -19,7 +19,8 @@ import com.xxx.mvplib.R
  * 769856557@qq.com
  * yangyong
  */
-abstract class BaseViewFragment : Fragment(), BaseView {
+abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
+
     /**
      * 通用加载框
      */
@@ -38,18 +39,6 @@ abstract class BaseViewFragment : Fragment(), BaseView {
      */
     private var isRegisterBlankjBus: Boolean = false
 
-    /**
-     * 初始化布局
-     */
-    @LayoutRes
-    protected abstract fun initContentView(): Int
-
-    /**
-     * 初始化
-     */
-    protected abstract fun init(view: View?)
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,14 +51,13 @@ abstract class BaseViewFragment : Fragment(), BaseView {
         init(view)
     }
 
-
     /**
      * 显示加载框
      * @param hint 提示语，可不传
      */
     override fun showLoadingDialog(hint: String) {
-        if (activity is BaseViewActivity) {
-            (activity as? BaseViewActivity)?.showLoadingDialog(hint)
+        if (activity is BaseActivity) {
+            (activity as? BaseActivity)?.showLoadingDialog(hint)
             return
         }
         if (activity?.isFinishing == false && !alertDialog.isShowing) {
@@ -89,8 +77,8 @@ abstract class BaseViewFragment : Fragment(), BaseView {
      * 隐藏加载框
      */
     override fun dismissLoadingDialog() {
-        if (activity is BaseViewActivity) {
-            (activity as? BaseViewActivity)?.dismissLoadingDialog()
+        if (activity is BaseActivity) {
+            (activity as? BaseActivity)?.dismissLoadingDialog()
             return
         }
         if (activity?.isFinishing == false) {
@@ -109,8 +97,8 @@ abstract class BaseViewFragment : Fragment(), BaseView {
      * @param hint 提示语
      */
     override fun setLoadingDialogHint(hint: String) {
-        if (activity is BaseViewActivity) {
-            (activity as? BaseViewActivity)?.setLoadingDialogHint(hint)
+        if (activity is BaseActivity) {
+            (activity as? BaseActivity)?.setLoadingDialogHint(hint)
             return
         }
         if (activity?.isFinishing == false && alertDialog.isShowing) {
@@ -132,10 +120,18 @@ abstract class BaseViewFragment : Fragment(), BaseView {
         BusUtils.register(this)
     }
 
-    override fun onDestroy() {
+    /**
+     * 注销com.blankj.bus,和EventBus类似的库
+     */
+    protected fun unRegisterBlankjBus() {
         if (isRegisterBlankjBus) {
             BusUtils.unregister(this)
+            isRegisterBlankjBus = false
         }
+    }
+
+    override fun onDestroy() {
+        unRegisterBlankjBus()
         dismissLoadingDialog()
         super.onDestroy()
     }
