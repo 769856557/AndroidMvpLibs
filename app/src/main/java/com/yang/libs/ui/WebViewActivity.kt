@@ -48,7 +48,7 @@ class WebViewActivity : BaseViewActivity() {
     }
 
 
-    override fun createLayoutRes(): Int = R.layout.activity_webview
+    override fun initContentView(): Int = R.layout.activity_webview
 
     @SuppressLint("JavascriptInterface")
     override fun init() {

@@ -39,10 +39,10 @@ abstract class BaseViewFragment : Fragment(), BaseView {
     private var isRegisterBlankjBus: Boolean = false
 
     /**
-     * 创建布局资源
+     * 初始化布局
      */
     @LayoutRes
-    protected abstract fun createLayoutRes(): Int
+    protected abstract fun initContentView(): Int
 
     /**
      * 初始化
@@ -55,7 +55,7 @@ abstract class BaseViewFragment : Fragment(), BaseView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(createLayoutRes(), container, false)
+        return inflater.inflate(initContentView(), container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

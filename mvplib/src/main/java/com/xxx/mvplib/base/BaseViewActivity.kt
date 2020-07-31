@@ -38,10 +38,10 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
     private var isRegisterBlankjBus: Boolean = false
 
     /**
-     * 创建布局资源
+     * 初始化布局
      */
     @LayoutRes
-    abstract fun createLayoutRes(): Int
+    abstract fun initContentView(): Int
 
     /**
      * 初始化
@@ -51,7 +51,7 @@ abstract class BaseViewActivity : AppCompatActivity(), BaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val layoutId = createLayoutRes()
+        val layoutId = initContentView()
         if (layoutId > 0) {
             setContentView(layoutId)
             setSupportActionBar(findViewById(R.id.toolBar))//绑定标题栏

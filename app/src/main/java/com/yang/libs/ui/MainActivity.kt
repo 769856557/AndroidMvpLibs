@@ -14,7 +14,7 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
 
     override fun createPresenter(): MainPresenter = MainPresenter()
 
-    override fun createLayoutRes(): Int = R.layout.activity_main
+    override fun initContentView(): Int = R.layout.activity_main
 
     override fun init() {
         title = "主页标题"
