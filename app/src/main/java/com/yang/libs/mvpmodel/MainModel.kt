@@ -1,8 +1,8 @@
 package com.yang.libs.mvpmodel
 
-import com.xxx.mvplib.base.mvp.BaseModel
-import com.xxx.mvplib.net.helper.RxThreadHelper
-import com.xxx.mvplib.net.observer.XxBaseHttpObserver
+import com.xxx.lib.base.mvp.BaseModel
+import com.xxx.lib.net.helper.RxThreadHelper
+import com.xxx.lib.net.observer.XxBaseHttpObserver
 import com.yang.libs.api.AppApi
 import com.yang.libs.bean.BannerBean
 

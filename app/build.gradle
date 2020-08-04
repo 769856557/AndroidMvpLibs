@@ -49,11 +49,11 @@ android {
 
     repositories {
         flatDir {
-            dirs project(':mvplib').file('libs')
+            dirs project(':xxxlib').file('libs')
         }
     }
 }
 
 dependencies {
-    implementation project(':mvplib')
+    implementation project(':xxxlib')
 }

@@ -1,1 +1,3 @@
-include ':app', ':mvplib', ':mvpres'
+include ':app'
+include ':xxxlib'
+include ':xxxres'

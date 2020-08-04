@@ -1,7 +1,7 @@
 package com.yang.libs.api
 
-import com.xxx.mvplib.bean.BaseResponseBean
-import com.xxx.mvplib.net.helper.RetrofitOkHttpHelper
+import com.xxx.lib.bean.BaseResponseBean
+import com.xxx.lib.net.helper.RetrofitOkHttpHelper
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.bean.UploadBean
 import io.reactivex.Observable

@@ -7,8 +7,8 @@ import com.blankj.utilcode.util.BusUtils
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
-import com.xxx.mvplib.api.WeiXinApi
-import com.xxx.mvplib.base.ui.BaseActivity
+import com.xxx.lib.api.WeiXinApi
+import com.xxx.lib.base.ui.BaseActivity
 
 /**
  * 微信授权、分享回调

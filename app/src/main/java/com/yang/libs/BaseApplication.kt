@@ -2,7 +2,7 @@ package com.yang.libs
 
 import android.app.Application
 import com.blankj.utilcode.util.Utils
-import com.xxx.mvplib.AppConfig
+import com.xxx.lib.AppConfig
 
 /**
  * →_→

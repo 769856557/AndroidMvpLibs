@@ -15,9 +15,9 @@ import android.webkit.WebViewClient
 import com.blankj.utilcode.util.FileUtils
 import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.entity.LocalMedia
-import com.xxx.mvplib.PathConfig
-import com.xxx.mvplib.base.ui.BaseActivity
-import com.xxx.mvplib.utils.WebViewUtils
+import com.xxx.lib.PathConfig
+import com.xxx.lib.base.ui.BaseActivity
+import com.xxx.lib.utils.WebViewUtils
 import com.yang.libs.BuildConfig
 import com.yang.libs.R
 import kotlinx.android.synthetic.main.activity_webview.*

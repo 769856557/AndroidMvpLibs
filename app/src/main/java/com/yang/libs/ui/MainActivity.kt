@@ -1,8 +1,8 @@
 package com.yang.libs.ui
 
 import android.view.View
-import com.xxx.mvplib.GlideApp
-import com.xxx.mvplib.base.ui.BasePresenterActivity
+import com.xxx.lib.GlideApp
+import com.xxx.lib.base.ui.BasePresenterActivity
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.mvpmodel.MainModel
