@@ -3,6 +3,7 @@ package com.yang.libs.ui
 import android.view.View
 import com.xxx.lib.GlideApp
 import com.xxx.lib.base.ui.BasePresenterActivity
+import com.xxx.lib.widget.HintDialog
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.mvpmodel.MainModel
@@ -26,7 +27,9 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
         btOne.setOnClickListener {
             getPresenter().getAdvertisement("param")
         }
+        val hintDialog = HintDialog(this)
         btTwo.setOnClickListener {
+            hintDialog.show()
         }
     }
 

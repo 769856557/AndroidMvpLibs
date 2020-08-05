@@ -20,10 +20,12 @@ class HintDialog(context: Context) : Dialog(context), View.OnClickListener {
          * 左边按钮点击回调
          */
         const val ONCLICK_LEFT = 100
+
         /**
          * 右边按钮点击回调
          */
         const val ONCLICK_RIGHT = 200
+
         /**
          * 单按钮点击回调
          */
@@ -42,7 +44,8 @@ class HintDialog(context: Context) : Dialog(context), View.OnClickListener {
         btCenter.setOnClickListener(this)
 
         setTitle("温馨提示")
-        setButtonTextLeftRight("取消", "确定")
+        setButtonTextLeft("取消")
+        setButtonTextRight("确定")
         setButtonTextCenter("确定")
         setCenterButtonVisiblity(false)
     }
@@ -65,21 +68,51 @@ class HintDialog(context: Context) : Dialog(context), View.OnClickListener {
     }
 
     /**
-     * 设置按钮文本
+     * 设置左按钮文本
      * @param left 左按钮文本
+     */
+    fun setButtonTextLeft(left: String) {
+        btLeft.text = left
+    }
+
+    /**
+     * 设置右按钮文本
      * @param right 右按钮文本
      */
-    fun setButtonTextLeftRight(left: String, right: String) {
-        btLeft.text = left
+    fun setButtonTextRight(right: String) {
         btRight.text = right
     }
 
     /**
-     * 设置单按钮按钮文本
-     * @param center 单按文本
+     * 设置单按钮文本
+     * @param center 单按钮文本
      */
     fun setButtonTextCenter(center: String) {
         btCenter.text = center
+    }
+
+    /**
+     * 设置左按钮文本颜色
+     * @param leftColor 左按钮文本颜色
+     */
+    fun setButtonTextColorLeft(leftColor: Int) {
+        btLeft.setTextColor(leftColor)
+    }
+
+    /**
+     * 设置右按钮文本颜色
+     * @param rightColor 右按钮文本颜色
+     */
+    fun setButtonTextColorRight(rightColor: Int) {
+        btRight.setTextColor(rightColor)
+    }
+
+    /**
+     * 设置单按钮文本颜色
+     * @param centerColor 单按文本颜色
+     */
+    fun setButtonTextColorCenter(centerColor: Int) {
+        btCenter.setTextColor(centerColor)
     }
 
     /**
@@ -95,7 +128,6 @@ class HintDialog(context: Context) : Dialog(context), View.OnClickListener {
             llLeftRight.visibility = View.VISIBLE
         }
     }
-
 
     /**
      * 设置回调
