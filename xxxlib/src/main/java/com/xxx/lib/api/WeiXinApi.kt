@@ -186,7 +186,6 @@ object WeiXinApi {
             @Field("grant_type") grantType: String
         ): Observable<WxAccessTokenBean>
 
-
         /**
          * 获取用户个人信息
          * @param lang 国家地区语言版本，zh_CN 简体，zh_TW 繁体，en 英语，默认为 zh-CN
@@ -220,7 +219,6 @@ object WeiXinApi {
             @Field("refresh_token") refreshToken: String,
             @Field("grant_type") grantType: String
         ): Observable<WxRefreshTokenBean>
-
 
         /**
          * 生成预支付交易单

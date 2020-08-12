@@ -1,7 +1,9 @@
 package com.xxx.lib
 
+import android.content.Context
 import com.blankj.utilcode.util.SPUtils
 import com.xxx.lib.constant.KeyAccount
+import com.xxx.lib.constant.KeySetting
 
 /**
  * SharedPreferences相关配置
@@ -12,19 +14,30 @@ import com.xxx.lib.constant.KeyAccount
  */
 object SPConfig {
 
+    /**
+     * 获取账号相关SPUtils
+     */
+    fun getAccountSPUtils(): SPUtils =
+        SPUtils.getInstance(KeyAccount.FILE_NAME, Context.MODE_PRIVATE)
+
+    /**
+     * 获取设置相关SPUtils
+     */
+    fun getSettingSPUtils(): SPUtils =
+        SPUtils.getInstance(KeySetting.FILE_NAME, Context.MODE_PRIVATE)
 
     /**
      * 登录,登陆成功后需要调该方法
      */
-    fun login() {
+    fun loginSPDo() {
 
     }
 
     /**
      * 退出登录，退出登录需要调用该方法
      */
-    fun logout() {
-        SPUtils.getInstance(KeyAccount.FILE_NAME).clear()
+    fun logoutSPDo() {
+        getAccountSPUtils().clear()
     }
 
 }
