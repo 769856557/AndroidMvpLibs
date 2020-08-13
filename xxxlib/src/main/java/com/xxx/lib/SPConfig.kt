@@ -1,6 +1,5 @@
 package com.xxx.lib
 
-import android.content.Context
 import com.blankj.utilcode.util.SPUtils
 import com.xxx.lib.constant.KeyAccount
 import com.xxx.lib.constant.KeySetting
@@ -18,13 +17,13 @@ object SPConfig {
      * 获取账号相关SPUtils
      */
     fun getAccountSPUtils(): SPUtils =
-        SPUtils.getInstance(KeyAccount.FILE_NAME, Context.MODE_PRIVATE)
+        SPUtils.getInstance(KeyAccount.FILE_NAME)
 
     /**
      * 获取设置相关SPUtils
      */
     fun getSettingSPUtils(): SPUtils =
-        SPUtils.getInstance(KeySetting.FILE_NAME, Context.MODE_PRIVATE)
+        SPUtils.getInstance(KeySetting.FILE_NAME)
 
     /**
      * 登录,登陆成功后需要调该方法
