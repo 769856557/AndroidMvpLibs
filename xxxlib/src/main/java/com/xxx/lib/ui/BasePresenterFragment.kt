@@ -1,8 +1,8 @@
-package com.xxx.lib.base.ui
+package com.xxx.lib.ui
 
-import com.xxx.lib.base.mvp.BaseModel
-import com.xxx.lib.base.mvp.BasePresenter
-import com.xxx.lib.base.mvp.BaseView
+import com.xxx.lib.mvp.BaseModel
+import com.xxx.lib.mvp.BasePresenter
+import com.xxx.lib.mvp.BaseView
 
 /**
  * Fragment二级级基类

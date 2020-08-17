@@ -51,12 +51,13 @@ dependencies {
         exclude group: "androidx.vectordrawable"
         exclude group: "androidx.annotation"
     }
+
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.google.code.gson:gson:2.8.6'
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.47'
     api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
     api 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:5.4.0'
     api (name: 'alipaySdk-15.6.8-20191021122514', ext: 'aar')
-    api files('libs/open_sdk_r6008_lite.jar')
-
+    api files('libs\\open_sdk_r6008_lite.jar')
+    api files('libs\\tbs_sdk_thirdapp_v4.3.0.39_43939.jar')
 }

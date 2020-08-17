@@ -1,8 +1,8 @@
 package com.yang.libs
 
-import android.app.Application
-import com.blankj.utilcode.util.Utils
 import com.xxx.lib.AppConfig
+import com.xxx.lib.widget.BaseLibApplication
+
 
 /**
  * →_→
@@ -10,11 +10,10 @@ import com.xxx.lib.AppConfig
  * 769856557@qq.com
  * yangyong
  */
-class BaseApplication : Application() {
+class BaseApplication : BaseLibApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        Utils.init(this)
         AppConfig.init(BuildConfig.DEBUG, BuildConfig.BUILD_TYPE)
     }
 }

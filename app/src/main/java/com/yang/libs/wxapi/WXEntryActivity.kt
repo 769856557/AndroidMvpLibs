@@ -8,7 +8,7 @@ import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.xxx.lib.api.WeiXinApi
-import com.xxx.lib.base.ui.BaseActivity
+import com.xxx.lib.ui.BaseActivity
 
 /**
  * 微信授权、分享回调

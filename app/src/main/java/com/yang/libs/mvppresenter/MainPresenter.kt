@@ -1,7 +1,7 @@
 package com.yang.libs.mvppresenter
 
 import com.blankj.utilcode.util.ToastUtils
-import com.xxx.lib.base.mvp.BasePresenter
+import com.xxx.lib.mvp.BasePresenter
 import com.xxx.lib.net.observer.XxBaseHttpObserver
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.mvpmodel.MainModel

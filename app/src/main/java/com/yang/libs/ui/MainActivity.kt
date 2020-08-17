@@ -1,9 +1,11 @@
 package com.yang.libs.ui
 
+import android.content.Intent
 import android.view.View
 import com.xxx.lib.GlideApp
-import com.xxx.lib.base.ui.BasePresenterActivity
-import com.xxx.lib.widget.HintDialog
+import com.xxx.lib.constant.Extra
+import com.xxx.lib.ui.BasePresenterActivity
+import com.xxx.lib.ui.WebViewActivity
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.mvpmodel.MainModel
@@ -27,9 +29,12 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
         btOne.setOnClickListener {
             getPresenter().getAdvertisement("param")
         }
-        val hintDialog = HintDialog(this)
         btTwo.setOnClickListener {
-            hintDialog.show()
+            val intent = Intent(this, WebViewActivity::class.java).apply {
+                putExtra(Extra.EXTRA_TITLE, "默认标题")
+                putExtra(Extra.EXTRA_LINK, "http://c.51ehw.com/index.php/_CLIENT/Customer/login")
+            }
+            startActivity(intent)
         }
     }
 

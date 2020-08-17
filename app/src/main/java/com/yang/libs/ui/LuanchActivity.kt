@@ -3,7 +3,7 @@ package com.yang.libs.ui
 import android.content.Intent
 import android.os.Handler
 import android.view.View
-import com.xxx.lib.base.ui.BaseActivity
+import com.xxx.lib.ui.BaseActivity
 import com.yang.libs.R
 
 /**

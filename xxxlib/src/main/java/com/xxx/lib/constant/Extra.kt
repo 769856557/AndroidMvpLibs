@@ -1,7 +1,7 @@
 package com.xxx.lib.constant
 
 /**
- * 全局Extra
+ * 全局Extra，注意：可能出现不同的数据类应用同一个KEY
  * →_→
  * 2020/1/4 15:27
  * 769856557@qq.com
@@ -10,17 +10,30 @@ package com.xxx.lib.constant
 object Extra {
 
     /**
-     * 数据实体,传递bean或者List<bean>
+     * 数据实体
      */
     const val EXTRA_DATA = "extra_data"
+
     /**
      * 标题
      */
     const val EXTRA_TITLE = "extra_title"
+
     /**
-     * fragment切换，类型，整数类型
+     * 链接
      */
-    const val EXTRA_FRAGMENT_POSITION = "extra_fragment_position"
+    const val EXTRA_LINK = "extra_link"
+
+    /**
+     * 文本
+     */
+    const val EXTRA_TEXT = "extra_text"
+
+    /**
+     * 序号
+     */
+    const val EXTRA_POSITION = "extra_position"
+
     /**
      * 手机号
      */

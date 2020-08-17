@@ -1,6 +1,8 @@
 package com.xxx.lib
 
 import com.blankj.utilcode.util.SPUtils
+import com.blankj.utilcode.util.Utils
+import com.tencent.smtt.sdk.QbSdk
 import com.xxx.lib.constant.KeyAccount
 import com.xxx.lib.constant.KeySetting
 
@@ -37,6 +39,7 @@ object SPConfig {
      */
     fun logoutSPDo() {
         getAccountSPUtils().clear()
+        QbSdk.clearAllWebViewCache(Utils.getApp(), true)
     }
 
 }
