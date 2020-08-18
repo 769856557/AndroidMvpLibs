@@ -17,6 +17,7 @@ import com.tencent.smtt.sdk.WebView
 import com.tencent.smtt.sdk.WebViewClient
 import com.xxx.lib.GlideEngine
 import com.xxx.lib.R
+import com.xxx.lib.base.BaseActivity
 import com.xxx.lib.constant.Extra
 import com.xxx.lib.utils.WebViewUtils
 import kotlinx.android.synthetic.main.activity_web_view.*
@@ -96,7 +97,7 @@ class WebViewActivity : BaseActivity() {
             mValueCallback = valueCallback
             PictureSelector.create(this@WebViewActivity)
                 .openGallery(PictureMimeType.ofImage())
-                .imageEngine(GlideEngine.createGlideEngine())
+                .imageEngine(GlideEngine.instance)
                 .selectionMode(PictureConfig.SINGLE)
                 .isCompress(true)
                 .forResult(mOnResultCallbackListener)

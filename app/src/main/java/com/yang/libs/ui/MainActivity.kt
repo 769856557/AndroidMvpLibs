@@ -3,8 +3,8 @@ package com.yang.libs.ui
 import android.content.Intent
 import android.view.View
 import com.xxx.lib.GlideApp
+import com.xxx.lib.base.BasePresenterActivity
 import com.xxx.lib.constant.Extra
-import com.xxx.lib.ui.BasePresenterActivity
 import com.xxx.lib.ui.WebViewActivity
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean

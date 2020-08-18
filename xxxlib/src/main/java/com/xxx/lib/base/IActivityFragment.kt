@@ -1,4 +1,4 @@
-package com.xxx.lib.ui
+package com.xxx.lib.base
 
 import android.view.View
 import androidx.annotation.LayoutRes

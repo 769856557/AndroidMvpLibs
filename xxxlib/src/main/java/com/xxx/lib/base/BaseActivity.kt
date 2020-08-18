@@ -1,32 +1,31 @@
-package com.xxx.lib.ui
+package com.xxx.lib.base
 
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.BusUtils
 import com.xxx.lib.R
-import com.xxx.lib.mvp.BaseView
 
 /**
- * Fragment一级基类
+ * Activity一级基类
  * →_→
- * 2017/11/2 18:22
+ * 2017/10/30 16:24
  * 769856557@qq.com
  * yangyong
  */
-abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
+abstract class BaseActivity : AppCompatActivity(),
+    IActivityFragment, BaseView {
 
     /**
      * 通用加载框
      */
     private val alertDialog: AlertDialog by lazy {
         AlertDialog
-            .Builder(context!!)
+            .Builder(this)
             .setView(R.layout.dialog_loading)
             .create().apply {
                 setCanceledOnTouchOutside(false)
@@ -39,16 +38,47 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
      */
     private var isRegisterBlankjBus: Boolean = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(initContentView(), container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val layoutId = initContentView()
+        if (layoutId > 0) {
+            setContentView(layoutId)
+            setSupportActionBar(findViewById(R.id.toolBar))//绑定标题栏
+            supportActionBar?.setDisplayShowTitleEnabled(false)//不展示原生标题
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)//展示左侧按钮
+        }
+        init(null)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        init(view)
+
+    override fun onSupportNavigateUp(): Boolean {
+        return if (!super.onSupportNavigateUp()) {
+            onBackPressed()
+            false
+        } else {
+            true
+        }
+    }
+
+
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     */
+    override fun setTitle(title: CharSequence) {
+        findViewById<TextView>(R.id.tvTitle)?.text = title
+    }
+
+    /**
+     * 设置沉浸式状态栏,API最低支持19
+     */
+    protected fun setStatusBarTranslucent() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            val layoutParams = window.attributes
+            layoutParams.flags =
+                WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS or layoutParams.flags
+        }
     }
 
     /**
@@ -56,19 +86,14 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
      * @param hint 提示语，可不传
      */
     override fun showLoadingDialog(hint: String) {
-        if (activity is BaseActivity) {
-            (activity as? BaseActivity)?.showLoadingDialog(hint)
-            return
-        }
-        if (activity?.isFinishing == false && !alertDialog.isShowing) {
-            activity?.runOnUiThread {
+        if (!isFinishing && !alertDialog.isShowing) {
+            runOnUiThread {
                 try {
                     alertDialog.show()
                     alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-
             }
         }
     }
@@ -77,12 +102,8 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
      * 隐藏加载框
      */
     override fun dismissLoadingDialog() {
-        if (activity is BaseActivity) {
-            (activity as? BaseActivity)?.dismissLoadingDialog()
-            return
-        }
-        if (activity?.isFinishing == false) {
-            activity?.runOnUiThread {
+        if (!isFinishing) {
+            runOnUiThread {
                 try {
                     alertDialog.dismiss()
                 } catch (e: Exception) {
@@ -97,12 +118,8 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
      * @param hint 提示语
      */
     override fun setLoadingDialogHint(hint: String) {
-        if (activity is BaseActivity) {
-            (activity as? BaseActivity)?.setLoadingDialogHint(hint)
-            return
-        }
-        if (activity?.isFinishing == false && alertDialog.isShowing) {
-            activity?.runOnUiThread {
+        if (!isFinishing && alertDialog.isShowing) {
+            runOnUiThread {
                 try {
                     alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
                 } catch (e: Exception) {
@@ -113,7 +130,7 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
     }
 
     /**
-     *注册com.blankj.bus,和EventBus类似的库
+     * 注册com.blankj.bus,和EventBus类似的库
      */
     protected fun registerBlankjBus() {
         isRegisterBlankjBus = true
@@ -131,9 +148,8 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
     }
 
     override fun onDestroy() {
-        unRegisterBlankjBus()
+        unRegisterBlankjBus();
         dismissLoadingDialog()
         super.onDestroy()
     }
-
 }

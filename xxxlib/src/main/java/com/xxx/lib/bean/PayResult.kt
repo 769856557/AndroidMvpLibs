@@ -3,13 +3,13 @@ package com.xxx.lib.bean
 import android.text.TextUtils
 
 /**
- * 支付结果实体类
+ * 支付宝支付结果
  * →_→
  * 2017/1/9 20:08
  * 769856557@qq.com
  * yangyong
  */
-data class PayResult(var rawResult: Map<String, String>) {
+data class PayResult(val rawResult: Map<String, String>) {
 
     companion object {
         /**
@@ -28,12 +28,16 @@ data class PayResult(var rawResult: Map<String, String>) {
 
     init {
         for (key in rawResult.keys) {
-            if (TextUtils.equals(key, "resultStatus")) {
-                resultStatus = rawResult[key]!!
-            } else if (TextUtils.equals(key, "result")) {
-                result = rawResult[key]!!
-            } else if (TextUtils.equals(key, "memo")) {
-                memo = rawResult[key]!!
+            when {
+                TextUtils.equals(key, "resultStatus") -> {
+                    resultStatus = rawResult[key] ?: ""
+                }
+                TextUtils.equals(key, "result") -> {
+                    result = rawResult[key] ?: ""
+                }
+                TextUtils.equals(key, "memo") -> {
+                    memo = rawResult[key] ?: ""
+                }
             }
         }
     }

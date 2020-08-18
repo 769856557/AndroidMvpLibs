@@ -1,8 +1,4 @@
-package com.xxx.lib.ui
-
-import com.xxx.lib.mvp.BaseModel
-import com.xxx.lib.mvp.BasePresenter
-import com.xxx.lib.mvp.BaseView
+package com.xxx.lib.base
 
 /**
  * Activity二级基类

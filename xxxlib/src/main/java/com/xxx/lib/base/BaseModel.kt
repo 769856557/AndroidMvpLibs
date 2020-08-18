@@ -1,4 +1,4 @@
-package com.xxx.lib.mvp
+package com.xxx.lib.base
 
 /**
  * →_→
