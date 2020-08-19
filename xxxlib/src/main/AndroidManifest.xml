@@ -3,6 +3,9 @@
 
     <application>
 
+        <!--垃圾清理服务-->
+        <service android:name=".service.ClearService" />
+
         <!--通用WebView-->
         <activity
             android:name=".ui.WebViewActivity"

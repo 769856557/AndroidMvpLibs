@@ -1,7 +1,7 @@
 package com.yang.libs
 
 import com.xxx.lib.AppConfig
-import com.xxx.lib.widget.BaseLibApplication
+import com.xxx.lib.BaseLibApplication
 
 
 /**
@@ -14,6 +14,7 @@ class BaseApplication : BaseLibApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        //初始化App相关配置
         AppConfig.init(BuildConfig.DEBUG, BuildConfig.BUILD_TYPE)
     }
 }

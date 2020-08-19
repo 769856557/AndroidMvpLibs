@@ -16,7 +16,7 @@ import com.xxx.lib.AppConfigDefault.RELEASE_WX_MCH_ID
 import com.xxx.lib.AppConfigDefault.RELEASE_WX_NOTIFY_URL
 
 /**
- * app相关配置
+ * App相关配置
  * →_→
  * 2019/11/15 15:31
  * 769856557@qq.com
