@@ -1,8 +1,6 @@
 package com.xxx.lib
 
 import com.blankj.utilcode.util.SPUtils
-import com.blankj.utilcode.util.Utils
-import com.tencent.smtt.sdk.QbSdk
 import com.xxx.lib.constant.KeyAccount
 import com.xxx.lib.constant.KeySetting
 
@@ -18,28 +16,15 @@ object SPConfig {
     /**
      * 获取账号相关SPUtils
      */
-    fun getAccountSPUtils(): SPUtils =
+    val sPUtilsAccount by lazy {
         SPUtils.getInstance(KeyAccount.FILE_NAME)
+    }
+
 
     /**
      * 获取设置相关SPUtils
      */
-    fun getSettingSPUtils(): SPUtils =
+    val sPUtilsSetting by lazy {
         SPUtils.getInstance(KeySetting.FILE_NAME)
-
-    /**
-     * 登录,登陆成功后需要调该方法
-     */
-    fun loginSPDo() {
-
     }
-
-    /**
-     * 退出登录，退出登录需要调用该方法
-     */
-    fun logoutSPDo() {
-        getAccountSPUtils().clear()
-        QbSdk.clearAllWebViewCache(Utils.getApp(), true)
-    }
-
 }

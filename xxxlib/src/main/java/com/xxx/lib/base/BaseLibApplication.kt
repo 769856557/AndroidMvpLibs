@@ -1,10 +1,11 @@
-package com.xxx.lib
+package com.xxx.lib.base
 
 import android.app.Application
 import android.content.Intent
 import com.blankj.utilcode.util.Utils
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
+import com.xxx.lib.SPConfig
 import com.xxx.lib.service.ClearService
 import java.util.*
 
@@ -15,6 +16,24 @@ import java.util.*
  * yangyong
  */
 open class BaseLibApplication : Application() {
+
+    companion object {
+        /**
+         * 登录,登陆成功后需要调该方法
+         */
+        fun login() {
+
+        }
+
+        /**
+         * 退出登录，退出登录需要调用该方法
+         */
+        fun logout() {
+            SPConfig.sPUtilsAccount.clear()
+            QbSdk.clearAllWebViewCache(Utils.getApp(), true)
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         //通用工具库初始化

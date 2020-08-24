@@ -17,8 +17,8 @@ class ClearService : IntentService(ClearService::class.java.simpleName) {
 
     override fun onHandleIntent(intent: Intent?) {
         val path = PathUtils.getExternalAppFilesPath()
-        if (FileUtils.getLength(path) > 1024L * 1024 * 100) {
-            //大于100M，执行清理
+        if (FileUtils.getLength(path) > 1024L * 1024 * 200) {
+            //大于200M，执行清理
             CleanUtils.deleteFilesInDir(path)
         }
     }
