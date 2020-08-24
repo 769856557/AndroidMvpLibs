@@ -22,8 +22,10 @@
     <color name="text_999999">#999999</color>
     <color name="text_FF0000">#FF0000</color>
     <!--线条颜色-->
+    <color name="line_primary">@color/app_primary</color>
+    <color name="line_secondary">@color/app_secondary</color>
+    <color name="line_tertiary">@color/app_tertiary</color>
     <color name="line_gray">#DDDDDD</color>
-    <color name="line_white">@android:color/white</color>
     <!-- 按压效果颜色-->
     <color name="selector_primary_default">@color/app_primary</color>
     <color name="selector_primary_pressed">@color/app_primary</color>
