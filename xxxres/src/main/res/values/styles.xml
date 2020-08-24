@@ -8,14 +8,23 @@
         <item name="colorAccent">@color/app_primary</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:textColor">@color/text_333333</item>
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
     </style>
 
     <!-- 启动界面主题样式-->
-    <style name="ActivityLuanchTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ActivityLuanchTheme" parent="AppTheme">
         <item name="android:windowBackground">@android:color/holo_blue_light</item>
     </style>
 
-    <!--按钮样式-->
+    <!-- Activity切换动画 -->
+    <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit</item>
+    </style>
+
+    <!--按钮主样式-->
     <style name="ButtonStylePrimary" parent="Widget.AppCompat.Button">
         <item name="android:layout_height">40dp</item>
         <item name="android:textSize">16sp</item>
@@ -24,7 +33,7 @@
         <item name="android:foreground">?attr/selectableItemBackground</item>
     </style>
 
-    <!--横线样式-->
+    <!--横线灰色样式-->
     <style name="LineGray">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.5dp</item>
