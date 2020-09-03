@@ -107,8 +107,10 @@ object QQApi {
         expiresIn: String,
         iUiListener: IUiListener
     ) {
-        tencent.openId = openid
-        tencent.setAccessToken(accessToken, expiresIn)
+        tencent.run {
+            openId = openid
+            setAccessToken(accessToken, expiresIn)
+        }
         UserInfo(Utils.getApp(), tencent.qqToken).getUserInfo(iUiListener)
     }
 }

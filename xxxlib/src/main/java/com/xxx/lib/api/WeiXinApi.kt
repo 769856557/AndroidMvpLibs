@@ -61,22 +61,20 @@ object WeiXinApi {
             ToastUtils.showLong("请先安装微信")
             return
         }
-
-        val webpage = WXWebpageObject()
-        webpage.webpageUrl = url
-
-        val msg = WXMediaMessage(webpage)
-        msg.title = title
-        msg.description = des
-        msg.setThumbImage(bitmap)
-
-        val req = SendMessageToWX.Req()
-        req.message = msg
-        req.scene = scene
-        req.transaction = transaction
-        if (req.checkArgs()) {
-            iWxApi.sendReq(req)
+        val webpage = WXWebpageObject().apply {
+            webpageUrl = url
         }
+        val msg = WXMediaMessage(webpage).apply {
+            this.title = title
+            description = des
+            setThumbImage(bitmap)
+        }
+        val req = SendMessageToWX.Req().apply {
+            message = msg
+            this.scene = scene
+            this.transaction = transaction
+        }
+        if (req.checkArgs()) iWxApi.sendReq(req)
     }
 
     /**
@@ -90,18 +88,16 @@ object WeiXinApi {
             ToastUtils.showLong("请先安装微信")
             return
         }
-
-        val imgObj = WXImageObject()
-        imgObj.imagePath = path
-        val msg = WXMediaMessage(imgObj)
-
-        val req = SendMessageToWX.Req()
-        req.message = msg
-        req.scene = scene
-        req.transaction = transaction
-        if (req.checkArgs()) {
-            iWxApi.sendReq(req)
+        val imgObj = WXImageObject().apply {
+            imagePath = path
         }
+        val msg = WXMediaMessage(imgObj)
+        val req = SendMessageToWX.Req().apply {
+            message = msg
+            this.scene = scene
+            this.transaction = transaction
+        }
+        if (req.checkArgs()) iWxApi.sendReq(req)
     }
 
 
@@ -116,13 +112,11 @@ object WeiXinApi {
             ToastUtils.showLong("请先安装微信")
             return
         }
-
-        val req = SendAuth.Req()
-        req.scope = scope
-        req.transaction = transaction
-        if (req.checkArgs()) {
-            iWxApi.sendReq(req)
+        val req = SendAuth.Req().apply {
+            this.scope = scope
+            this.transaction = transaction
         }
+        if (req.checkArgs()) iWxApi.sendReq(req)
     }
 
 
@@ -151,19 +145,17 @@ object WeiXinApi {
             ToastUtils.showLong("请先安装微信")
             return
         }
-
-        val req = PayReq()
-        req.appId = appId
-        req.partnerId = partnerid
-        req.prepayId = prepayId
-        req.nonceStr = nonceStr
-        req.timeStamp = timestamp
-        req.packageValue = packageValue
-        req.sign = sign
-        req.extData = transaction
-        if (req.checkArgs()) {
-            iWxApi.sendReq(req)
+        val req = PayReq().apply {
+            this.appId = appId
+            partnerId = partnerid
+            this.prepayId = prepayId
+            this.nonceStr = nonceStr
+            timeStamp = timestamp
+            this.packageValue = packageValue
+            this.sign = sign
+            extData = transaction
         }
+        if (req.checkArgs()) iWxApi.sendReq(req)
     }
 
 

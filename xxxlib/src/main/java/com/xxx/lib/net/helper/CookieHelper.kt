@@ -1,8 +1,8 @@
 package com.xxx.lib.net.helper
 
 import com.blankj.utilcode.util.GsonUtils
-import com.blankj.utilcode.util.SPUtils
 import com.google.gson.reflect.TypeToken
+import com.xxx.lib.SPConfig
 import com.xxx.lib.constant.KeyAccount
 import okhttp3.Cookie
 import okhttp3.CookieJar
@@ -18,8 +18,7 @@ import okhttp3.HttpUrl
 class CookieHelper : CookieJar {
 
     override fun loadForRequest(url: HttpUrl): List<Cookie> {
-        val cookie = SPUtils.getInstance(KeyAccount.FILE_NAME)
-            .getString(KeyAccount.KEY_COOKIE)
+        val cookie = SPConfig.sPUtilsAccount.getString(KeyAccount.KEY_COOKIE)
         if (cookie.isNotBlank()) {
             return GsonUtils.fromJson<List<Cookie>>(
                 cookie,
@@ -33,8 +32,7 @@ class CookieHelper : CookieJar {
     override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
         val cookie = GsonUtils.toJson(cookies)
         if (cookie.contains("ci_session_new")) {
-            SPUtils.getInstance(KeyAccount.FILE_NAME)
-                .put(KeyAccount.KEY_COOKIE, cookie)
+            SPConfig.sPUtilsAccount.put(KeyAccount.KEY_COOKIE, cookie)
         }
     }
 }
