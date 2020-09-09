@@ -42,12 +42,21 @@ object StatusBarUtils {
             val field = layoutParams.getField("EXTRA_FLAG_STATUS_BAR_DARK_MODE")
             darkModeFlag = field.getInt(layoutParams)
             val extraFlagField =
-                clazz.getMethod("setExtraFlags", Int::class.javaPrimitiveType, Int::class.javaPrimitiveType)
-            extraFlagField.invoke(activity.window, if (isFontColorDark) darkModeFlag else 0, darkModeFlag)
+                clazz.getMethod(
+                    "setExtraFlags",
+                    Int::class.javaPrimitiveType,
+                    Int::class.javaPrimitiveType
+                )
+            extraFlagField.invoke(
+                activity.window,
+                if (isFontColorDark) darkModeFlag else 0,
+                darkModeFlag
+            )
             return true
-        } catch (ignored: Exception) {
+        } catch (e: Exception) {
+            e.printStackTrace()
+            return false
         }
-
         return false
     }
 
@@ -79,7 +88,9 @@ object StatusBarUtils {
                 meizuFlags.setInt(lp, value)
                 activity.window.attributes = lp
                 result = true
-            } catch (ignored: Exception) {
+            } catch (e: Exception) {
+                e.printStackTrace()
+                result = false
             }
 
         }
