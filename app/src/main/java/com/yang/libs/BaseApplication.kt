@@ -1,7 +1,7 @@
 package com.yang.libs
 
 import com.xxx.lib.AppConfig
-import com.xxx.lib.base.BaseLibApplication
+import com.xxx.lib.BaseLibApplication
 
 
 /**

@@ -1,11 +1,10 @@
-package com.xxx.lib.base
+package com.xxx.lib
 
 import android.app.Application
 import android.content.Intent
 import com.blankj.utilcode.util.Utils
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
-import com.xxx.lib.SPConfig
 import com.xxx.lib.service.ClearService
 import java.util.*
 
@@ -19,7 +18,7 @@ open class BaseLibApplication : Application() {
 
     companion object {
         /**
-         * 登录,登陆成功后需要调该方法
+         * 登录成功，登陆成功需要调用该方法
          */
         fun login() {
 
