@@ -4,6 +4,12 @@
 -keepattributes SourceFile,LineNumberTable
 -renamesourcefileattribute SourceFile
 
+#BusUtils$Bus
+-keepattributes *Annotation*
+-keepclassmembers class * {
+    @com.xxx.xxx.BusUtils$Bus <methods>;
+}
+
 #gson
 -keepattributes Signature
 -keepattributes *Annotation*

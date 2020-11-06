@@ -19,7 +19,7 @@ class ClearService : IntentService(ClearService::class.java.simpleName) {
         val path = PathUtils.getExternalAppFilesPath()
         if (FileUtils.getLength(path) > 1024L * 1024 * 200) {
             //大于200M，执行清理
-            CleanUtils.deleteFilesInDir(path)
+            CleanUtils.cleanCustomDir(path)
         }
     }
 
