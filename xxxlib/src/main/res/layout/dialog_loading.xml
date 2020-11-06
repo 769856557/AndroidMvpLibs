@@ -1,24 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent" android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_loading"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <com.wang.avi.AVLoadingIndicatorView
+        <com.wang.avi.AVLoadingIndicatorView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:indicatorName="BallSpinFadeLoaderIndicator"/>
+            app:indicatorName="BallSpinFadeLoaderIndicator" />
 
-    <TextView
+        <TextView
             android:id="@+id/tvHint"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:maxLength="10"
+            android:minEms="4"
             android:textColor="@android:color/white"
             android:textSize="16sp"
-    />
-
+            android:visibility="gone"
+            tools:text="加载中"
+            tools:visibility="visible" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -21,10 +21,4 @@ interface BaseView {
      */
     fun dismissLoadingDialog()
 
-    /**
-     * 设置加载框提示，加载框显示后才生效
-     * @param hint 提示语
-     */
-    fun setLoadingDialogHint(hint: String = "")
-
 }

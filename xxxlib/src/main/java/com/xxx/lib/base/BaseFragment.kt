@@ -30,6 +30,7 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
             .create().apply {
                 setCanceledOnTouchOutside(false)
                 window?.setBackgroundDrawable(ColorDrawable())
+                window?.setDimAmount(0F)
             }
     }
 
@@ -55,19 +56,19 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
      * @param hint 提示语，可不传
      */
     override fun showLoadingDialog(hint: String) {
-        if (activity is BaseActivity) {
-            (activity as? BaseActivity)?.showLoadingDialog(hint)
+        if (activity?.isFinishing != false) {
             return
         }
-        if (activity?.isFinishing == false && !alertDialog.isShowing) {
+        if (activity is BaseActivity) {
+            (activity as? BaseActivity)?.showLoadingDialog(hint)
+        } else {
             activity?.runOnUiThread {
                 try {
-                    alertDialog.show()
-                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
+                    if (!alertDialog.isShowing) alertDialog.show()
+                    setLoadingDialogHint(hint)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-
             }
         }
     }
@@ -76,14 +77,16 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
      * 隐藏加载框
      */
     override fun dismissLoadingDialog() {
-        if (activity is BaseActivity) {
-            (activity as? BaseActivity)?.dismissLoadingDialog()
+        if (activity?.isFinishing != false) {
             return
         }
-        if (activity?.isFinishing == false) {
+        if (activity is BaseActivity) {
+            (activity as? BaseActivity)?.dismissLoadingDialog()
+        } else {
             activity?.runOnUiThread {
                 try {
                     alertDialog.dismiss()
+                    setLoadingDialogHint("")
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -92,18 +95,22 @@ abstract class BaseFragment : Fragment(), IActivityFragment, BaseView {
     }
 
     /**
-     * 设置加载框提示，加载框显示后才生效
+     * 设置加载框提示
      * @param hint 提示语
      */
-    override fun setLoadingDialogHint(hint: String) {
-        if (activity is BaseActivity) {
-            (activity as? BaseActivity)?.setLoadingDialogHint(hint)
+    private fun setLoadingDialogHint(hint: String) {
+        if (activity?.isFinishing != false) {
             return
         }
-        if (activity?.isFinishing == false && alertDialog.isShowing) {
+        if (activity is BaseActivity) {
+            (activity as BaseActivity).showLoadingDialog(hint)
+        } else {
             activity?.runOnUiThread {
                 try {
-                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
+                    alertDialog.findViewById<TextView>(R.id.tvHint)?.apply {
+                        visibility = if (hint.isBlank()) View.GONE else View.VISIBLE
+                        text = hint
+                    }
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }

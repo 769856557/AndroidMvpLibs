@@ -3,6 +3,7 @@ package com.xxx.lib.base
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -30,6 +31,7 @@ abstract class BaseActivity : AppCompatActivity(),
             .create().apply {
                 setCanceledOnTouchOutside(false)
                 window?.setBackgroundDrawable(ColorDrawable())
+                window?.setDimAmount(0F)
             }
     }
 
@@ -86,14 +88,15 @@ abstract class BaseActivity : AppCompatActivity(),
      * @param hint 提示语，可不传
      */
     override fun showLoadingDialog(hint: String) {
-        if (!isFinishing && !alertDialog.isShowing) {
-            runOnUiThread {
-                try {
-                    alertDialog.show()
-                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+        if (isFinishing) {
+            return
+        }
+        runOnUiThread {
+            try {
+                if (!alertDialog.isShowing) alertDialog.show()
+                setLoadingDialogHint(hint)
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
@@ -102,29 +105,35 @@ abstract class BaseActivity : AppCompatActivity(),
      * 隐藏加载框
      */
     override fun dismissLoadingDialog() {
-        if (!isFinishing) {
-            runOnUiThread {
-                try {
-                    alertDialog.dismiss()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+        if (isFinishing) {
+            return
+        }
+        runOnUiThread {
+            try {
+                alertDialog.dismiss()
+                setLoadingDialogHint("")
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
 
     /**
-     * 设置加载框提示，加载框显示后才生效
+     * 设置加载框提示
      * @param hint 提示语
      */
-    override fun setLoadingDialogHint(hint: String) {
-        if (!isFinishing && alertDialog.isShowing) {
-            runOnUiThread {
-                try {
-                    alertDialog.findViewById<TextView>(R.id.tvHint)?.text = hint
-                } catch (e: Exception) {
-                    e.printStackTrace()
+    private fun setLoadingDialogHint(hint: String) {
+        if (isFinishing) {
+            return
+        }
+        runOnUiThread {
+            try {
+                alertDialog.findViewById<TextView>(R.id.tvHint)?.apply {
+                    visibility = if (hint.isBlank()) View.GONE else View.VISIBLE
+                    text = hint
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
