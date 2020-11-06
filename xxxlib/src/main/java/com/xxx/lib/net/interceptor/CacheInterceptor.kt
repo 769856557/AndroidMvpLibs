@@ -26,9 +26,9 @@ class CacheInterceptor {
         @RequiresPermission(ACCESS_NETWORK_STATE)
         override fun intercept(chain: Interceptor.Chain): Response {
             val cacheControl: CacheControl = if (NetworkUtils.isConnected()) {
-                //有网络，10s内存在未过期的缓存，则发起缓存请求，否则发起网络请求
+                //有网络，5s内存在未过期的缓存，则发起缓存请求，否则发起网络请求
                 CacheControl.Builder()
-                    .maxAge(10, TimeUnit.SECONDS)
+                    .maxAge(5, TimeUnit.SECONDS)
                     .build()
             } else {
                 //没网络，直接发起缓存请求
@@ -48,7 +48,7 @@ class CacheInterceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             return chain.proceed(chain.request()).newBuilder()
                 .removeHeader("Pragma")
-                .header("Cache-Control", "max-age=10")//配置缓存过期时间为10s
+                .header("Cache-Control", "max-age=5")//配置缓存过期时间为5s
                 .build();
         }
     }
