@@ -12,13 +12,6 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:windowSoftInputMode="stateHidden|adjustResize" />
 
-        <!--支付宝集成-->
-        <activity
-            android:name="com.alipay.sdk.app.H5PayActivity"
-            android:configChanges="orientation|keyboardHidden|navigation"
-            android:exported="false"
-            android:screenOrientation="behind" />
-
         <!-- QQSDK集成 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"

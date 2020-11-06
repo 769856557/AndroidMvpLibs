@@ -1,7 +1,7 @@
 package com.yang.libs.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.BaseViewHolder
+import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.yang.libs.R
 
 /**
@@ -12,6 +12,8 @@ import com.yang.libs.R
  */
 class MainAdapter : BaseQuickAdapter<Any, BaseViewHolder>(R.layout.adapter_main) {
 
-    override fun convert(helper: BaseViewHolder, item: Any?) {
+    override fun convert(holder: BaseViewHolder, item: Any) {
     }
+
+
 }

@@ -43,7 +43,7 @@ class HintDialog(context: Context) : Dialog(context), View.OnClickListener {
         btRight.setOnClickListener(this)
         btCenter.setOnClickListener(this)
 
-        setTitle("温馨提示")
+        setTitleText("温馨提示")
         setButtonTextLeft("取消")
         setButtonTextRight("确定")
         setButtonTextCenter("确定")
@@ -55,7 +55,7 @@ class HintDialog(context: Context) : Dialog(context), View.OnClickListener {
      * 设置标题
      * @param title 标题
      */
-    override fun setTitle(title: CharSequence) {
+    fun setTitleText(title: CharSequence) {
         tvTitle.text = title
     }
 
@@ -63,7 +63,7 @@ class HintDialog(context: Context) : Dialog(context), View.OnClickListener {
      * 设置提示
      * @param hint 提示
      */
-    fun setHint(hint: String) {
+    fun setHintText(hint: String) {
         tvHint.text = hint
     }
 

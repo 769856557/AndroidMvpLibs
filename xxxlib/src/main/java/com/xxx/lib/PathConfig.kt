@@ -57,7 +57,7 @@ object PathConfig {
      *okhttp缓存文件夹路径，根目录/Android/data/包名/cache/okhttp
      */
     val DIR_CACHE_OKHTTP by lazy {
-        "${Utils.getApp().externalCacheDir.absolutePath}${File.separator}okhttp".also {
+        "${Utils.getApp().externalCacheDir?.absolutePath}${File.separator}okhttp".also {
             FileUtils.createOrExistsDir(it)
         }
     }
@@ -67,7 +67,7 @@ object PathConfig {
      */
     val DIR_CACHE_GLIDE by lazy {
         "glide".also {
-            FileUtils.createOrExistsDir("${Utils.getApp().externalCacheDir.absolutePath}${File.separator}$it")
+            FileUtils.createOrExistsDir("${Utils.getApp().externalCacheDir?.absolutePath}${File.separator}$it")
         }
     }
 
