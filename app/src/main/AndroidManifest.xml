@@ -37,7 +37,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.MainActivity" />
+        <activity
+            android:name=".ui.MainActivity"
+            android:launchMode="singleTask" />
 
         <!-- *************************** 第三方集成 ***************************-->
 

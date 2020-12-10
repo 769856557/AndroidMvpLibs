@@ -1,11 +1,10 @@
 package com.yang.libs.ui
 
-import android.content.Intent
 import android.view.View
+import com.alibaba.android.arouter.launcher.ARouter
 import com.xxx.lib.GlideApp
 import com.xxx.lib.base.BasePresenterActivity
-import com.xxx.lib.constant.Extra
-import com.xxx.lib.ui.WebViewActivity
+import com.xxx.lib.constant.RouteLink
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.mvpmodel.MainModel
@@ -30,11 +29,8 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            val intent = Intent(this, WebViewActivity::class.java).apply {
-                putExtra(Extra.EXTRA_TITLE, "默认标题")
-                putExtra(Extra.EXTRA_LINK, "http://c.51ehw.com/index.php/_CLIENT/Customer/login")
-            }
-            startActivity(intent)
+            ARouter.getInstance().build(RouteLink.ROUTE_COM_YANG_LIBS_UI_LUANCHACTIVITY)
+                .navigation()
         }
     }
 

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.blankj.bus'
 
 android {
@@ -12,6 +13,11 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         multiDexEnabled true
+        kapt {
+            arguments {
+                arg("AROUTER_MODULE_NAME", project.getName())
+            }
+        }
     }
 
     signingConfigs {
@@ -56,4 +62,5 @@ android {
 
 dependencies {
     implementation project(':xxxlib')
+    kapt 'com.alibaba:arouter-compiler:1.5.1'
 }

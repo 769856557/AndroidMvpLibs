@@ -2,6 +2,8 @@ package com.xxx.lib
 
 import android.app.Application
 import android.content.Intent
+import com.alibaba.android.arouter.launcher.ARouter
+import com.blankj.utilcode.util.AppUtils
 import com.blankj.utilcode.util.Utils
 import com.tencent.smtt.export.external.TbsCoreSettings
 import com.tencent.smtt.sdk.QbSdk
@@ -44,6 +46,12 @@ open class BaseLibApplication : Application() {
         }
         QbSdk.initTbsSettings(map as Map<String, Any>)
         QbSdk.initX5Environment(this, null)
+        //ARouter路由初始化
+        if (AppUtils.isAppDebug()) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
         //启动垃圾清理服务
         startService(Intent(this, ClearService::class.java))
     }

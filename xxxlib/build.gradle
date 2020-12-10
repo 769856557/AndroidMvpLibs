@@ -60,4 +60,5 @@ dependencies {
     api(name: 'alipaySdk-15.7.9-20200727142846', ext: 'aar')
     api files('libs\\open_sdk_r6008_lite.jar')
     api files('libs\\tbs_sdk_thirdapp_v4.3.0.39_43939.jar')
+    api 'com.alibaba:arouter-api:1.5.1'
 }
