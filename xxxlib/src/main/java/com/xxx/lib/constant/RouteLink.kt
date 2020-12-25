@@ -11,5 +11,5 @@ object RouteLink {
     /**
      * 启动页
      */
-    const val ROUTE_COM_YANG_LIBS_UI_LUANCHACTIVITY = "/com/yang/libs/ui/LuanchActivity"
+    const val LINK_LUANCH_ACTIVITY = "/link/LuanchActivity"
 }

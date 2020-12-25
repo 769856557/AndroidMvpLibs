@@ -14,7 +14,7 @@ import com.yang.libs.R
  * 769856557@qq.com
  * yangyong
  */
-@Route(path = RouteLink.ROUTE_COM_YANG_LIBS_UI_LUANCHACTIVITY)
+@Route(path = RouteLink.LINK_LUANCH_ACTIVITY)
 class LuanchActivity : BaseActivity() {
 
     override fun initContentView(): Int = R.layout.activity_luanch

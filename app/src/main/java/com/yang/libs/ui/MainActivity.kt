@@ -29,7 +29,7 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            ARouter.getInstance().build(RouteLink.ROUTE_COM_YANG_LIBS_UI_LUANCHACTIVITY)
+            ARouter.getInstance().build(RouteLink.LINK_LUANCH_ACTIVITY)
                 .navigation()
         }
     }
