@@ -33,6 +33,13 @@ open class BaseLibApplication : Application() {
             SPConfig.sPUtilsAccount.clear()
             QbSdk.clearAllWebViewCache(Utils.getApp(), true)
         }
+
+        /**
+         * 是否已经登录
+         */
+        fun isLogin(): Boolean {
+            return false
+        }
     }
 
     override fun onCreate() {
