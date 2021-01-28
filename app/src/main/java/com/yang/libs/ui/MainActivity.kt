@@ -41,4 +41,6 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
 
     override fun getAdvertisementFail() {
     }
+
+
 }
