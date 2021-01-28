@@ -14,7 +14,7 @@ import com.xxx.lib.constant.KeySetting
 object SPConfig {
 
     /**
-     * 获取账号相关SPUtils
+     * 获取账号相关SPUtils，退出账号会清除文件
      */
     val sPUtilsAccount by lazy {
         SPUtils.getInstance(KeyAccount.FILE_NAME)
@@ -22,7 +22,7 @@ object SPConfig {
 
 
     /**
-     * 获取设置相关SPUtils
+     * 获取设置相关SPUtils，退出账号不会清除文件
      */
     val sPUtilsSetting by lazy {
         SPUtils.getInstance(KeySetting.FILE_NAME)
