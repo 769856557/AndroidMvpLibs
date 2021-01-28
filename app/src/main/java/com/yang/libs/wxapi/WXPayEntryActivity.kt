@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.blankj.utilcode.util.BusUtils
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
-import com.tencent.mm.opensdk.modelpay.PayResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
 import com.xxx.lib.api.WeiXinApi
 
@@ -35,7 +34,7 @@ class WXPayEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
     override fun onReq(req: BaseReq) {}
 
     override fun onResp(resp: BaseResp) {
-        BusUtils.post((resp as PayResp).extData, resp)//发送结果事件
+        BusUtils.post(resp.transaction, resp)//发送结果事件
         finish()
     }
 

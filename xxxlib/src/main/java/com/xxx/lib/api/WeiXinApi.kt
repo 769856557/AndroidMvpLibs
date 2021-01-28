@@ -43,18 +43,18 @@ object WeiXinApi {
      * 微信分享(网页分享)
      *
      * @param scene 分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
-     * @param title 网页标题
-     * @param des 网页描述
-     * @param bitmap 图片，不超过32k
-     *  @param url 网页url
-     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的分享功能
+     * @param title 网页标题,限制长度不超过 512Bytes
+     * @param description 网页描述,限制长度不超过 1KB
+     * @param bitmap 网页图片，限制内容大小不超过 32KB
+     * @param webpageUrl 网页链接，限制长度不超过 10KB
+     * @param transaction 回调标识，请在[Action]类中声明，用于区分不同的分享
      */
     fun shareWeb(
         scene: Int,
         title: String,
-        des: String,
+        description: String,
         bitmap: Bitmap,
-        url: String,
+        webpageUrl: String,
         transaction: String
     ) {
         if (!iWxApi.isWXAppInstalled) {
@@ -62,15 +62,15 @@ object WeiXinApi {
             return
         }
         val webpage = WXWebpageObject().apply {
-            webpageUrl = url
+            this.webpageUrl = webpageUrl
         }
-        val msg = WXMediaMessage(webpage).apply {
+        val message = WXMediaMessage(webpage).apply {
             this.title = title
-            description = des
+            this.description = description
             setThumbImage(bitmap)
         }
         val req = SendMessageToWX.Req().apply {
-            message = msg
+            this.message = message
             this.scene = scene
             this.transaction = transaction
         }
@@ -79,21 +79,21 @@ object WeiXinApi {
 
     /**
      * 微信分享(图片分享)
-     * @param scene       分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
-     * @param path       图片本地路径，不超过10M
-     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的分享功能
+     * @param scene 分享方式：好友分享[SendMessageToWX.Req.WXSceneSession]，朋友圈分享[SendMessageToWX.Req.WXSceneTimeline]
+     * @param imagePath 图片本地路径，不超过10M
+     * @param transaction 回调标识，请在[Action]类中声明，用于区分不同的分享
      */
-    fun shareImg(scene: Int, path: String, transaction: String) {
+    fun shareImg(scene: Int, imagePath: String, transaction: String) {
         if (!iWxApi.isWXAppInstalled) {
             ToastUtils.showLong("请先安装微信")
             return
         }
         val imgObj = WXImageObject().apply {
-            imagePath = path
+            this.imagePath = imagePath
         }
-        val msg = WXMediaMessage(imgObj)
+        val message = WXMediaMessage(imgObj)
         val req = SendMessageToWX.Req().apply {
-            message = msg
+            this.message = message
             this.scene = scene
             this.transaction = transaction
         }
@@ -105,7 +105,7 @@ object WeiXinApi {
      * 微信授权
      *
      * @param scope //"snsapi_login,snsapi_userinfo"
-     * @param transaction 回调标识，请在[Action]类中声明，,用于区分不同的授权功能
+     * @param transaction 回调标识，请在[Action]类中声明，用于区分不同的授权
      */
     fun auth(scope: String, transaction: String) {
         if (!iWxApi.isWXAppInstalled) {
@@ -122,21 +122,21 @@ object WeiXinApi {
 
     /**
      * 微信支付
-     * @param appId        appid
-     * @param partnerid    商户id
-     * @param prepayId     预支付交易会话标识
-     * @param nonceStr     随机字符串
-     * @param timestamp    时间戳
-     * @param packageValue
-     * @param sign         签名
-     * @param transaction 回调标识，请在[Action]类中声明，用于区分支付类型，例如：购买商品、充值话费
+     * @param appId 应用ID
+     * @param partnerId 商户号
+     * @param prepayId 预支付交易会话ID
+     * @param nonceStr 随机字符串
+     * @param timeStamp 时间戳
+     * @param packageValue 暂填写固定值Sign=WXPay
+     * @param sign 签名
+     * @param transaction 回调标识，请在[Action]类中声明，用于区分不同的支付
      */
     fun pay(
         appId: String,
-        partnerid: String,
+        partnerId: String,
         prepayId: String,
         nonceStr: String,
-        timestamp: String,
+        timeStamp: String,
         packageValue: String,
         sign: String,
         transaction: String
@@ -147,13 +147,13 @@ object WeiXinApi {
         }
         val req = PayReq().apply {
             this.appId = appId
-            partnerId = partnerid
+            this.partnerId = partnerId
             this.prepayId = prepayId
             this.nonceStr = nonceStr
-            timeStamp = timestamp
+            this.timeStamp = timeStamp
             this.packageValue = packageValue
             this.sign = sign
-            extData = transaction
+            this.transaction = transaction
         }
         if (req.checkArgs()) iWxApi.sendReq(req)
     }
