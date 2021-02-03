@@ -9,7 +9,7 @@ import com.blankj.utilcode.util.ToastUtils
 import com.tencent.mm.opensdk.modelbase.BaseReq
 import com.tencent.mm.opensdk.modelbase.BaseResp
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler
-import com.xxx.lib.api.WeiXinApi
+import com.xxx.lib.api.WXApi
 import com.xxx.lib.bean.PayResultBean
 
 /**
@@ -24,13 +24,13 @@ class WXPayEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WeiXinApi.iWxApi.handleIntent(intent, this)
+        WXApi.iWxApi.handleIntent(intent, this)
     }
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        WeiXinApi.iWxApi.handleIntent(intent, this)
+        WXApi.iWxApi.handleIntent(intent, this)
     }
 
     override fun onReq(req: BaseReq) {}
@@ -44,14 +44,14 @@ class WXPayEntryActivity : AppCompatActivity(), IWXAPIEventHandler {
         when (resp.errCode) {
             //支付成功，分发事件给具体界面做具体处理
             BaseResp.ErrCode.ERR_OK -> {
-                PayResultBean(PayResultBean.RESULT_SUCCESS, PayResultBean.TYPE_WEIXIN)
+                PayResultBean(PayResultBean.RESULT_SUCCESS, PayResultBean.TYPE_WX)
                     .let {
                         BusUtils.post(resp.transaction, it)
                     }
             }
             //支付取消，分发事件给具体界面做具体处理
             BaseResp.ErrCode.ERR_USER_CANCEL -> {
-                PayResultBean(PayResultBean.RESULT_CANCEL, PayResultBean.TYPE_WEIXIN)
+                PayResultBean(PayResultBean.RESULT_CANCEL, PayResultBean.TYPE_WX)
                     .let {
                         BusUtils.post(resp.transaction, it)
                     }

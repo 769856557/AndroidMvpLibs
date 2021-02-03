@@ -28,7 +28,7 @@ import retrofit2.http.POST
  * 769856557@qq.com
  * yangyong
  */
-object WeiXinApi {
+object WXApi {
 
     /**
      * IWXAPI实例

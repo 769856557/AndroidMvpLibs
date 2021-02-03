@@ -2,13 +2,17 @@ package com.xxx.lib.api
 
 import android.app.Activity
 import android.os.Bundle
+import com.blankj.utilcode.util.BusUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.blankj.utilcode.util.Utils
 import com.tencent.connect.UserInfo
 import com.tencent.connect.share.QQShare
 import com.tencent.tauth.IUiListener
 import com.tencent.tauth.Tencent
+import com.tencent.tauth.UiError
 import com.xxx.lib.AppConfig
+import com.xxx.lib.bean.ShareResultBean
+import com.xxx.lib.constant.Action
 
 /**
  * QQAPI
@@ -34,7 +38,7 @@ object QQApi {
      * @param des 网页描述
      * @param img  图片地址
      * @param url 网页地址
-     * @param iUiListener 分享回调
+     * @param tag 分享标识，请在[Action]类中声明，用于区分不同的分享，例如：分享活动、分享公告
      */
     fun shareWeb(
         activity: Activity,
@@ -43,7 +47,7 @@ object QQApi {
         des: String,
         img: String,
         url: String,
-        iUiListener: IUiListener
+        tag: String
     ) {
         if (!tencent.isQQInstalled(activity)) {
             ToastUtils.showLong("请先安装QQ")
@@ -56,7 +60,29 @@ object QQApi {
             putString(QQShare.SHARE_TO_QQ_IMAGE_URL, img)
             putString(QQShare.SHARE_TO_QQ_TARGET_URL, url)
         }
-        tencent.shareToQQ(activity, params, iUiListener)
+        tencent.shareToQQ(activity, params, object : IUiListener {
+            override fun onComplete(data: Any?) {
+                //分享成功，分发事件给具体界面做具体处理
+                ShareResultBean(ShareResultBean.RESULT_SUCCESS, ShareResultBean.TYPE_QQ)
+                    .let {
+                        BusUtils.post(tag, it)
+                    }
+            }
+
+            override fun onCancel() {
+                //分享取消，分发事件给具体界面做具体处理
+                ShareResultBean(ShareResultBean.RESULT_CANCEL, ShareResultBean.TYPE_QQ)
+                    .let {
+                        BusUtils.post(tag, it)
+                    }
+            }
+
+            override fun onError(error: UiError?) {
+                //分享错误，直接提示错误信息，不再分发
+                ToastUtils.showLong(error?.errorMessage ?: return)
+            }
+        })
+
     }
 
     /**
@@ -65,9 +91,9 @@ object QQApi {
      * @param activity    Activity实例
      * @param way         分享方式 ,0好友分享,1空间分享
      * @param path         图片本地路径
-     * @param iUiListener 分享回调
+     * @param tag 分享标识，请在[Action]类中声明，用于区分不同的分享，例如：分享活动、分享公告
      */
-    fun shareImg(activity: Activity, way: Int, path: String, iUiListener: IUiListener) {
+    fun shareImg(activity: Activity, way: Int, path: String, tag: String) {
         if (!tencent.isQQInstalled(activity)) {
             ToastUtils.showLong("请先安装QQ")
             return
@@ -77,7 +103,28 @@ object QQApi {
             putInt(QQShare.SHARE_TO_QQ_EXT_INT, way)
             putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, path)
         }
-        tencent.shareToQQ(activity, params, iUiListener)
+        tencent.shareToQQ(activity, params, object : IUiListener {
+            override fun onComplete(data: Any?) {
+                //分享成功，分发事件给具体界面做具体处理
+                ShareResultBean(ShareResultBean.RESULT_SUCCESS, ShareResultBean.TYPE_QQ)
+                    .let {
+                        BusUtils.post(tag, it)
+                    }
+            }
+
+            override fun onCancel() {
+                //分享取消，分发事件给具体界面做具体处理
+                ShareResultBean(ShareResultBean.RESULT_CANCEL, ShareResultBean.TYPE_QQ)
+                    .let {
+                        BusUtils.post(tag, it)
+                    }
+            }
+
+            override fun onError(error: UiError?) {
+                //分享错误，直接提示错误信息，不再分发
+                ToastUtils.showLong(error?.errorMessage ?: return)
+            }
+        })
     }
 
     /**
