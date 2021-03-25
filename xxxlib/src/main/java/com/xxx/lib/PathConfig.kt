@@ -34,7 +34,7 @@ object PathConfig {
     }
 
     /**
-     * 照片保存文件夹路径,只能用于PictureSelector，根目录/包名/photo
+     * 图片保存文件夹路径,只能用于PictureSelector，根目录/包名/image
      */
     val DIR_IMAGE_PICTURESELECTOR by lazy {
         "/${AppUtils.getAppPackageName()}${File.separator}image".also {
