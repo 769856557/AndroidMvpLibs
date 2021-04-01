@@ -7,6 +7,8 @@ import com.blankj.utilcode.util.BusUtils
 import com.blankj.utilcode.util.ToastUtils
 import com.xxx.lib.bean.PayResultBean
 import com.xxx.lib.constant.Action
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * 支付宝api
@@ -25,10 +27,10 @@ object AliApi {
      */
     fun pay(activity: Activity, orderInfo: String, tag: String) {
         val payTask = PayTask(activity)
-        Thread(Runnable {
+        GlobalScope.launch {
             val payResult = PayResult(payTask.payV2(orderInfo, true))
             payResultAnalysis(tag, payResult)
-        }).start()
+        }
     }
 
     private fun payResultAnalysis(tag: String, payResult: PayResult) {
