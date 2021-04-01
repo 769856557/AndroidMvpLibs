@@ -5,7 +5,7 @@ import android.os.Handler
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.xxx.lib.base.BaseActivity
-import com.xxx.lib.constant.RouteLink
+import com.xxx.lib.constant.ARouterLink
 import com.yang.libs.R
 
 /**
@@ -14,7 +14,7 @@ import com.yang.libs.R
  * 769856557@qq.com
  * yangyong
  */
-@Route(path = RouteLink.LINK_LUANCH_ACTIVITY)
+@Route(path = ARouterLink.LINK_LUANCH_ACTIVITY)
 class LuanchActivity : BaseActivity() {
 
     override fun initContentView(): Int = R.layout.activity_luanch

@@ -7,7 +7,7 @@ package com.xxx.lib.constant
  * 769856557@qq.com
  * yangyong
  */
-object RouteLink {
+object ARouterLink {
     /**
      * 启动页
      */

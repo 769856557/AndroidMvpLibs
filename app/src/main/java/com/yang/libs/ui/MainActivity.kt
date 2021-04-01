@@ -4,7 +4,7 @@ import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
 import com.xxx.lib.GlideApp
 import com.xxx.lib.base.BasePresenterActivity
-import com.xxx.lib.constant.RouteLink
+import com.xxx.lib.constant.ARouterLink
 import com.yang.libs.R
 import com.yang.libs.bean.BannerBean
 import com.yang.libs.mvpmodel.MainModel
@@ -29,7 +29,7 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
-            ARouter.getInstance().build(RouteLink.LINK_LUANCH_ACTIVITY)
+            ARouter.getInstance().build(ARouterLink.LINK_LUANCH_ACTIVITY)
                 .navigation()
         }
     }
