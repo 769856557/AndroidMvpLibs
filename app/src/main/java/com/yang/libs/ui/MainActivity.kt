@@ -2,7 +2,6 @@ package com.yang.libs.ui
 
 import android.view.View
 import com.alibaba.android.arouter.launcher.ARouter
-import com.xxx.lib.GlideApp
 import com.xxx.lib.base.BasePresenterActivity
 import com.xxx.lib.constant.ARouterLink
 import com.yang.libs.R
@@ -21,14 +20,12 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
 
     override fun init(view: View?) {
         title = "主页标题"
-        GlideApp
-            .with(this)
-            .load("http://a2.att.hudong.com/08/72/01300000165476121273722687045.jpg")
-            .into(ivImg)
         btOne.setOnClickListener {
+            //请求业务接口
             getPresenter().getAdvertisement("param")
         }
         btTwo.setOnClickListener {
+            //路由跳转
             ARouter.getInstance().build(ARouterLink.LINK_LUANCH_ACTIVITY)
                 .navigation()
         }
@@ -36,10 +33,12 @@ class MainActivity : BasePresenterActivity<MainModel, MainView, MainPresenter>()
 
 
     override fun getAdvertisementSuccess(bean: BannerBean) {
+        //请求业务接口成功
         tvContent.text = bean.app[0].app_name
     }
 
     override fun getAdvertisementFail() {
+        //请求业务接口失败
     }
 
 
