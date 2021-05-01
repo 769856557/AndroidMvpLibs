@@ -10,7 +10,7 @@ import com.yang.libs.R
  * 769856557@qq.com
  * yangyong
  */
-class MainAdapter : BaseQuickAdapter<Any, BaseViewHolder>(R.layout.adapter_main) {
+class MainAdapter : BaseQuickAdapter<Any, BaseViewHolder>(R.layout.item_main) {
 
     override fun convert(holder: BaseViewHolder, item: Any) {
     }
